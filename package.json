@@ -88,6 +88,7 @@
     "@webcomponents/webcomponentsjs": "^2.0.0",
     "es6-template-string-loader": "2.0.0",
     "html-loader": "0.5.5",
+    "iron-swiper-3": "2.0.1",
     "pwa-helpers": "^0.8.2",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",

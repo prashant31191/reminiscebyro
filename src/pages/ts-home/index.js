@@ -17,6 +17,7 @@ import { MDCRipple } from '@material/ripple';
 import '@polymer/iron-image';
 import { PageViewElement } from '../../components/page-view-element.js';
 import { fadeIn, fadeOut } from '../../components/animation.js';
+import "../../components/app-product-item.js";
 
 /**
  * `ts-home` Description
@@ -48,7 +49,20 @@ class TsHome extends PageViewElement {
     * Object describing property-related metadata used by Polymer features
     */
     static get properties() {
-        return {}
+        return {
+            swiper: {
+                type: Object,
+                value: {
+                    pagination: {
+                        el: '.swiper-pagination',
+                        type: 'progressbar',
+                    },
+                    slidesPerView: 3,
+                    spaceBetween: 38,
+                    centeredSlides: true
+                }
+            },
+        }
     }
 
     show(){
@@ -73,6 +87,7 @@ class TsHome extends PageViewElement {
      */
     constructor() {
         super();
+        this.bestSellers = [{},{},{},{}]
     }
 
     connectedCallback(){
@@ -82,9 +97,11 @@ class TsHome extends PageViewElement {
     /**
      * Use for one-time configuration of your component after local DOM is initialized. 
      */
-    ready() {
+    async ready() {
         super.ready();
         const buttonRipple = new MDCRipple(this.shadowRoot.querySelector('.mdc-button'));
+        await import('iron-swiper-3/iron-swiper.js');
+        
     }
 }
 

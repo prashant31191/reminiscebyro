@@ -59,16 +59,19 @@
         margin-top: -60px;
         z-index: 0;
     }
-    .category-item{
-        background: #eee;
-        width: 100%;
-        height: 375px;
-        background-size: cover;
-    }
-    .category-grid{
+    .feature-grid{
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-columns: repeat(6, 1fr);
         grid-gap: 8px;
+    }
+    .feature-item{
+        grid-column-end: span 3;
+    }
+    .heading-wrapper{
+        margin-top: 5em;
+    }
+    iron-swiper{
+        height: 400px;
     }
 </style>
 <div class="page-wrapper">
@@ -101,46 +104,51 @@
             </g>
         </svg>
     </div>
-    <section class="app-section layout horizontal center pad">
+    <section class="app-section content layout horizontal center pad">
         <div class="pad">
             <iron-image 
                 style="width:400px; height:400px; background-color: lightgray;"
                 sizing="cover"
                 preload 
                 fade 
-                src="https://tesori-theaworld.c9users.io/images/terry/terry-towels-set-white-650gsm.jpg"></iron-image>
+                src="https://www.fentybeauty.com/dw/image/v2/AAXW_PRD/on/demandware.static/-/Sites-itemmaster_FNT/default/dw92d0bfc2/hi-res/Summer%20II%20Concrete%20-%20Final/27785V1_alt1_final.jpg?sw=550%20550w"></iron-image>
         </div>
         <div class="pad">
             <h1 class="mdc-typography--headline3">Speaking of the web</h1>
-            <p  class="mdc-typography--body2">We're pleased to say that its a perfect timing.</p>
+            <p  class="mdc-typography--body2">Create colorful dimension from cheeks to eyes to temples.</p>
         </div>
     </section>
-    <section class="app-section content category">
-        <div class="category-grid">
-            <div class="category-item" 
-                style="grid-column-end: span 2; background-image: url(https://d2axgx0qsxn7a2.cloudfront.net/media/cms_page/SFERRA-AMIRA-TOWEL-HOME-PAGE-3_2.jpg)">
-                <!-- <a href="#">
-                    <div class="footer">
-                        <h1>Cool Lamp</h1>
-                        <span></span>
-                    </div>
-                </a> -->
+    <section class="app-section feature">
+        <div class="content">
+            <div class="center heading-wrapper">
+                <h1 class="mdc-typography--headline5">Featured</h1>
             </div>
-            <div class="category-item" style="grid-column-end: span 2; background-image: url(https://d2axgx0qsxn7a2.cloudfront.net/media/cms_page/SFERRA-ALMA-ALUMBRA-HOME-PAGE-2.jpg)">
-
-            </div>
-            <div class="category-item" style="background-image:url(https://d2axgx0qsxn7a2.cloudfront.net/media/catalog/product/cache/1/image/800x/040ec09b1e35df139433887a97daa66f/s/f/sferra-sarma-bath-towel-786bthtwl-default_1.jpg)">
-
-            </div>
-            <div class="category-item" style="grid-column-end: span 2; background-image:url(https://d2axgx0qsxn7a2.cloudfront.net/media/catalog/category/Fiona-Shop-By-Collection_2.jpg)">
-
-            </div>
-            <div class="category-item" style="background-image: url(https://d2axgx0qsxn7a2.cloudfront.net/media/catalog/product/cache/1/image/800x/040ec09b1e35df139433887a97daa66f/s/f/sferra-fresco-candle-7000-default.jpg)">
-
+            <div class="feature-grid">
+                <a href="#" class="feature-item">
+                    <app-product-item featured></app-product-item>
+                </a>
+                <a href="#" class="feature-item">
+                    <app-product-item featured></app-product-item>
+                </a>
+                <a href="#" class="feature-item">
+                    <app-product-item featured></app-product-item>
+                </a>
+                <a href="#" class="feature-item">
+                    <app-product-item featured></app-product-item>
+                </a>
             </div>
         </div>
     </section>
-    <section class="app-section content">
-
+    <section class="app-section feature">
+        <div class="content">
+            <div class="center heading-wrapper">
+                <h1 class="mdc-typography--headline5">Best Sellers</h1>
+            </div>
+            <iron-swiper options="[[swiper]]">
+                <template is="dom-repeat" items="[[bestSellers]]">
+                    <app-product-item shadow></app-product-item>
+                </template>
+            </iron-swiper>
+        </div>
     </section>
 </div>
