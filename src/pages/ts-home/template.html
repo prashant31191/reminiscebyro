@@ -1,0 +1,146 @@
+
+<style include="iron-flex iron-flex-factors iron-flex-alignment">
+    :host{
+        opacity: 0;
+    }
+    .app-hero {
+        height: 60vh;
+        background-color: var(--app-primary-color);
+        background-size: cover;
+    }
+    .app-hero-content{
+        height: 100%;
+    }
+    .hero-inner {
+        height: 60vh;
+    }
+
+    .some-component {
+        height: 331px;
+        border-radius: 12px;
+        max-width: 600px;
+        background: #b1b1b4;
+        box-shadow: 0px 17px 27px -26px rgba(0, 0, 0, 0.7);
+        background-image: url(/images/background.jpg);
+        background-size: cover;
+    }
+
+    button{
+        --mdc-theme-primary: var(--app-secondary-color);
+        padding: 0px 24px;
+    }
+
+    .hero-inner button {
+        margin: 16px;
+        padding: 0 52px;
+    }
+    .app-hero{
+        height: 80vh;
+    }
+    .hero-content{
+        color: var(--app-light-text-color);
+    }
+    .hero-content p{
+        max-width: 500px;
+    }
+    .hero-content h1{
+        max-width: 300px;
+    }
+    .call-action-wrapper{
+        margin: 2em 0;
+    }
+    .white-wave{
+        width: 100%;
+        height: 100%;
+    }
+    .hero-bottom-wave{
+        position: relative;
+        height: 20vh;
+        margin-top: -60px;
+        z-index: 0;
+    }
+    .category-item{
+        background: #eee;
+        width: 100%;
+        height: 375px;
+        background-size: cover;
+    }
+    .category-grid{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-gap: 8px;
+    }
+</style>
+<div class="page-wrapper">
+    <section class="app-hero pad">
+        <div class="content layout horizontal center-center app-hero-content">
+            <div class="hero-content pad flex">
+                <h1 class="mdc-typography--headline2">Adu Matte Liquid Lipstick</h1>
+                <p class="mdc-typography--body2">Senses is the smart sleep tracker that improves your sleep, wakes you up feeling great, and shoes how the envirnment
+                    of your room affects your rest.</p>
+                <div class="call-action-wrapper center">
+                    <a href="#">
+                        <button class="mdc-button mdc-button--outlined">
+                            Shop Now
+                        </button>
+                    </a>
+                </div>
+            </div>
+            <div class="hero-media hidden-on-small pad flex">
+                <div class="some-component"></div>
+            </div>
+        </div>
+    </section>
+    <div class="hero-bottom-wave">
+        <svg class="white-wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2185.67598 163.5116" preserveAspectRatio="none">
+            <g fill="#FFF">
+                <path id="wave-hero-a" d="M0.00014879508281249998,169.299133541075 C0,121.45670655968749 0,73.61032456187499 0,25.77386223625 510.57,74.124400495 866.45,56.7873953784375 1102.43,29.9850213009375 1165.08,22.871175317812497 1217.35,15.314639165625 1305.37,8.8993063053125 1663.92,-17.2141530103125 1974.87,22.398967115625002 2185.67,61.323413463125 2185.67,97.31330516125 2185.67,133.303196859375 2185.67,169.2931688853125 1457.11,169.2931688853125 728.55,169.2931688853125 0,169.2931688853125 z"
+                    data-original="M0,36.13176c510.57341-49.1484,866.45316-31.52357,1102.43632-4.28682,62.644,7.23026,114.91521,14.91582,202.936,21.4341C1663.92411,79.83119,1974.87411,39.56043,2185.676,0V163.5116H0Z"
+                    data-svg-origin="0 0" style="transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);"></path>
+                <path id="wave-hero-b" class="filler" d="M.00015,169.346,0,25.69084c510.57343,49.14831,866.45322,31.52344,1102.43639,4.28665,62.644-7.23023,114.91523-14.91579,202.936-21.43411,358.55178-26.55218,669.50178,13.71854,880.30381,53.27894l.00014,107.5234Z"></path>
+            </g>
+        </svg>
+    </div>
+    <section class="app-section layout horizontal center pad">
+        <div class="pad">
+            <iron-image 
+                style="width:400px; height:400px; background-color: lightgray;"
+                sizing="cover"
+                preload 
+                fade 
+                src="https://tesori-theaworld.c9users.io/images/terry/terry-towels-set-white-650gsm.jpg"></iron-image>
+        </div>
+        <div class="pad">
+            <h1 class="mdc-typography--headline3">Speaking of the web</h1>
+            <p  class="mdc-typography--body2">We're pleased to say that its a perfect timing.</p>
+        </div>
+    </section>
+    <section class="app-section content category">
+        <div class="category-grid">
+            <div class="category-item" 
+                style="grid-column-end: span 2; background-image: url(https://d2axgx0qsxn7a2.cloudfront.net/media/cms_page/SFERRA-AMIRA-TOWEL-HOME-PAGE-3_2.jpg)">
+                <!-- <a href="#">
+                    <div class="footer">
+                        <h1>Cool Lamp</h1>
+                        <span></span>
+                    </div>
+                </a> -->
+            </div>
+            <div class="category-item" style="grid-column-end: span 2; background-image: url(https://d2axgx0qsxn7a2.cloudfront.net/media/cms_page/SFERRA-ALMA-ALUMBRA-HOME-PAGE-2.jpg)">
+
+            </div>
+            <div class="category-item" style="background-image:url(https://d2axgx0qsxn7a2.cloudfront.net/media/catalog/product/cache/1/image/800x/040ec09b1e35df139433887a97daa66f/s/f/sferra-sarma-bath-towel-786bthtwl-default_1.jpg)">
+
+            </div>
+            <div class="category-item" style="grid-column-end: span 2; background-image:url(https://d2axgx0qsxn7a2.cloudfront.net/media/catalog/category/Fiona-Shop-By-Collection_2.jpg)">
+
+            </div>
+            <div class="category-item" style="background-image: url(https://d2axgx0qsxn7a2.cloudfront.net/media/catalog/product/cache/1/image/800x/040ec09b1e35df139433887a97daa66f/s/f/sferra-fresco-candle-7000-default.jpg)">
+
+            </div>
+        </div>
+    </section>
+    <section class="app-section content">
+
+    </section>
+</div>
