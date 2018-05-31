@@ -13,7 +13,7 @@ import '@polymer/iron-image';
 import buttonStyles from "./material/button.html";
 import '@polymer/iron-icon';
 
-class $ProductItem extends LitElement {
+class ProductItem extends LitElement {
     _render(props) {
         return html`
         ${html([buttonStyles])}
@@ -32,7 +32,11 @@ class $ProductItem extends LitElement {
              .cart-icon{
                 display:none;
             }
-            iron-image, .product-media, .wrapper{
+            .product-media{
+                width: 100%;
+                height: calc(100% - 87px);
+            }
+            .wrapper, iron-image{
                 width: 100%;
                 height: 100%;
             }
@@ -40,7 +44,8 @@ class $ProductItem extends LitElement {
                 position: absolute;
                 bottom: 0px;
                 width:100%;
-                background: #e3ecebb0;
+                height: 87px;
+                background: white;
             }
             .title{
                 font-size: 18px;
@@ -59,6 +64,12 @@ class $ProductItem extends LitElement {
             .pad{
                 padding: 1em;
             }
+            button{
+                color: white;
+                background: #d80b6d;
+                border-radius: 25px;
+                --mdc-theme-primary: var(--app-primary-color);
+            }
         </style>
             
         <div class="wrapper">
@@ -67,7 +78,7 @@ class $ProductItem extends LitElement {
                 <iron-image 
                     style="background-color: lightgray;" 
                     sizing="cover" preload fade 
-                    src="/images/cosmetics-1543271_960_720.jpg">
+                    src="/assets/images/cosmetics-1543271_960_720.jpg">
                 </iron-image>
             </div>
             <footer>
@@ -76,8 +87,8 @@ class $ProductItem extends LitElement {
                     <div class="flexed">
                         <span class="price-tag">$60.00</span>
                         <span style="flex:1"></span>
-                        <button class="mdc-button"> 
-                            <iron-icon icon="bn-icons:cart" class="cart-icon"></iron-icon> Add to Cart</button>
+                        <button class="mdc-button mdc-button--dense mdc-button--raised"> 
+                            Add to Cart</button>
                     </div>
                 </div>
                 
@@ -107,4 +118,4 @@ class $ProductItem extends LitElement {
     }
 }
 
-window.customElements.define('app-product-item', $ProductItem);
+window.customElements.define('app-product-item', ProductItem);

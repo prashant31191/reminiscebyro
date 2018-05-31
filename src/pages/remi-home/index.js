@@ -27,7 +27,7 @@ import "../../components/app-product-item.js";
  * @demo 
  * 
  */
-class TsHome extends PageViewElement {
+class RemiHome extends PageViewElement {
     
 
     static get template() {
@@ -100,9 +100,8 @@ class TsHome extends PageViewElement {
     async ready() {
         super.ready();
         const buttonRipple = new MDCRipple(this.shadowRoot.querySelector('.mdc-button'));
-        await import('iron-swiper-3/iron-swiper.js');
         
     }
 }
 
-customElements.define('ts-home', TsHome);
+customElements.define('remi-home', RemiHome);

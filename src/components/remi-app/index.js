@@ -16,7 +16,7 @@ import { store } from '../../store.js';
 import { navigate, updateOffline, updateDrawerState, updateLayout } from '../../actions/app.js';
 import template from './template.html';
 
-class MyApp extends connect(store)(PolymerElement) {
+class RemiApp extends connect(store)(PolymerElement) {
 
   static get template() {
 
@@ -81,4 +81,4 @@ static get properties() {
   }
 }
 
-window.customElements.define('sk-app', MyApp);
+window.customElements.define('remi-app', RemiApp);

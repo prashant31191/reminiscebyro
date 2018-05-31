@@ -1,5 +1,5 @@
 
-<style include="iron-flex iron-flex-factors iron-flex-alignment">
+<style include="iron-flex iron-flex-factors iron-flex-alignment iron-positioning">
     :host{
         opacity: 0;
     }
@@ -21,7 +21,7 @@
         max-width: 600px;
         background: #b1b1b4;
         box-shadow: 0px 17px 27px -26px rgba(0, 0, 0, 0.7);
-        background-image: url(/images/background.jpg);
+        background-image: url(/assets/images/background.jpg);
         background-size: cover;
     }
 
@@ -62,10 +62,10 @@
     .feature-grid{
         display: grid;
         grid-template-columns: repeat(6, 1fr);
-        grid-gap: 8px;
+        grid-gap: 24px;
     }
     .feature-item{
-        grid-column-end: span 3;
+        grid-column-end: span 2;
     }
     .heading-wrapper{
         margin-top: 5em;
@@ -73,6 +73,29 @@
     iron-swiper{
         height: 400px;
     }
+    .white-btn{
+        --mdc-theme-primary: white;
+        padding: 0px 28px !important;
+    }
+    .subtitle{
+        padding: 1em;
+    }
+    .bottom-banner-info{
+        background: #a25d707a;
+    }
+    .bottom-banner-info>*{
+        margin: 8px 0;
+    }
+    @media only screen and (max-device-width: 480px) and (min-device-width: 320px){
+    .feature-item{
+        grid-column-end: span 6;
+    }
+  }
+  @media only screen and (max-device-width: 768px) and (min-device-width: 480px){
+    .feature-item{
+        grid-column-end: span 3;
+    }
+  }
 </style>
 <div class="page-wrapper">
     <section class="app-hero pad">
@@ -82,7 +105,7 @@
                 <p class="mdc-typography--body2">Senses is the smart sleep tracker that improves your sleep, wakes you up feeling great, and shoes how the envirnment
                     of your room affects your rest.</p>
                 <div class="call-action-wrapper center">
-                    <a href="#">
+                    <a href="/shop">
                         <button class="mdc-button mdc-button--outlined">
                             Shop Now
                         </button>
@@ -118,28 +141,34 @@
             <p  class="mdc-typography--body2">Create colorful dimension from cheeks to eyes to temples.</p>
         </div>
     </section>
-    <section class="app-section feature">
+    <section class="app-section feature pad" style="margin-bottom: 4em;">
         <div class="content">
             <div class="center heading-wrapper">
                 <h1 class="mdc-typography--headline5">Featured</h1>
             </div>
             <div class="feature-grid">
-                <a href="#" class="feature-item">
+                <a href="/product/some-product" class="feature-item">
                     <app-product-item featured></app-product-item>
                 </a>
-                <a href="#" class="feature-item">
+                <a href="/product/some-product" class="feature-item">
                     <app-product-item featured></app-product-item>
                 </a>
-                <a href="#" class="feature-item">
+                <a href="/product/some-product" class="feature-item">
                     <app-product-item featured></app-product-item>
                 </a>
-                <a href="#" class="feature-item">
+                <a href="/product/some-product" class="feature-item">
+                    <app-product-item featured></app-product-item>
+                </a>
+                <a href="/product/some-product" class="feature-item">
+                    <app-product-item featured></app-product-item>
+                </a>
+                <a href="/product/some-product" class="feature-item">
                     <app-product-item featured></app-product-item>
                 </a>
             </div>
         </div>
     </section>
-    <section class="app-section feature">
+    <!-- <section class="app-section feature">
         <div class="content">
             <div class="center heading-wrapper">
                 <h1 class="mdc-typography--headline5">Best Sellers</h1>
@@ -149,6 +178,24 @@
                     <app-product-item shadow></app-product-item>
                 </template>
             </iron-swiper>
+        </div>
+    </section> -->
+    <section class="app-section" style="height: 70vh; position: relative;">
+        <iron-image 
+            style="width:100%; height:100%; background-color: lightgray;"
+            sizing="cover"
+            preload 
+            fade 
+            src="/assets/images/pexels-photo-457704.jpeg"></iron-image>
+        <div class="layout vertical center-center bottom-banner-info fit white-color">
+            <div class="title mdc-typography--headline5">
+                <small style="font-size:18px">NEW!</small>
+                <br>Matte Liquid Lipstick
+            </div>
+            <div class="mdc-typography--body">Stunning Metalic Touch Glow Skin Tone.</div>
+            <button class="mdc-button mdc-button--outlined white-btn">
+                Shop Now
+            </button>
         </div>
     </section>
 </div>

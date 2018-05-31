@@ -95,7 +95,7 @@ app-header {
 
 footer {
   padding: 24px;
-  background: var(--app-drawer-background-color);
+  background: #6a4565;
   color: var(--app-drawer-text-color);
   text-align: center;
 }
@@ -149,8 +149,8 @@ changes to a wide layout. */
 </app-drawer>
 <!-- Main content -->
 <main class="main-content">
-  <ts-home class="page" selected$="[[is_selected(_page, 'home')]]"></ts-home>
-  <my-view1 class="page" selected$="[[is_selected(_page, 'view1')]]"></my-view1>
+  <remi-home class="page" selected$="[[is_selected(_page, 'home')]]"></remi-home>
+  <remi-product class="page" selected$="[[is_selected(_page, 'product')]]"></remi-product>
   <my-view2 class="page" selected$="[[is_selected(_page, 'view2')]]"></my-view2>
   <my-view3 class="page" selected$="[[is_selected(_page, 'view3')]]"></my-view3>
   <my-view404 class="page" selected$="[[is_selected(_page, 'view404')]]"></my-view404>
