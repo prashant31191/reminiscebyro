@@ -1,1 +1,117 @@
-Working on it
+<style include="iron-flex iron-flex-factors iron-flex-alignment iron-positioning">
+    .product-media{
+        position: relative;
+        margin: 64px 32px;
+        width: 100%;
+        max-width: 600px;
+    }
+    .product-media>iron-image{
+        width: 100%;
+        height: 100%;
+        background-color: #eee;
+    }
+    quantity-input{
+        margin-right: 16px;
+    }
+    button.btn-add-cart{
+        --mdc-theme-primary: var(--app-secondary-color);
+        width: 263px;
+        height: 48px;
+    }
+    .detail{
+        margin: 64px 16px;
+    }
+    .colors{
+        padding-bottom: 16px;
+        margin-bottom: 1em;
+        border-bottom: 1px solid #eee;
+    }
+    .color-swatch{
+        border: 1px solid rgba(0,0,0,.2);
+        border-radius: 50%;
+        display: inline-block;
+        height: 1em;
+        vertical-align: middle;
+        width: 1em;
+        cursor: pointer;
+        padding: 6px;
+        margin: 0 4px;
+    }
+    .color-names{
+        
+        color: #000000c7;
+    }
+    .color-names>span{
+        font-weight: 500;
+    }
+    /* @media only screen and (max-device-width: 480px) and (min-device-width: 320px){
+    .main-section{
+        flex-direction: column;
+    }
+  } */
+  @media only screen and (max-device-width: 768px) and (min-device-width: 320px){
+    .main-section{
+        flex-direction: column !important;
+    }
+    .product-media{
+        height: 300px;
+        margin-bottom: 16px;
+    }
+    .detail{
+        margin-top: 16px;
+    }
+  }
+</style>
+<section class="page-wrapper">
+    <div class="content layout horizontal main-section">
+        <div class="product-media">
+            <iron-image 
+                sizing="cover"
+                preload 
+                fade 
+                src="https://www.fentybeauty.com/dw/image/v2/AAXW_PRD/on/demandware.static/-/Sites-itemmaster_FNT/default/dw92d0bfc2/hi-res/Summer%20II%20Concrete%20-%20Final/27785V1_alt1_final.jpg?sw=550%20550w"></iron-image>
+        </div>
+        <div class="detail layout vertical">
+            <h1 class="mdc-typography--headline4">Anvil L/S Crew Neck - Grey</h1>
+            <div class="price mdc-typography--headline6">$22.15</div>
+            <div class="pickers">
+                <!-- Color -->
+                <div class="colors-wrapper">
+                    <h2 class="mdc-typography--body2 color-names">Colour: <span>Indigo</span>, <span>Pink</span></h2>
+                    <div class="colors vertical-scroll">
+                        <span class="color-swatch" style="background: #3F51B5;"></span>
+                        <span class="color-swatch" style="background: #b96f55;"></span>
+                        <span class="color-swatch" style="background: #ff0057;"></span>
+                    </div>
+                </div>
+                <div class="layout horizontal center">
+                    <quantity-input class="flex"></quantity-input>
+                    <div class="flex-2">
+                        <button class="mdc-button mdc-button--unelevated btn-add-cart">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="description">
+                <h2 class="mdc-typography--headline5">Description</h2>
+                <p class="mdc-typography--body2">You'll be swooning over this crew neck as soon as you feel how soft it is.&nbsp;
+                    <div>
+                        <br>
+                    </div>
+                    <div class="mdc-typography--headline5">Features:</div>
+                    <div>
+                        <ul>
+                            <li>40% preshrunk ring-spun cotton, 60% polyester terry fleece.&nbsp;</li>
+                            <li>Available in dark heather charcoal with the white Google logo screen printed across center chest.</li>
+                        </ul>
+                    </div>
+                </p>
+            </div>
+            <!-- <shop-button responsive="">
+                <button aria-label="Add this item to cart">Add to Cart</button>
+            </shop-button> -->
+        </div>
+    </div>
+</section>

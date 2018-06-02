@@ -17,6 +17,7 @@ import { MDCRipple } from '@material/ripple';
 import '@polymer/iron-image';
 import { PageViewElement } from '../../components/page-view-element.js';
 import { fadeIn, fadeOut } from '../../components/animation.js';
+import '../../components/quantity-input.js';
 
 /**
  * `ts-home` Description
