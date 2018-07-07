@@ -15,6 +15,15 @@ app-header {
   z-index: 3;
 }
 
+:host([page=product]) .toolbar-list{
+  display: none;
+}
+:host([page=product]) #back-btn{
+  display: block;
+}
+#back-btn{
+  display: none;
+}
 .toolbar-top {
   background-color: var(--app-header-background-color);
 }
@@ -85,11 +94,11 @@ app-header {
   background: white;
 }
 
-.page {
-  display: none;
-}
+[page] {
+        display: none;
+      }
 
-.page[active] {
+[page][active] {
   display: block;
 }
 
@@ -125,35 +134,40 @@ changes to a wide layout. */
 <!-- Header -->
 <app-header condenses reveals effects="waterfall">
   <app-toolbar class="toolbar-top" sticky>
-    <!-- <button class="menu-btn" title="Menu" on-click="${_ => store.dispatch(updateDrawerState(true))}">${menuIcon}</button> -->
+    <a href="/">
+      <paper-icon-button icon="bn-icons:arrow-back" id="back-btn"></paper-icon-button>
+    </a>
+    
     <div main-title>
        ReminiscebyRo
     </div>
+    
     <span class="flex"></span>
     <paper-icon-button icon="bn-icons:cart"></paper-icon-button>
   </app-toolbar>
   <!-- This gets hidden on a small screen-->
   <nav class="toolbar-list">
-    <a selected$="[[is_selected(_page, 'home')]]" href="/">Home</a>
-    <a selected$="[[is_selected(_page, 'view2')]]" href="/view2">Our Company</a>
-    <a selected$="[[is_selected(_page, 'view3')]]" href="/view3">Our Work</a>
+    <a selected$="[[is_selected(page, 'home')]]" href="/">Home</a>
+    <a selected$="[[is_selected(page, 'shop')]]" href="/shop">Shop</a>
+    <a selected$="[[is_selected(page, 'about')]]" href="/about">Our Story</a>
+    <a selected$="[[is_selected(page, 'contact')]]" href="/contact">Get in touch</a>
   </nav>
 </app-header>
 <!-- Drawer content -->
-<app-drawer opened="[[_drawerOpened]]" on-opened-changed="[[updateDrawerState]]">
+<!-- <app-drawer opened="[[_drawerOpened]]" on-opened-changed="[[updateDrawerState]]">
   <nav class="drawer-list">
     <a selected$="[[is_selected(_page, 'home')]]" href="/">Home</a>
     <a selected$="[[is_selected(_page, 'view2')]]" href="/view2">View Two</a>
     <a selected$="[[is_selected(_page, 'view3')]]" href="/view3">View Three</a>
   </nav>
-</app-drawer>
+</app-drawer> -->
 <!-- Main content -->
-<main class="main-content">
-  <remi-home class="page" selected$="[[is_selected(_page, 'home')]]"></remi-home>
-  <remi-product class="page" selected$="[[is_selected(_page, 'product')]]"></remi-product>
-  <my-view2 class="page" selected$="[[is_selected(_page, 'view2')]]"></my-view2>
-  <my-view3 class="page" selected$="[[is_selected(_page, 'view3')]]"></my-view3>
-  <my-view404 class="page" selected$="[[is_selected(_page, 'view404')]]"></my-view404>
+<main class="main-content" id="pages">
+  <remi-home page="home"></remi-home>
+  <remi-product page="product"></remi-product>
+  <remi-about page="about"></remi-about>
+  <remi-contact page="contact"></remi-contact>
+  <remi-shop page="shop"></remi-shop>
 </main>
 <footer>
 </footer>

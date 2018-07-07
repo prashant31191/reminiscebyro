@@ -15,20 +15,29 @@ import { updateMetadata } from 'pwa-helpers/metadata.js';
 import { store } from '../../store.js';
 import { navigate, updateOffline, updateDrawerState, updateLayout } from '../../actions/app.js';
 import template from './template.html';
+import sharedStyles from '../shared-styles.html';
+
 
 class RemiApp extends connect(store)(PolymerElement) {
 
   static get template() {
 
     return html`
-        ${html([template])}
+        ${html([
+          template
+          +sharedStyles
+        ])}
       `;
   }
 
 static get properties() {
   return {
     appTitle: String,
-    _page: String,
+    page: {
+      type: Object,
+      observer: '_pageChanged',
+      reflectToAttribute: true 
+    },
     _drawerOpened: Boolean,
     _snackbarOpened: Boolean,
     _offline: Boolean
@@ -56,11 +65,42 @@ static get properties() {
     //   (matches) => store.dispatch(updateLayout(matches)));
   }
 
-    is_selected(_page, view){
-      return _page === view;
+  /**
+    * @desc When the user navigates to a new page
+    * @param {old, new} page - passes old and new page
+    */
+  _pageChanged(page, old) {
+    this._activatePage(
+      this.$.pages.querySelector(`[page=${page}]`),
+      this.$.pages.querySelector(`[page=${old}]`)
+    );
+
+  }
+
+  is_selected(page, view){
+    return page === view;
+  }
+  
+  async _activatePage(_newPage, _oldPage) {
+    //hide the old page
+    if (_oldPage && typeof _oldPage.hide === "function") {
+      await _oldPage.hide();
     }
 
-    
+    //Show the new page
+    if (_newPage && typeof _newPage.show === "function") {
+      await _newPage.show();
+    } else {
+      //if we are here, the page is not loaded so maybe show a spinner
+      //wait for awhile try again?
+      //sky is the limit
+      _newPage.start = true;
+    }
+
+    window.scrollTo(0, 0);
+
+  }
+
     
   _didRender(properties, changeList) {
     if ('_page' in changeList) {
@@ -74,7 +114,7 @@ static get properties() {
   }
 
   _stateChanged(state) {
-    this._page = state.app.page;
+    this.page = state.app.page;
     this._offline = state.app.offline;
     this._snackbarOpened = state.app.snackbarOpened;
     this._drawerOpened = state.app.drawerOpened;

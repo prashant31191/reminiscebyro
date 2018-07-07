@@ -41,7 +41,6 @@ class RemiProduct extends PageViewElement {
 
     static get observers(){
         return [
-            '_onPageSelected(selected)'
         ]
     }
 
@@ -54,13 +53,22 @@ class RemiProduct extends PageViewElement {
         }
     }
 
-    show(){
-        fadeIn(this);
-        
+    hide() {
+        return new Promise(async (resolve, reject) => {
+            const animation = await fadeOut(this).finished;
+            this.active = false;
+            resolve();
+        })
+
     }
 
-    hide(){
-        fadeOut(this);
+    show() {
+        return new Promise(async (resolve, reject) => {
+            const animation = await fadeIn(this).finished;
+            this.active = true;
+            resolve();
+        })
+
     }
 
     _onPageSelected(selected){

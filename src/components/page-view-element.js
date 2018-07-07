@@ -26,5 +26,21 @@ export class PageViewElement extends PolymerElement {
       },
     }
   }
-  
+
+  show() {
+    this.active = true;
+  }
+  hide() {
+    this.active = false;
+  }
+  ready() {
+    super.ready();
+
+    //Play animation when page is loaded
+    if (this.start && typeof this.show === "function") {
+      this.show();
+    }
+
+  }
+
 }

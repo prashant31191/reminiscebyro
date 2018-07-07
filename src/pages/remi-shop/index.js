@@ -10,11 +10,9 @@
 import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 import template from './template.html'
 import SharedStyles  from '../../components/shared-styles.html';
-import '@polymer/iron-flex-layout/iron-flex-layout-classes.js';
-import { typography } from '../../components/typo.js';
-import buttonStyles from "../../components/material/button.html";
-import { MDCRipple } from '@material/ripple';
 import '@polymer/iron-image';
+
+import "../../components/app-product-item.js";
 import { PageViewElement } from '../../components/page-view-element.js';
 import { fadeIn, fadeOut } from '../../components/animation.js';
 
@@ -31,9 +29,7 @@ class RemiShop extends PageViewElement {
 
     static get template() {
         return html`
-            ${typography}
             ${html([template])}
-            ${html([buttonStyles])}
             ${html([SharedStyles])}
         `;
     }
@@ -53,19 +49,22 @@ class RemiShop extends PageViewElement {
         }
     }
 
-    show(){
-        fadeIn(this);
-        
+    hide() {
+        return new Promise(async (resolve, reject) => {
+          const animation = await fadeOut(this).finished;
+          this.active = false;
+          resolve();
+        })
+
     }
 
-    hide(){
-        fadeOut(this);
-    }
+    show() {
+        return new Promise(async (resolve, reject) => {
+          const animation = await fadeIn(this).finished;
+          this.active = true;
+          resolve();
+        })
 
-    _onPageSelected(selected){
-        
-        selected ? this.show() : this.hide()  
-        this.active = selected;
     }
 
     /**
@@ -87,10 +86,8 @@ class RemiShop extends PageViewElement {
      */
     async ready() {
         super.ready();
-        const buttonRipple = new MDCRipple(this.shadowRoot.querySelector('.mdc-button'));
-        await import('iron-swiper-3/iron-swiper.js');
         
     }
 }
 
-customElements.define('remi-product', RemiShop);
+customElements.define('remi-shop', RemiShop);

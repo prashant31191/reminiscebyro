@@ -8,14 +8,18 @@
     subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 */
 import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
+import '@polymer/iron-flex-layout/iron-flex-layout-classes.js';
+import '@polymer/iron-image';
+import { MDCRipple } from '@material/ripple';
+
+import { PageViewElement } from '../../components/page-view-element.js';
 import template from './template.html'
 import SharedStyles  from '../../components/shared-styles.html';
-import '@polymer/iron-flex-layout/iron-flex-layout-classes.js';
 import { typography } from '../../components/typo.js';
 import buttonStyles from "../../components/material/button.html";
-import { MDCRipple } from '@material/ripple';
-import '@polymer/iron-image';
-import { PageViewElement } from '../../components/page-view-element.js';
+
+
+
 import { fadeIn, fadeOut } from '../../components/animation.js';
 import "../../components/app-product-item.js";
 
@@ -41,7 +45,6 @@ class RemiHome extends PageViewElement {
 
     static get observers(){
         return [
-            '_onSelectedChange(selected)'
         ]
     }
 
@@ -65,19 +68,22 @@ class RemiHome extends PageViewElement {
         }
     }
 
-    show(){
-        fadeIn(this);
-        
+    hide() {
+        return new Promise(async (resolve, reject) => {
+            const animation = await fadeOut(this).finished;
+            this.active = false;
+            resolve();
+        })
+
     }
 
-    hide(){
-        fadeOut(this);
-    }
+    show() {
+        return new Promise(async (resolve, reject) => {
+            const animation = await fadeIn(this).finished;
+            this.active = true;
+            resolve();
+        })
 
-    _onSelectedChange(selected){
-        
-        selected ? this.show() : this.hide()  
-        this.active = selected;
     }
 
     /**
