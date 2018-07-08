@@ -29,25 +29,33 @@ class QuantityInput extends LitElement {
         <style>
             :host { 
                 display: block;
-                max-width: 125px;
-                background: #eee;
+                max-width: 200px;
             }
             input{
                 border: 0px;
                 outline: 0px;
                 background: transparent;
             }
-            .quantity>*{
-                display: inline-block;
+            .quantity{
+                display: flex;
             }
             input[type=text]{
-                width: calc(100% - 110px);
-                vertical-align:baseline;
+                color: #393433;
+                vertical-align: baseline;
+                width: 30px;
+                font-weight: 600;
+                text-align: center;
+                padding: 4px;
+                background-color: #e6e6e6;
+                border-radius: 62%;
             }
             input[type=button]{
-                width: 50px;
-                height: 44px;
+                height: 35px;
                 cursor: pointer;
+                width: 90px;
+                font-size: 14px;
+                font-weight: 600;
+                color: #717171;
             }
         </style>
         <div class="quantity">
@@ -59,20 +67,24 @@ class QuantityInput extends LitElement {
     }
 
     /**
-            * Object describing property-related metadata used by Polymer features
-            */
+    * Object describing property-related metadata used by Polymer features
+    */
     static get properties() {
         return {
-            value: Number
+            value: Number,
+            min: Number,
+            max: Number
         }
     }
 
     minus(e){
+        if ((this.value - 1) < this.min) return;
         this.value--;
         this.valueChange();
     }
     
     plus(e){
+        if((this.value + 1) > this.max) return;
         this.value++;
         this.valueChange();
     }

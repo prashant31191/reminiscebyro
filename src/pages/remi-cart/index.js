@@ -12,7 +12,9 @@ import { PageViewElement } from "../../components/page-view-element";
 import { connect } from 'pwa-helpers/connect-mixin.js';
 
 import { store } from '../../store.js';
-
+import template from './template.html';
+import SharedStyles from '../../components/shared-styles.html';
+import '../../components/remi-cart-item.js';
 /**
  * `bn-project` Description
  *
@@ -21,7 +23,7 @@ import { store } from '../../store.js';
  * @demo
  * 
  */
-class RemiAbout extends connect(store)(PageViewElement) {
+class RemiCart extends connect(store)(PageViewElement) {
     static get properties() {
         return {
 
@@ -29,14 +31,10 @@ class RemiAbout extends connect(store)(PageViewElement) {
     }
 
     static get template() {
-        return html`
-            <style>
-            
-            </style>
-            <section>
-                
-            </section>
-        `;
+        return html([
+            template +
+            SharedStyles
+        ]);
     }
 
     /**
@@ -72,4 +70,4 @@ class RemiAbout extends connect(store)(PageViewElement) {
     }
 }
 
-customElements.define('remi-about', RemiAbout);
+customElements.define('remi-cart', RemiCart);

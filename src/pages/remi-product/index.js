@@ -8,16 +8,19 @@
     subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 */
 import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
-import template from './template.html'
-import SharedStyles  from '../../components/shared-styles.html';
-import '@polymer/iron-flex-layout/iron-flex-layout-classes.js';
-import { typography } from '../../components/typo.js';
-import buttonStyles from "../../components/material/button.html";
 import { MDCRipple } from '@material/ripple';
 import '@polymer/iron-image';
+import '@polymer/iron-flex-layout/iron-flex-layout-classes.js';
+
+import template from './template.html'
 import { PageViewElement } from '../../components/page-view-element.js';
-import { fadeIn, fadeOut } from '../../components/animation.js';
+import SharedStyles  from '../../components/shared-styles.html';
+import buttonStyles from "../../components/material/button.html";
+import '../../components/remi-color-swatch-input.js';
 import '../../components/quantity-input.js';
+
+import { fadeIn, fadeOut } from '../../components/animation.js';
+
 
 /**
  * `ts-home` Description
@@ -31,12 +34,13 @@ class RemiProduct extends PageViewElement {
     
 
     static get template() {
-        return html`
-            ${typography}
-            ${html([template])}
-            ${html([buttonStyles])}
-            ${html([SharedStyles])}
-        `;
+        return html([
+            template + 
+            buttonStyles + 
+            SharedStyles
+                
+        ])
+
     }
 
     static get observers(){

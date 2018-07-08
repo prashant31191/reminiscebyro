@@ -11,13 +11,30 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 import { LitElement, html } from '@polymer/lit-element';
 
 // This element is *not* connected to the redux store.
-class ShopItem extends LitElement {
+class RemiColorSwatchInput extends LitElement {
   _render(props) {
     return html`
-      ${props.name}:
-      <span hidden="${props.amount === 0}">${props.amount} * </span>
-      $${props.price}
-      </span>
+      <style>
+        .color-swatch{
+          border-radius: 50%;
+          display: inline-block;
+          height: 1em;
+          vertical-align: middle;
+          width: 1em;
+          cursor: pointer;
+          padding: 6px;
+          margin: 0 4px;
+      }
+      .colors{
+        padding-bottom: 16px;
+        margin-bottom: 1em;
+      }
+      </style>
+     <div class="colors vertical-scroll">
+          <span class="color-swatch" style="background: #3F51B5;"></span>
+          <span class="color-swatch" style="background: #b96f55;"></span>
+          <span class="color-swatch" style="background: #ff0057;"></span>
+      </div>
     `;
   }
 
@@ -30,4 +47,4 @@ class ShopItem extends LitElement {
   }
 }
 
-window.customElements.define('shop-item', ShopItem);
+window.customElements.define('remi-color-swatch-input', RemiColorSwatchInput);

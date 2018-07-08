@@ -54,7 +54,7 @@ app-header {
 
 .toolbar-list > a[selected] {
   color: #fdfefe;
-  background: var(--app-secondary-color);
+  background: #f51681;
   border-radius: 26px;
 }
 
@@ -143,7 +143,8 @@ changes to a wide layout. */
     </div>
     
     <span class="flex"></span>
-    <paper-icon-button icon="bn-icons:cart"></paper-icon-button>
+    <a href="/cart"><paper-icon-button icon="bn-icons:cart"></paper-icon-button></a>
+    
   </app-toolbar>
   <!-- This gets hidden on a small screen-->
   <nav class="toolbar-list">
@@ -168,6 +169,8 @@ changes to a wide layout. */
   <remi-about page="about"></remi-about>
   <remi-contact page="contact"></remi-contact>
   <remi-shop page="shop"></remi-shop>
+  <remi-cart page="cart"></remi-cart>
+  <remi-login page="login"></remi-login>
 </main>
 <footer>
 </footer>

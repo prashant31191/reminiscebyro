@@ -15,7 +15,6 @@ import { MDCRipple } from '@material/ripple';
 import { PageViewElement } from '../../components/page-view-element.js';
 import template from './template.html'
 import SharedStyles  from '../../components/shared-styles.html';
-import { typography } from '../../components/typo.js';
 import buttonStyles from "../../components/material/button.html";
 
 
@@ -35,12 +34,13 @@ class RemiHome extends PageViewElement {
     
 
     static get template() {
-        return html`
-            ${typography}
-            ${html([template])}
-            ${html([buttonStyles])}
-            ${html([SharedStyles])}
-        `;
+        return html([
+            template + 
+            buttonStyles + 
+            SharedStyles
+                
+        ])
+        
     }
 
     static get observers(){

@@ -10,6 +10,9 @@
         height: 100%;
         background-color: #eee;
     }
+    .price {
+        font-weight: 600;
+    }
     quantity-input{
         margin-right: 16px;
     }
@@ -21,24 +24,7 @@
     .detail{
         margin: 64px 16px;
     }
-    .colors{
-        padding-bottom: 16px;
-        margin-bottom: 1em;
-        border-bottom: 1px solid #eee;
-    }
-    .color-swatch{
-        border: 1px solid rgba(0,0,0,.2);
-        border-radius: 50%;
-        display: inline-block;
-        height: 1em;
-        vertical-align: middle;
-        width: 1em;
-        cursor: pointer;
-        padding: 6px;
-        margin: 0 4px;
-    }
     .color-names{
-        
         color: #000000c7;
     }
     .color-names>span{
@@ -78,15 +64,11 @@
                 <!-- Color -->
                 <div class="colors-wrapper">
                     <h2 class="mdc-typography--body2 color-names">Colour: <span>Indigo</span>, <span>Pink</span></h2>
-                    <div class="colors vertical-scroll">
-                        <span class="color-swatch" style="background: #3F51B5;"></span>
-                        <span class="color-swatch" style="background: #b96f55;"></span>
-                        <span class="color-swatch" style="background: #ff0057;"></span>
-                    </div>
+                    <remi-color-swatch-input></remi-color-swatch-input>
                 </div>
                 <div class="layout horizontal center">
-                    <quantity-input class="flex"></quantity-input>
-                    <div class="flex-2">
+                    <quantity-input min="1" max="7"></quantity-input>
+                    <div class="flex">
                         <button class="mdc-button mdc-button--unelevated btn-add-cart">
                             Add to Cart
                         </button>
