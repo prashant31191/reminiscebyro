@@ -187,8 +187,9 @@ changes to a wide layout. */
   <remi-cart page="cart"></remi-cart>
   <remi-login page="login"></remi-login>
   <remi-dashboard page="dashboard"></remi-dashboard>
+  <remi-products page="products"></remi-products>
 </main>
 <footer>
 </footer>
-<snack-bar active?="${_snackbarOpened}">
+<snack-bar active$="[[toastVisible]]">
   You are now ${_offline ? 'offline' : 'online'}.</snack-bar>

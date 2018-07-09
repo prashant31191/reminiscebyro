@@ -36,16 +36,36 @@
     }
     .orders-inner, .profits-inner{
         border-radius: 16px;
-        padding: 16px;
         background-color: #332d2c;
-        height: 400px;
-        
+        min-height: 400px;
+        overflow: hidden;
     }
     .profits{
         margin: 4em 1em;
     }
     .profits-inner{
 
+    }
+    .profits-inner header{
+        height: 68px;
+    }
+    .summary-info>*{
+        display: block
+    }
+    .summary-number{
+        font-size: 2rem;
+    }
+    .summary-title{
+        color: #ffffff94;
+    }
+    .summary-info>iron-icon{
+        --iron-icon-height: 65px;
+        --iron-icon-width: 65px;
+        margin-left: auto;
+    }
+    canvas{
+        height: 300px !important;
+        width: 100% !important;
     }
 </style>
 <section class="content">
@@ -56,19 +76,45 @@
 
     <main>
         <section class="layout horizontal">
-            <div class="summary-item first"></div>
-            <div class="summary-item second"></div>
-            <div class="summary-item third"></div>
+            <div class="summary-item first">
+                <div class="summary-info">
+                    <iron-icon src="/assets/icons/eye.svg"></iron-icon>
+                    <span class="summary-title">Total Views</span>
+                    <span class="summary-number">14,000</span>
+                </div>
+            </div>
+            <div class="summary-item second">
+                <div class="summary-info">
+                    <iron-icon src="/assets/icons/online-shopping-cart.svg"></iron-icon>
+                    <span class="summary-title">Total Orders</span>
+                    <span class="summary-number">400</span>
+                </div>
+            </div>
+            <div class="summary-item third">
+                <div class="summary-info">
+                    <iron-icon src="/assets/icons/money.svg"></iron-icon>
+                    <span class="summary-title">Total Revenue</span>
+                    <span class="summary-number">$12,875</span>
+                </div>
+            </div>
         </section>
         <section class="layout horizontal">
             <div class="cart flex profits">
                 <div class="profits-inner">
-
+                    <header class="pad">
+                        <h1>Profits</h1>
+                    </header>
+                    <canvas id="profits"></canvas>
                 </div>
             </div>
             <div class="orders">
                 <div class="orders-inner">
-
+                    <header class="pad">
+                        <h1>Latest Orders</h1>
+                    </header>
+                    <section>
+                        
+                    </section>
                 </div>
             </div>
         </section>

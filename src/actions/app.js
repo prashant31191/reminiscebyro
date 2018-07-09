@@ -32,7 +32,7 @@ const loadPage = (page) => async (dispatch) => {
   // If the page is invalid, set to 404. The is also a good spot to check
   // other location things like sub-path or query params.
   if (['home', 'product', 'shop', 'about', 'contact', 'cart', 'login',
-      'dashboard'].indexOf(page) === -1) {
+      'dashboard', 'products'].indexOf(page) === -1) {
     page = 'view404';
   }
 
@@ -59,6 +59,9 @@ const loadPage = (page) => async (dispatch) => {
       break;
     case 'dashboard':
       await import('../pages/remi-dashboard');
+      break;
+    case 'products':
+      await import('../pages/remi-products');
       break;
     default:
       await import('../pages/remi-home');
