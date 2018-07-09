@@ -7,14 +7,17 @@ The complete set of contributors may be found at http://polymer.github.io/CONTRI
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 */
+import { Auth } from '../core/auth.js';
 
+export const UPDATE_USER = 'UPDATE_USER';
 export const UPDATE_PAGE = 'UPDATE_PAGE';
 export const UPDATE_OFFLINE = 'UPDATE_OFFLINE';
-export const UPDATE_DRAWER_STATE = 'UPDATE_DRAWER_STATE';
+export const UPDATE_LOADING = 'UPDATE_LOADING';
 export const OPEN_SNACKBAR = 'OPEN_SNACKBAR';
 export const CLOSE_SNACKBAR = 'CLOSE_SNACKBAR';
 
 export const navigate = (path) => (dispatch) => {
+  dispatch(updateLoading(true));
   // Extract the page name from path.
   const page = path === '/' ? 'home' : path.split('/')[1];
   const slug = page ? path.split('/')[2] : null;
@@ -23,18 +26,15 @@ export const navigate = (path) => (dispatch) => {
   // you can do here
   dispatch(loadPage(page));
 
-  // Close the drawer - in case the *path* change came from a link in the drawer.
-  dispatch(updateDrawerState(false));
 };
 
 const loadPage = (page) => async (dispatch) => {
   // If the page is invalid, set to 404. The is also a good spot to check
   // other location things like sub-path or query params.
-  if (['home', 'product', 'shop', 'about', 'contact', 'cart'].indexOf(page) === -1) {
+  if (['home', 'product', 'shop', 'about', 'contact', 'cart', 'login',
+      'dashboard'].indexOf(page) === -1) {
     page = 'view404';
   }
-
-  dispatch(updatePage(page));
 
   switch(page) {
     case 'home':
@@ -54,9 +54,18 @@ const loadPage = (page) => async (dispatch) => {
     case 'about':
       await import('../pages/remi-about');
       break;
+    case 'login':
+      await import('../pages/remi-login');
+      break;
+    case 'dashboard':
+      await import('../pages/remi-dashboard');
+      break;
     default:
       await import('../pages/remi-home');
   }
+
+  dispatch(updatePage(page));
+  dispatch(updateLoading(false));
 }
 
 const updatePage = (page) => {
@@ -94,11 +103,28 @@ export const updateLayout = (wide) => (dispatch, getState) => {
   }
 }
 
-export const updateDrawerState = (opened) => (dispatch, getState) => {
-  if (getState().app.drawerOpened !== opened) {
-    dispatch({
-      type: UPDATE_DRAWER_STATE,
-      opened
-    });
+export const updateLoading = (loading) => {
+  return {
+    type: UPDATE_LOADING,
+    loading
+  }
+}
+
+
+
+export const login = (data) => async (dispatch, state) => {
+  await Auth.login(data);
+}
+
+export const listenUserChange = () => (dispatch, state) => {
+  Auth._onAuthChange((user) => {
+    dispatch(updateUser(user))
+  })
+}
+
+export const updateUser = (user) => {
+  return {
+    type: UPDATE_USER,
+    user
   }
 }

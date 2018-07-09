@@ -2,23 +2,27 @@
 
 import { PolymerElement, html } from '@polymer/polymer/polymer-element';
 
+import { RemiApp } from '../../core/app.js';
+
 import '@polymer/app-layout/app-drawer/app-drawer.js';
 import '@polymer/app-layout/app-header/app-header.js';
 import '@polymer/app-layout/app-scroll-effects/effects/waterfall.js';
 import '@polymer/app-layout/app-toolbar/app-toolbar.js';
 import { setPassiveTouchGestures } from '@polymer/polymer/lib/utils/settings.js';
+import '@polymer/iron-flex-layout/iron-flex-layout-classes.js';
+import '@polymer/paper-progress/paper-progress.js';
 
 import { connect } from 'pwa-helpers/connect-mixin.js';
 import { installRouter } from 'pwa-helpers/router.js';
 import { updateMetadata } from 'pwa-helpers/metadata.js';
 
 import { store } from '../../store.js';
-import { navigate, updateOffline, updateDrawerState, updateLayout } from '../../actions/app.js';
+import { navigate, updateOffline, updateDrawerState, updateLayout, listenUserChange, updateLoading } from '../../actions/app.js';
 import template from './template.html';
 import sharedStyles from '../shared-styles.html';
 
 
-class RemiApp extends connect(store)(PolymerElement) {
+window.customElements.define('remi-app', class extends connect(store)(PolymerElement) {
 
   static get template() {
 
@@ -38,9 +42,15 @@ static get properties() {
       observer: '_pageChanged',
       reflectToAttribute: true 
     },
+    loading: String,
     _drawerOpened: Boolean,
     _snackbarOpened: Boolean,
-    _offline: Boolean
+    _offline: Boolean,
+    hideNav:{
+      type: Boolean,
+      reflectToAttribute: true,
+      computed: '_computeHideNav(page)'
+    }
   }
 }
 
@@ -54,7 +64,9 @@ static get properties() {
   async ready() {
     super.ready();
 
+    store.dispatch(listenUserChange());
     await import('../lazy-components.js');
+
   }
 
   connectedCallback() {
@@ -65,11 +77,16 @@ static get properties() {
     //   (matches) => store.dispatch(updateLayout(matches)));
   }
 
+  _computeHideNav(){
+    return ['product', 'cart'].indexOf(this.page) != -1;
+  }
   /**
     * @desc When the user navigates to a new page
     * @param {old, new} page - passes old and new page
     */
   _pageChanged(page, old) {
+    this._drawerOpened = false;
+
     this._activatePage(
       this.$.pages.querySelector(`[page=${page}]`),
       this.$.pages.querySelector(`[page=${old}]`)
@@ -101,7 +118,9 @@ static get properties() {
 
   }
 
-    
+  _openDrawer(){
+    this._drawerOpened = true;
+  }
   _didRender(properties, changeList) {
     if ('_page' in changeList) {
       const pageTitle = properties.appTitle + ' - ' + changeList._page;
@@ -117,8 +136,7 @@ static get properties() {
     this.page = state.app.page;
     this._offline = state.app.offline;
     this._snackbarOpened = state.app.snackbarOpened;
-    this._drawerOpened = state.app.drawerOpened;
+    this._user = state.app.user;
+    this.loading = state.app.loading;
   }
-}
-
-window.customElements.define('remi-app', RemiApp);
+});

@@ -15,10 +15,17 @@ app-header {
   z-index: 3;
 }
 
-:host([page=product]) .toolbar-list{
+app-drawer{
+  z-index: 4;
+}
+
+:host([hide-nav]) .toolbar-list{
   display: none;
 }
-:host([page=product]) #back-btn{
+:host([hide-nav]) #menu-btn{
+  display: none !important;
+}
+:host([hide-nav]) #back-btn{
   display: block;
 }
 #back-btn{
@@ -108,7 +115,10 @@ footer {
   color: var(--app-drawer-text-color);
   text-align: center;
 }
-
+paper-progress{
+  width: 100%;
+   --paper-progress-active-color: var(--app-secondary-color);
+}
 /* Wide layout: when the viewport width is bigger than 460px, layout
 changes to a wide layout. */
 @media (min-width: 460px) {
@@ -116,12 +126,8 @@ changes to a wide layout. */
     display: block;
   }
 
-  .menu-btn {
-    display: none;
-  }
-
   .main-content {
-    padding-top: 118px;
+    padding-top: 114px;
   }
 
   /* The drawer button isn't shown in the wide layout, so we don't
@@ -132,8 +138,15 @@ changes to a wide layout. */
 }
 </style>
 <!-- Header -->
+
 <app-header condenses reveals effects="waterfall">
+  <paper-progress indeterminate hidden$="[[!loading]]"></paper-progress>
   <app-toolbar class="toolbar-top" sticky>
+    <paper-icon-button 
+      id="menu-btn"
+      icon="bn-icons:menu" 
+      hidden$="[[!_user]]"
+      on-click="_openDrawer"></paper-icon-button>
     <a href="/">
       <paper-icon-button icon="bn-icons:arrow-back" id="back-btn"></paper-icon-button>
     </a>
@@ -142,7 +155,6 @@ changes to a wide layout. */
        ReminiscebyRo
     </div>
     
-    <span class="flex"></span>
     <a href="/cart"><paper-icon-button icon="bn-icons:cart"></paper-icon-button></a>
     
   </app-toolbar>
@@ -155,13 +167,16 @@ changes to a wide layout. */
   </nav>
 </app-header>
 <!-- Drawer content -->
-<!-- <app-drawer opened="[[_drawerOpened]]" on-opened-changed="[[updateDrawerState]]">
+
+<app-drawer opened="{{_drawerOpened}}">
   <nav class="drawer-list">
-    <a selected$="[[is_selected(_page, 'home')]]" href="/">Home</a>
-    <a selected$="[[is_selected(_page, 'view2')]]" href="/view2">View Two</a>
-    <a selected$="[[is_selected(_page, 'view3')]]" href="/view3">View Three</a>
+    <a selected$="[[is_selected(_page, 'view2')]]" href="/dashboard">Dashboard</a>
+    <a selected$="[[is_selected(_page, 'view3')]]" href="/products">Products</a>
+    <a selected$="[[is_selected(_page, 'view3')]]" href="/orders">Orders</a>
+    <a selected$="[[is_selected(_page, 'view3')]]" href="/blogging">Blog</a>
+    <a selected$="[[is_selected(_page, 'view3')]]" href="/media">Media</a>
   </nav>
-</app-drawer> -->
+</app-drawer>
 <!-- Main content -->
 <main class="main-content" id="pages">
   <remi-home page="home"></remi-home>
@@ -171,6 +186,7 @@ changes to a wide layout. */
   <remi-shop page="shop"></remi-shop>
   <remi-cart page="cart"></remi-cart>
   <remi-login page="login"></remi-login>
+  <remi-dashboard page="dashboard"></remi-dashboard>
 </main>
 <footer>
 </footer>

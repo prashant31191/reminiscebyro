@@ -9,9 +9,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 */
 
 import { UPDATE_PAGE, UPDATE_OFFLINE,
-         OPEN_SNACKBAR, CLOSE_SNACKBAR, UPDATE_DRAWER_STATE } from '../actions/app.js';
+  OPEN_SNACKBAR, CLOSE_SNACKBAR, UPDATE_LOADING,
+        UPDATE_USER } from '../actions/app.js';
 
-const app = (state = {drawerOpened: false}, action) => {
+const app = (state = {drawerOpened: false, user: null}, action) => {
   switch (action.type) {
     case UPDATE_PAGE:
       return {
@@ -23,10 +24,10 @@ const app = (state = {drawerOpened: false}, action) => {
         ...state,
         offline: action.offline
       };
-    case UPDATE_DRAWER_STATE:
+    case UPDATE_LOADING:
       return {
         ...state,
-        drawerOpened: action.opened
+        loading: action.loading
       }
     case OPEN_SNACKBAR:
       return {
@@ -38,6 +39,11 @@ const app = (state = {drawerOpened: false}, action) => {
         ...state,
         snackbarOpened: false
       };
+    case UPDATE_USER:
+      return {
+        ...state,
+        user: action.user
+      }
     default:
       return state;
   }

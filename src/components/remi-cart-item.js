@@ -54,8 +54,8 @@ class CartItem extends PolymerElement {
         justify-content: center;
       }
       .name{
-        font-weight: 600;
-        font-size: .7rem;
+        font-weight: 500;
+        font-size: .5rem;
         color: #393433;
         text-decoration:none;
       }

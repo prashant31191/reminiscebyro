@@ -8,7 +8,6 @@
     subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 */
 import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
-import '@polymer/iron-flex-layout/iron-flex-layout-classes.js';
 import '@polymer/iron-image';
 import { MDCRipple } from '@material/ripple';
 
