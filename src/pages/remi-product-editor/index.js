@@ -10,10 +10,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 import { html } from '@polymer/polymer/polymer-element.js';
 import { PageViewElement } from "../../components/page-view-element";
 import { connect } from 'pwa-helpers/connect-mixin.js';
+import { MDCTextField } from '@material/textfield';
+import {Checkbox} from "@material/mwc-checkbox";
 
 import { store } from '../../store.js';
 import template from './template.html';
-
+import SharedStyles from '../../components/shared-styles.html';
+import buttonStyles from "../../components/material/button.html";
+import textfield from '../../components/material/textfield.html';
+import '../../components/remi-media-uploader.js';
 /**
  * `bn-project` Description
  *
@@ -22,7 +27,7 @@ import template from './template.html';
  * @demo
  * 
  */
-class RemiProducts extends connect(store)(PageViewElement) {
+class RemiProductEdit extends connect(store)(PageViewElement) {
     static get properties() {
         return {
 
@@ -32,6 +37,9 @@ class RemiProducts extends connect(store)(PageViewElement) {
     static get template() {
         return html([
             template
+            + SharedStyles
+            + buttonStyles
+            + textfield
         ]);
     }
 
@@ -61,6 +69,7 @@ class RemiProducts extends connect(store)(PageViewElement) {
      */
     ready() {
         super.ready();
+        this.shadowRoot.querySelectorAll('.mdc-text-field').forEach((node) => new MDCTextField(node));
     }
 
     _stateChanged(state){
@@ -68,4 +77,4 @@ class RemiProducts extends connect(store)(PageViewElement) {
     }
 }
 
-customElements.define('remi-products', RemiProducts);
+customElements.define('remi-product-editor', RemiProductEdit);

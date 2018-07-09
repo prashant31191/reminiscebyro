@@ -11,8 +11,11 @@ import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 import template from './template.html'
 import SharedStyles  from '../../components/shared-styles.html';
 import '@polymer/iron-image';
+import { connect } from 'pwa-helpers/connect-mixin.js';
 
-import "../../components/app-product-item.js";
+import { store } from '../../store.js';
+import "../../components/remi-product-item";
+import buttonStyles from "../../components/material/button.html";
 import { PageViewElement } from '../../components/page-view-element.js';
 import { fadeIn, fadeOut } from '../../components/animation.js';
 
@@ -24,19 +27,20 @@ import { fadeIn, fadeOut } from '../../components/animation.js';
  * @demo 
  * 
  */
-class RemiShop extends PageViewElement {
+class RemiShop extends connect(store)(PageViewElement) {
     
 
     static get template() {
-        return html`
-            ${html([template])}
-            ${html([SharedStyles])}
-        `;
+        return html([
+            template
+            + SharedStyles 
+            + buttonStyles
+        ])
+
     }
 
     static get observers(){
         return [
-            '_onPageSelected(selected)'
         ]
     }
 
@@ -81,6 +85,9 @@ class RemiShop extends PageViewElement {
         super.connectedCallback();
     }
 
+    _stateChanged(state){
+        this.user = state.app.user;
+    }
     /**
      * Use for one-time configuration of your component after local DOM is initialized. 
      */

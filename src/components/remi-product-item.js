@@ -13,7 +13,7 @@ import '@polymer/iron-image';
 import buttonStyles from "./material/button.html";
 import '@polymer/iron-icon';
 
-class ProductItem extends LitElement {
+class RemiProductItem extends LitElement {
     _render(props) {
         return html`
         ${html([buttonStyles])}
@@ -70,6 +70,20 @@ class ProductItem extends LitElement {
                 border-radius: 25px;
                 --mdc-theme-primary: var(--app-primary-color);
             }
+            .stats-item{
+                margin-right: 12px;
+                font-size: 12px;
+                color: #5f5f5f;
+            }
+            .stats-item iron-icon{
+                color: #bdbdbd;
+                margin-right: 4px;
+            }
+            .stats{
+                justify-content: center;
+                align-items: center;
+                margin-top: 12px;
+            }
         </style>
             
         <div class="wrapper">
@@ -84,12 +98,33 @@ class ProductItem extends LitElement {
             <footer>
                 <div class="pad">
                     <h4 class="title">Chocolate is so cool</h4>
-                    <div class="flexed">
-                        <span class="price-tag">$60.00</span>
-                        <span style="flex:1"></span>
-                        <button class="mdc-button mdc-button--dense mdc-button--raised"> 
-                            Add to Cart</button>
-                    </div>
+                   ${(props.forAdmin != true) 
+                        ?
+                        html`
+                            <div class="flexed">
+                                <span class="price-tag">$60.00</span>
+                                <span style="flex:1"></span>
+                                <button class="mdc-button mdc-button--dense mdc-button--raised"> 
+                                    Add to Cart</button>
+                            </div>` 
+                        : 
+                        html`
+                            <div class="flexed stats">
+                                <div class="stats-item">
+                                    <iron-icon icon="bn-icons:cart"></iron-icon>
+                                    <span>100 Sales</span>
+                                </div>
+                                <div class="stats-item">
+                                    <iron-icon icon="bn-icons:eye"></iron-icon>
+                                    <span>30 Views</span>
+                                </div>
+                                <span style="flex:1"></span>
+                                <div>
+                                    <iron-icon icon="bn-icons:stats"></iron-icon>
+                                </div>
+                            </div>
+                    `}
+                    
                 </div>
                 
             </footer>
@@ -101,6 +136,10 @@ class ProductItem extends LitElement {
     static get properties() {
         return {
             title: String,
+            forAdmin:{
+                type: Boolean,
+                reflectToAttribute: true
+            }
         }
     }
 
@@ -118,4 +157,4 @@ class ProductItem extends LitElement {
     }
 }
 
-window.customElements.define('app-product-item', ProductItem);
+window.customElements.define('remi-product-item', RemiProductItem);

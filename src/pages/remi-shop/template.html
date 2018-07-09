@@ -7,6 +7,9 @@
     .feature-item{
         grid-column-end: span 2;
     }
+    .toolbar{
+        padding: 16px 0;
+    }
 </style>
 <section>
 
@@ -16,24 +19,35 @@
         <div class="center heading-wrapper">
             <h1 class="mdc-typography--headline5">Shop</h1>
         </div>
+        <template is="dom-if" if="[[user]]">
+            <header class="layout horizontal center toolbar">
+                <span class="flex"></span>
+                <a href="/product-edit/create">
+                    <button class="mdc-button accent-btn">
+                        Add Product
+                    </button>
+                </a>
+                
+            </header>
+        </template>
         <div class="feature-grid">
             <a href="/product/some-product" class="feature-item">
-                <app-product-item featured></app-product-item>
+                <remi-product-item featured forAdmin></remi-product-item>
             </a>
             <a href="/product/some-product" class="feature-item">
-                <app-product-item featured></app-product-item>
+                <remi-product-item featured></remi-product-item>
             </a>
             <a href="/product/some-product" class="feature-item">
-                <app-product-item featured></app-product-item>
+                <remi-product-item featured></remi-product-item>
             </a>
             <a href="/product/some-product" class="feature-item">
-                <app-product-item featured></app-product-item>
+                <remi-product-item featured></remi-product-item>
             </a>
             <a href="/product/some-product" class="feature-item">
-                <app-product-item featured></app-product-item>
+                <remi-product-item featured></remi-product-item>
             </a>
             <a href="/product/some-product" class="feature-item">
-                <app-product-item featured></app-product-item>
+                <remi-product-item featured></remi-product-item>
             </a>
         </div>
     </div>

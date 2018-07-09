@@ -17,9 +17,8 @@ import SharedStyles  from '../../components/shared-styles.html';
 import buttonStyles from "../../components/material/button.html";
 
 
-
 import { fadeIn, fadeOut } from '../../components/animation.js';
-import "../../components/app-product-item.js";
+import "../../components/remi-product-item";
 
 /**
  * `ts-home` Description

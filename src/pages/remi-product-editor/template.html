@@ -1,0 +1,156 @@
+<style>
+    :host{
+        background: #eee;
+    }
+    aside{
+        width: 400px;
+    }
+    .content{
+        padding: 3em 0;
+    }
+    form{
+        padding: 1em 3em;
+    }
+    form>*{
+        margin: 2em 0;
+    }
+    .mdc-text-field--box{
+        width: 100%;
+    }
+    .row{
+        display: flex;
+    }
+    .row>*{
+        margin-right: 16px;
+    }
+    h1{
+        margin: 0;
+        font-size: 1rem;
+    }
+    remi-media-uploader{
+        margin-top: 4rem;
+        background: white;
+    }
+    #mybtn{
+        
+    }
+    .mdc-text-field--textarea .mdc-floating-label {
+        background-color: #eee !important;
+    }
+</style>
+<div class="content">
+    <header>
+
+    </header>
+    <section class="layout horizontal">
+        <div class="flex">
+            <form id="form">
+                <h1>Product Information</h1>
+                <section class="row">
+                    <div class="mdc-text-field text-field mdc-text-field--dense mdc-text-field--box mdc-text-field--with-leading-icon">
+                        <iron-icon class="mdc-text-field__icon" icon="bn-icons:email"></iron-icon>
+                        <input 
+                            id="name" 
+                            name="name" 
+                            type="name"
+                            required
+                            value="{{name::change}}" 
+                            class="mdc-text-field__input">
+                        <label class="mdc-floating-label" for="name">Product Name</label>
+                        <div class="mdc-line-ripple"></div>
+                    </div>
+                </section>
+
+                <section class="row">
+                    <div class="mdc-text-field mdc-text-field--textarea mdc-text-field--fullwidth mdc-text-field--dense">
+                        <textarea id="description" value="{{description::change}}" class="mdc-text-field__input" rows="3" cols="40"></textarea>
+                        <label for="description" class="mdc-floating-label">Product Description</label>
+                    </div>
+                </section>
+                <section class="row">
+                    <div class="mdc-text-field mdc-text-field--textarea mdc-text-field--fullwidth mdc-text-field--dense">
+                        <textarea id="features" value="{{features::change}}" class="mdc-text-field__input" rows="2" cols="40"></textarea>
+                        <label for="features" class="mdc-floating-label">Product Features</label>
+                    </div>
+                </section>
+
+                <!-- Pricing -->
+                <h1>Product Pricing</h1>
+                <section class="row">
+                    <div class="mdc-text-field text-field mdc-text-field--dense mdc-text-field--box mdc-text-field--with-leading-icon">
+                        <iron-icon class="mdc-text-field__icon" icon="bn-icons:email"></iron-icon>
+                        <input 
+                            id="price" 
+                            name="price" 
+                            type="price"
+                            required
+                            value="{{price::change}}" 
+                            class="mdc-text-field__input">
+                        <label class="mdc-floating-label" for="price">Price</label>
+                        <div class="mdc-line-ripple"></div>
+                    </div>
+                    <div class="mdc-text-field text-field mdc-text-field--dense mdc-text-field--box mdc-text-field--with-leading-icon">
+                        <iron-icon class="mdc-text-field__icon" icon="bn-icons:email"></iron-icon>
+                        <input 
+                            id="price_compare" 
+                            name="price_compare" 
+                            type="price_compare"
+                            value="{{price_compare::change}}" 
+                            class="mdc-text-field__input">
+                        <label class="mdc-floating-label" for="price_compare">Compare at price</label>
+                        <div class="mdc-line-ripple"></div>
+                    </div>
+                </section>
+
+                <!-- SKU -->
+                <h1>Product Stock</h1>
+                <section class="row">
+                    <div class="mdc-text-field text-field mdc-text-field--dense mdc-text-field--box mdc-text-field--with-leading-icon">
+                        <iron-icon class="mdc-text-field__icon" icon="bn-icons:email"></iron-icon>
+                        <input 
+                            id="stock" 
+                            name="stock" 
+                            type="stock"
+                            required
+                            value="{{stock::change}}" 
+                            class="mdc-text-field__input">
+                        <label class="mdc-floating-label" for="stock">(Stock Keeping Unit) SKU</label>
+                        <div class="mdc-line-ripple"></div>
+                    </div>
+                    <div class="mdc-text-field text-field mdc-text-field--dense mdc-text-field--box mdc-text-field--with-leading-icon">
+                        <iron-icon class="mdc-text-field__icon" icon="bn-icons:email"></iron-icon>
+                        <input 
+                            id="title" 
+                            name="title" 
+                            type="title"
+                            required
+                            value="{{title::change}}" 
+                            class="mdc-text-field__input">
+                        <label class="mdc-floating-label" for="title">Compare at price</label>
+                        <div class="mdc-line-ripple"></div>
+                    </div>
+                </section>
+                <section class="row">
+                    <!-- Should user buy when no stock? -->
+                    <div>
+                        <mwc-checkbox></mwc-checkbox> Allow orders when there is no stock?
+                    </div>
+                    
+                    <!-- Should we notify when stock is low? -->
+                    <div>
+                        <mwc-checkbox></mwc-checkbox> notify me when stock is low?
+                    </div>
+                </section>
+                <section class="row actions">
+                    <button class="mdc-button accent-btn" id="mybtn" on-click="submit">
+                        Publish
+                    </button>
+                </section>
+            </form>
+        </div>
+        <aside>
+            <remi-media-uploader></remi-media-uploader>
+        </aside>
+    </section>
+    
+</div>
