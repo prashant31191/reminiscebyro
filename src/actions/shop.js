@@ -7,37 +7,64 @@ The complete set of contributors may be found at http://polymer.github.io/CONTRI
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 */
+import { Shop } from "../core/shop.js";
 
 export const GET_PRODUCTS = 'GET_PRODUCTS';
 export const ADD_TO_CART = 'ADD_TO_CART';
 export const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
 export const CHECKOUT_SUCCESS = 'CHECKOUT_SUCCESS';
 export const CHECKOUT_FAILURE = 'CHECKOUT_FAILURE';
+export const SET_FETCHING = 'SET_FETCHING';
+export const SET_UPDATING = 'SET_UPDATING';
+export const SET_ACTIVE_PRODUCT = 'SET_ACTIVE_PRODUCT';
 
-const PRODUCT_LIST = [
-  {"id": 1, "title": "Cabot Creamery Extra Sharp Cheddar Cheese", "price": 10.99, "inventory": 2},
-  {"id": 2, "title": "Cowgirl Creamery Mt. Tam Cheese", "price": 29.99, "inventory": 10},
-  {"id": 3, "title": "Tillamook Medium Cheddar Cheese", "price": 8.99, "inventory": 5},
-  {"id": 4, "title": "Point Reyes Bay Blue Cheese", "price": 24.99, "inventory": 7},
-  {"id": 5, "title": "Shepherd's Halloumi Cheese", "price": 11.99, "inventory": 3}
-]
 
-export const getAllProducts = () => (dispatch, getState) => {
+export const getProductListing = () => async (dispatch) => {
   // Here you would normally get the data from the server. We're simulating
   // that by dispatching an async action (that you would dispatch when you
   // succesfully got the data back)
+  dispatch(setFetching(true))
+  const data = await Shop.getAllProduct();
+  dispatch(setFetching(false))
 
   // You could reformat the data in the right format as well:
-  const products = PRODUCT_LIST.reduce((obj, product) => {
-    obj[product.id] = product
-    return obj
-  }, {});
+  const products = data;
 
   dispatch({
     type: GET_PRODUCTS,
     products: products
   });
 };
+
+export const publishProduct = (data) => async (dispatch) => {
+  
+  //Set loading to true
+  dispatch(setUpdating(true))
+
+  try {
+    const snapshot = await Shop.publishProduct(data);
+    console.log(snapshot);
+    //dispatch(setActiveProduct(product))
+    dispatch(setUpdating(false))
+  } catch (error) {
+    console.error(error);
+    dispatch(setUpdating(false))
+  }
+  
+}
+
+export const setActiveProduct = (activeProduct) => {
+  return {
+    type: SET_ACTIVE_PRODUCT,
+    activeProduct
+  }
+}
+
+export const getProductBySlug = (slug) => async (dispatch) => {
+
+  const product = await Shop.getProductBySlug(slug);
+  dispatch(setActiveProduct(product))
+}
 
 export const checkout = (productId) => (dispatch) => {
   // Here you could do things like credit card validation, etc.
@@ -76,4 +103,18 @@ export const addToCartUnsafe = (productId) => {
     type: ADD_TO_CART,
     productId
   };
+}
+
+export const setUpdating = (value) => {
+  return {
+    type: SET_UPDATING,
+    value
+  }
+}
+
+export const setFetching = (value) => {
+  return {
+    type: SET_FETCHING,
+    value
+  }
 }

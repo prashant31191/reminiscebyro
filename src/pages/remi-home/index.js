@@ -10,15 +10,24 @@
 import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 import '@polymer/iron-image';
 import { MDCRipple } from '@material/ripple';
+import { connect } from 'pwa-helpers/connect-mixin.js';
 
 import { PageViewElement } from '../../components/page-view-element.js';
 import template from './template.html'
 import SharedStyles  from '../../components/shared-styles.html';
 import buttonStyles from "../../components/material/button.html";
 
-
+import { store } from '../../store.js';
 import { fadeIn, fadeOut } from '../../components/animation.js';
 import "../../components/remi-product-item";
+import { getProductListing, setActiveProduct } from "../../actions/shop.js";
+
+import { shop } from "../../reducers/shop.js";
+
+store.addReducers({
+    shop
+});
+
 
 /**
  * `ts-home` Description
@@ -28,7 +37,7 @@ import "../../components/remi-product-item";
  * @demo 
  * 
  */
-class RemiHome extends PageViewElement {
+class RemiHome extends connect(store)(PageViewElement) {
     
 
     static get template() {
@@ -41,28 +50,14 @@ class RemiHome extends PageViewElement {
         
     }
 
-    static get observers(){
-        return [
-        ]
-    }
-
     /**
     * Object describing property-related metadata used by Polymer features
     */
     static get properties() {
         return {
-            swiper: {
-                type: Object,
-                value: {
-                    pagination: {
-                        el: '.swiper-pagination',
-                        type: 'progressbar',
-                    },
-                    slidesPerView: 3,
-                    spaceBetween: 38,
-                    centeredSlides: true
-                }
-            },
+            bestSellers:{
+                type: Array
+            }
         }
     }
 
@@ -91,9 +86,20 @@ class RemiHome extends PageViewElement {
      */
     constructor() {
         super();
-        this.bestSellers = [{},{},{},{}]
     }
 
+    _stateChanged(state) {
+        this.user = state.app.user;
+        this.bestSellers = state.shop.products;
+    }
+
+    _view(e) {
+        let node = e.target;
+        let data = node.data;
+
+        store.dispatch(setActiveProduct(data));
+    }
+    
     connectedCallback(){
         super.connectedCallback();
     }
@@ -103,6 +109,7 @@ class RemiHome extends PageViewElement {
      */
     async ready() {
         super.ready();
+        store.dispatch(getProductListing())
         const buttonRipple = new MDCRipple(this.shadowRoot.querySelector('.mdc-button'));
         
     }

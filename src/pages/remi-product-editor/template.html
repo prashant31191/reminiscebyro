@@ -54,7 +54,7 @@
                             name="name" 
                             type="name"
                             required
-                            value="{{name::change}}" 
+                            value="{{data.name::change}}" 
                             class="mdc-text-field__input">
                         <label class="mdc-floating-label" for="name">Product Name</label>
                         <div class="mdc-line-ripple"></div>
@@ -63,13 +63,13 @@
 
                 <section class="row">
                     <div class="mdc-text-field mdc-text-field--textarea mdc-text-field--fullwidth mdc-text-field--dense">
-                        <textarea id="description" value="{{description::change}}" class="mdc-text-field__input" rows="3" cols="40"></textarea>
+                        <textarea id="description" value="{{data.description::change}}" class="mdc-text-field__input" rows="3" cols="40"></textarea>
                         <label for="description" class="mdc-floating-label">Product Description</label>
                     </div>
                 </section>
                 <section class="row">
                     <div class="mdc-text-field mdc-text-field--textarea mdc-text-field--fullwidth mdc-text-field--dense">
-                        <textarea id="features" value="{{features::change}}" class="mdc-text-field__input" rows="2" cols="40"></textarea>
+                        <textarea id="features" value="{{data.features::change}}" class="mdc-text-field__input" rows="2" cols="40"></textarea>
                         <label for="features" class="mdc-floating-label">Product Features</label>
                     </div>
                 </section>
@@ -84,7 +84,7 @@
                             name="price" 
                             type="price"
                             required
-                            value="{{price::change}}" 
+                            value="{{data.price::change}}" 
                             class="mdc-text-field__input">
                         <label class="mdc-floating-label" for="price">Price</label>
                         <div class="mdc-line-ripple"></div>
@@ -95,7 +95,7 @@
                             id="price_compare" 
                             name="price_compare" 
                             type="price_compare"
-                            value="{{price_compare::change}}" 
+                            value="{{data.price_compare::change}}" 
                             class="mdc-text-field__input">
                         <label class="mdc-floating-label" for="price_compare">Compare at price</label>
                         <div class="mdc-line-ripple"></div>
@@ -112,7 +112,7 @@
                             name="stock" 
                             type="stock"
                             required
-                            value="{{stock::change}}" 
+                            value="{{data.stock::change}}" 
                             class="mdc-text-field__input">
                         <label class="mdc-floating-label" for="stock">(Stock Keeping Unit) SKU</label>
                         <div class="mdc-line-ripple"></div>
@@ -124,7 +124,7 @@
                             name="title" 
                             type="title"
                             required
-                            value="{{title::change}}" 
+                            value="{{data.title::change}}" 
                             class="mdc-text-field__input">
                         <label class="mdc-floating-label" for="title">Compare at price</label>
                         <div class="mdc-line-ripple"></div>
@@ -132,12 +132,12 @@
                 </section>
                 <section class="row">
                     <!-- Should user buy when no stock? -->
-                    <div>
+                    <div class="layout horizontal center">
                         <mwc-checkbox></mwc-checkbox> Allow orders when there is no stock?
                     </div>
                     
                     <!-- Should we notify when stock is low? -->
-                    <div>
+                    <div class="layout horizontal center">
                         <mwc-checkbox></mwc-checkbox> notify me when stock is low?
                     </div>
                 </section>
@@ -149,7 +149,7 @@
             </form>
         </div>
         <aside>
-            <remi-media-uploader></remi-media-uploader>
+            <remi-media-uploader image="{{data.image}}"></remi-media-uploader>
         </aside>
     </section>
     

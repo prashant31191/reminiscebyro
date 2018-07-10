@@ -11,7 +11,10 @@ import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 import { MDCRipple } from '@material/ripple';
 import '@polymer/iron-image';
 import '@polymer/iron-flex-layout/iron-flex-layout-classes.js';
+import { connect } from 'pwa-helpers/connect-mixin.js';
+import { afterNextRender } from "@polymer/polymer/lib/utils/render-status.js";
 
+import { store } from '../../store.js';
 import template from './template.html'
 import { PageViewElement } from '../../components/page-view-element.js';
 import SharedStyles  from '../../components/shared-styles.html';
@@ -19,7 +22,13 @@ import buttonStyles from "../../components/material/button.html";
 import '../../components/remi-color-swatch-input.js';
 import '../../components/quantity-input.js';
 
+import { shop } from "../../reducers/shop.js";
+import { getProductBySlug } from "../../actions/shop.js";
 import { fadeIn, fadeOut } from '../../components/animation.js';
+
+store.addReducers({
+    shop
+});
 
 
 /**
@@ -30,7 +39,7 @@ import { fadeIn, fadeOut } from '../../components/animation.js';
  * @demo 
  * 
  */
-class RemiProduct extends PageViewElement {
+class RemiProduct extends connect(store)(PageViewElement) {
     
 
     static get template() {
@@ -45,6 +54,7 @@ class RemiProduct extends PageViewElement {
 
     static get observers(){
         return [
+            '_checkShouldFetchData(_page, _slug)'
         ]
     }
 
@@ -53,7 +63,15 @@ class RemiProduct extends PageViewElement {
     */
     static get properties() {
         return {
-            
+            data:{
+                type: Object
+            }
+        }
+    }
+
+    _checkShouldFetchData(_page, _slug){
+        if(this.data.name == null && _page === 'product' && _slug != null){
+            store.dispatch(getProductBySlug(_slug))
         }
     }
 
@@ -88,7 +106,6 @@ class RemiProduct extends PageViewElement {
      */
     constructor() {
         super();
-        this.bestSellers = [{},{},{},{}]
     }
 
     connectedCallback(){
@@ -101,8 +118,16 @@ class RemiProduct extends PageViewElement {
     async ready() {
         super.ready();
         const buttonRipple = new MDCRipple(this.shadowRoot.querySelector('.mdc-button'));
-        await import('iron-swiper-3/iron-swiper.js');
+
+        afterNextRender(this, () => {
+        })
         
+    }
+
+    _stateChanged(state) {
+        this.data = state.shop.activeProduct;
+        this._page = state.app.route.page;
+        this._slug = state.app.route.slug;
     }
 }
 

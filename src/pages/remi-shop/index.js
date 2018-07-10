@@ -18,6 +18,13 @@ import "../../components/remi-product-item";
 import buttonStyles from "../../components/material/button.html";
 import { PageViewElement } from '../../components/page-view-element.js';
 import { fadeIn, fadeOut } from '../../components/animation.js';
+import { getProductListing, setActiveProduct } from "../../actions/shop.js";
+
+import { shop } from "../../reducers/shop.js";
+
+store.addReducers({
+    shop
+});
 
 /**
  * `ts-home` Description
@@ -71,6 +78,12 @@ class RemiShop extends connect(store)(PageViewElement) {
 
     }
 
+    _view(e){
+        let node = e.target;
+        let data = node.data;
+
+        store.dispatch(setActiveProduct(data));
+    }
     /**
      * Instance of the element is created/upgraded. Use: initializing state,
      * set up event listeners, create shadow dom.
@@ -78,7 +91,6 @@ class RemiShop extends connect(store)(PageViewElement) {
      */
     constructor() {
         super();
-        this.bestSellers = [{},{},{},{}]
     }
 
     connectedCallback(){
@@ -87,12 +99,15 @@ class RemiShop extends connect(store)(PageViewElement) {
 
     _stateChanged(state){
         this.user = state.app.user;
+        this.products = state.shop.products;
     }
     /**
      * Use for one-time configuration of your component after local DOM is initialized. 
      */
     async ready() {
         super.ready();
+
+        store.dispatch(getProductListing())
         
     }
 }

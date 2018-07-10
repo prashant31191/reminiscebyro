@@ -92,12 +92,12 @@ class RemiProductItem extends LitElement {
                 <iron-image 
                     style="background-color: lightgray;" 
                     sizing="cover" preload fade 
-                    src="/assets/images/cosmetics-1543271_960_720.jpg">
+                    src$="${props.data.image}">
                 </iron-image>
             </div>
             <footer>
                 <div class="pad">
-                    <h4 class="title">Chocolate is so cool</h4>
+                    <h4 class="title">${props.data.name}</h4>
                    ${(props.forAdmin != true) 
                         ?
                         html`
@@ -139,6 +139,10 @@ class RemiProductItem extends LitElement {
             forAdmin:{
                 type: Boolean,
                 reflectToAttribute: true
+            },
+            data: {
+                type: Object,
+                value: {}
             }
         }
     }

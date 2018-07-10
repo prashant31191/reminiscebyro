@@ -10,11 +10,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 import { Auth } from '../core/auth.js';
 
 export const UPDATE_USER = 'UPDATE_USER';
-export const UPDATE_PAGE = 'UPDATE_PAGE';
+export const UPDATE_ROUTE = 'UPDATE_ROUTE';
 export const UPDATE_OFFLINE = 'UPDATE_OFFLINE';
 export const UPDATE_LOADING = 'UPDATE_LOADING';
 export const OPEN_SNACKBAR = 'OPEN_SNACKBAR';
 export const CLOSE_SNACKBAR = 'CLOSE_SNACKBAR';
+let ROUTE = {};
 
 export const navigate = (path) => (dispatch) => {
   dispatch(updateLoading(true));
@@ -22,6 +23,11 @@ export const navigate = (path) => (dispatch) => {
   const page = path === '/' ? 'home' : path.split('/')[1];
   const slug = page ? path.split('/')[2] : null;
 
+  ROUTE = {
+    page: page,
+    slug: slug
+  }
+  
   // Any other info you might want to extract from the path (like page type),
   // you can do here
   dispatch(loadPage(page));
@@ -67,14 +73,15 @@ const loadPage = (page) => async (dispatch) => {
       await import('../pages/remi-home');
   }
 
-  dispatch(updatePage(page));
+  ROUTE.page = page;
+  dispatch(updateRoute(ROUTE));
   dispatch(updateLoading(false));
 }
 
-const updatePage = (page) => {
+const updateRoute = (route) => {
   return {
-    type: UPDATE_PAGE,
-    page
+    type: UPDATE_ROUTE,
+    route
   };
 }
 

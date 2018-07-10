@@ -7,10 +7,10 @@
   Code distributed by Google as part of the polymer project is also
   subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 */
-import { TravApp } from './app.js';
+import { RemiApp } from './app.js';
 
 
-const injected = TravApp.injected = TravApp.injected || [];
+const injected = RemiApp.injected = RemiApp.injected || [];
 
 export const convertObjectToArray = (obj) => {
     let data = []
@@ -38,4 +38,13 @@ const makeInjection = (componentName) => {
         component: service
     });
     return service;
+}
+
+export const Slugify = (text) => {
+    return text.toString().toLowerCase()
+        .replace(/\s+/g, '-')           // Replace spaces with -
+        .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+        .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+        .replace(/^-+/, '')             // Trim - from start of text
+        .replace(/-+$/, '');            // Trim - from end of text
 }

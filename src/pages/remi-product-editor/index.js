@@ -19,6 +19,15 @@ import SharedStyles from '../../components/shared-styles.html';
 import buttonStyles from "../../components/material/button.html";
 import textfield from '../../components/material/textfield.html';
 import '../../components/remi-media-uploader.js';
+
+import { shop } from "../../reducers/shop.js";
+import { publishProduct } from "../../actions/shop.js";
+import {slugify} from '../../core/utils.js';
+
+store.addReducers({
+    shop
+});
+
 /**
  * `bn-project` Description
  *
@@ -30,7 +39,10 @@ import '../../components/remi-media-uploader.js';
 class RemiProductEdit extends connect(store)(PageViewElement) {
     static get properties() {
         return {
-
+            data: {
+                type: Object,
+                value: {}
+            }
         }
     }
 
@@ -43,14 +55,17 @@ class RemiProductEdit extends connect(store)(PageViewElement) {
         ]);
     }
 
-    /**
-            * Object describing property-related metadata used by Polymer features
-            */
-    static get properties() {
-        return {}
+    static get observers() {
+        return [
+            '_slugify(title)'
+        ]
     }
 
-
+    _slugify(title){
+        if(title){
+            this.slug = slugify(title);
+        }
+    }
     /**
      * Instance of the element is created/upgraded. Use: initializing state,
      * set up event listeners, create shadow dom.
@@ -64,6 +79,30 @@ class RemiProductEdit extends connect(store)(PageViewElement) {
         super.connectedCallback();
     }
 
+    submit(e) {
+        e.preventDefault();
+        let node = e.target;
+
+        let data = {
+            email: this.email,
+            password: this.password
+        }
+        if (this._formIsValid()) {
+            this._submit(this.data)
+        } else {
+            console.error('form is invalid')
+        }
+    }
+
+    _formIsValid() {
+        return this.shadowRoot.querySelector('form').checkValidity();
+    }
+
+    _submit(data) {
+        console.log(data);
+        store.dispatch(publishProduct(data))
+    }
+
     /**
      * Use for one-time configuration of your component after local DOM is initialized. 
      */
@@ -73,7 +112,7 @@ class RemiProductEdit extends connect(store)(PageViewElement) {
     }
 
     _stateChanged(state){
-        
+        this.data = state.shop.activeProduct
     }
 }
 

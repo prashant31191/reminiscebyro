@@ -133,7 +133,7 @@ static get properties() {
   }
 
   _stateChanged(state) {
-    this.page = state.app.page;
+    this.page = state.app.route.page;
     this._offline = state.app.offline;
     this._snackbarOpened = state.app.snackbarOpened;
     this._user = state.app.user;

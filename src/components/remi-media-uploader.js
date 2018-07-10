@@ -11,12 +11,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 import '@polymer/iron-image';
 import '@polymer/iron-icon';
+import { Media } from "../core/media.js";
 
 class MediaUploader extends PolymerElement {
 
   static get properties() { return {
-    _items: Array,
-    _total: Number
+    image:{
+      type: String,
+      reflectToAttribute: true,
+      notify: true
+    }
   }}
 
   static get template(){
@@ -36,6 +40,7 @@ class MediaUploader extends PolymerElement {
           background-color: #eee;
           width: 100%;
           height: 100%;
+          position: relative;
       }
       .placeholder{
         display: flex;
@@ -49,6 +54,17 @@ class MediaUploader extends PolymerElement {
         --iron-icon-width: 85px;
         
       }
+      input{
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        cursor: pointer;
+        position: absolute;
+        top:0;
+        bottom: 0;
+        left:0;
+        right:0;
+      }
       .main:hover>div{
           opacity: .9;
       }
@@ -56,9 +72,17 @@ class MediaUploader extends PolymerElement {
     <div class="inner">
       <div class="main">
           <div>
-              <div class="placeholder">
+              <input type="file" on-change="_fileChanged">
+              <div class="placeholder" hidden$="[[image]]">
                   <iron-icon src="/assets/icons/media.svg"></iron-icon>
               </div>
+              <template is="dom-if" if="[[image]]">
+                <iron-image 
+                    style="width:100%; height:100%; background-color: lightgray;"
+                    sizing="cover"
+                    preload 
+                    src="[[image]]"></iron-image>
+              </template>
           </div>
       </div>
       <div class="list">
@@ -66,6 +90,45 @@ class MediaUploader extends PolymerElement {
       </div>
     </div>
     `;
+  }
+
+  /**
+    * @desc opens a modal window to display a message
+    * @param string msg - the message to be displayed
+    * @return bool - success or failure
+    */
+  _fileChanged(e){
+    
+    const file = e.target.files[0];
+    console.log('before upload');
+    
+    if(file)
+        this._makeUpload(file);
+  }
+
+  _makeUpload(file){
+    let uploader = Media.upload(file, 'products');
+    let progress, error;
+
+    uploader.on('state_changed',
+      progress = snapshot => this._progressChanged(snapshot),
+      error = err => this._onError(err)
+    )
+
+    uploader.then(this._onComplete.bind(this))
+  }
+
+  _progressChanged(snapshot){
+    let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+    this.progress = percentage;
+  }
+
+ async _onComplete(snapshot){
+    this.image = await snapshot.ref.getDownloadURL();
+  }
+
+  _onError(err){
+    alert(err)
   }
 
   

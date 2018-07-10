@@ -87,7 +87,7 @@
     .bottom-banner-info>*{
         margin: 8px 0;
     }
-    @media only screen and (max-device-width: 480px) and (min-device-width: 320px){
+  @media only screen and (max-device-width: 480px) and (min-device-width: 320px){
     .feature-item{
         grid-column-end: span 6;
     }
@@ -148,39 +148,14 @@
                 <h1 class="mdc-typography--headline5">Featured</h1>
             </div>
             <div class="feature-grid">
-                <a href="/product/some-product" class="feature-item">
-                    <remi-product-item featured></remi-product-item>
-                </a>
-                <a href="/product/some-product" class="feature-item">
-                    <remi-product-item featured></remi-product-item>
-                </a>
-                <a href="/product/some-product" class="feature-item">
-                    <remi-product-item featured></remi-product-item>
-                </a>
-                <a href="/product/some-product" class="feature-item">
-                    <remi-product-item featured></remi-product-item>
-                </a>
-                <a href="/product/some-product" class="feature-item">
-                    <remi-product-item featured></remi-product-item>
-                </a>
-                <a href="/product/some-product" class="feature-item">
-                    <remi-product-item featured></remi-product-item>
-                </a>
+                <template is="dom-repeat" items="[[bestSellers]]" as="product">
+                    <a href$="/product/[[product.slug]]" class="feature-item" on-click="_view">
+                        <remi-product-item featured forAdmin$="[[user]]" data="[[product]]"></remi-product-item>
+                    </a>
+                </template>
             </div>
         </div>
     </section>
-    <!-- <section class="app-section feature">
-        <div class="content">
-            <div class="center heading-wrapper">
-                <h1 class="mdc-typography--headline5">Best Sellers</h1>
-            </div>
-            <iron-swiper options="[[swiper]]">
-                <template is="dom-repeat" items="[[bestSellers]]">
-                    <app-product-item shadow></app-product-item>
-                </template>
-            </iron-swiper>
-        </div>
-    </section> -->
     <section class="app-section" style="height: 70vh; position: relative;">
         <iron-image 
             style="width:100%; height:100%; background-color: lightgray;"

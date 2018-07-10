@@ -8,7 +8,14 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 */
 
-import { GET_PRODUCTS, ADD_TO_CART, REMOVE_FROM_CART, CHECKOUT_SUCCESS, CHECKOUT_FAILURE } from '../actions/shop.js';
+import {
+  SET_ACTIVE_PRODUCT,
+  GET_PRODUCTS,
+  ADD_TO_CART,
+  REMOVE_FROM_CART,
+  CHECKOUT_SUCCESS,
+  CHECKOUT_FAILURE
+} from '../actions/shop.js';
 import { createSelector } from 'reselect';
 
 const INITIAL_CART = {
@@ -18,16 +25,21 @@ const INITIAL_CART = {
 
 const UPDATED_CART = {
   addedIds: ['1'],
-  quantityById: {'1': 1}
+  quantityById: { '1': 1 }
 };
 
-const shop = (state = {products: {}, cart: INITIAL_CART}, action) => {
+export const shop = (state = { products: [], activeProduct:{}, cart: INITIAL_CART }, action) => {
   switch (action.type) {
     case GET_PRODUCTS:
       return {
         ...state,
         products: action.products
       };
+    case SET_ACTIVE_PRODUCT:
+      return {
+        ...state,
+        activeProduct: action.activeProduct
+      }
     case ADD_TO_CART:
     case REMOVE_FROM_CART:
     case CHECKOUT_SUCCESS:
@@ -45,7 +57,7 @@ const shop = (state = {products: {}, cart: INITIAL_CART}, action) => {
     default:
       return state;
   }
-}
+};
 
 // Slice reducer: it only reduces the bit of the state it's concerned about.
 const products = (state, action) => {
@@ -60,7 +72,7 @@ const products = (state, action) => {
     default:
       return state;
   }
-}
+};
 
 const product = (state, action) => {
   switch (action.type) {
@@ -77,7 +89,7 @@ const product = (state, action) => {
     default:
       return state;
   }
-}
+};
 
 const cart = (state = INITIAL_CART, action) => {
   switch (action.type) {
@@ -92,7 +104,7 @@ const cart = (state = INITIAL_CART, action) => {
     default:
       return state;
   }
-}
+};
 
 const addedIds = (state = INITIAL_CART.addedIds, quantityById, action) => {
   const productId = action.productId;
@@ -116,7 +128,7 @@ const addedIds = (state = INITIAL_CART.addedIds, quantityById, action) => {
     default:
       return state;
   }
-}
+};
 
 const quantityById = (state = INITIAL_CART.quantityById, action) => {
   const productId = action.productId;
@@ -134,9 +146,7 @@ const quantityById = (state = INITIAL_CART.quantityById, action) => {
     default:
       return state;
   }
-}
-
-export default shop;
+};
 
 // Per Redux best practices, the shop data in our store is structured
 // for efficiency (small size and fast updates).
@@ -160,7 +170,7 @@ export const cartItemsSelector = createSelector(
     const items = [];
     for (let id of cart.addedIds) {
       const item = products[id];
-      items.push({id: item.id, title: item.title, amount: cart.quantityById[id], price: item.price});
+      items.push({ id: item.id, title: item.title, amount: cart.quantityById[id], price: item.price });
     }
     return items;
   }
@@ -188,6 +198,6 @@ export const cartQuantitySelector = createSelector(
     for (let id of cart.addedIds) {
       num += cart.quantityById[id];
     }
-    return num;  
+    return num;
   }
-)
+);
