@@ -112,11 +112,11 @@ class RemiProductItem extends LitElement {
                             <div class="flexed stats">
                                 <div class="stats-item">
                                     <iron-icon icon="bn-icons:cart"></iron-icon>
-                                    <span>100 Sales</span>
+                                    <span>${props.data.sales_count} Sales</span>
                                 </div>
                                 <div class="stats-item">
                                     <iron-icon icon="bn-icons:eye"></iron-icon>
-                                    <span>30 Views</span>
+                                    <span>${props.data.views} Views</span>
                                 </div>
                                 <span style="flex:1"></span>
                                 <div>

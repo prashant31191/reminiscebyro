@@ -17,7 +17,7 @@ export const CHECKOUT_FAILURE = 'CHECKOUT_FAILURE';
 export const SET_FETCHING = 'SET_FETCHING';
 export const SET_UPDATING = 'SET_UPDATING';
 export const SET_ACTIVE_PRODUCT = 'SET_ACTIVE_PRODUCT';
-
+export const SET_EDITING_PRODUCT = 'SET_EDITING_PRODUCT';
 
 export const getProductListing = () => async (dispatch) => {
   // Here you would normally get the data from the server. We're simulating
@@ -42,12 +42,9 @@ export const publishProduct = (data) => async (dispatch) => {
   dispatch(setUpdating(true))
 
   try {
-    const snapshot = await Shop.publishProduct(data);
-    console.log(snapshot);
-    //dispatch(setActiveProduct(product))
+    await Shop.publishProduct(data);
     dispatch(setUpdating(false))
   } catch (error) {
-    console.error(error);
     dispatch(setUpdating(false))
   }
   
@@ -60,11 +57,26 @@ export const setActiveProduct = (activeProduct) => {
   }
 }
 
-export const getProductBySlug = (slug) => async (dispatch) => {
+export const productWasViewed = (product) => async(dispatch) => {
+  const done = await Shop.incrementProductView(product);
+  //We can update the local state here if we want
+}
+
+export const setEditingProduct = (editingProduct) => {
+  return {
+    type: SET_EDITING_PRODUCT,
+    editingProduct
+  }
+}
+
+export const getProductBySlug = (slug, callback) => async (dispatch) => {
 
   const product = await Shop.getProductBySlug(slug);
-  dispatch(setActiveProduct(product))
+  callback(product);
 }
+
+
+
 
 export const checkout = (productId) => (dispatch) => {
   // Here you could do things like credit card validation, etc.

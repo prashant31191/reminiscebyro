@@ -12,6 +12,7 @@ import {
   SET_ACTIVE_PRODUCT,
   GET_PRODUCTS,
   ADD_TO_CART,
+  SET_EDITING_PRODUCT,
   REMOVE_FROM_CART,
   CHECKOUT_SUCCESS,
   CHECKOUT_FAILURE
@@ -28,7 +29,16 @@ const UPDATED_CART = {
   quantityById: { '1': 1 }
 };
 
-export const shop = (state = { products: [], activeProduct:{}, cart: INITIAL_CART }, action) => {
+const INITIAL_STATE = {
+  products: [], 
+  activeProduct: null,
+  editingProduct: {
+    views: 0
+  }, 
+  cart: INITIAL_CART
+}
+
+export const shop = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case GET_PRODUCTS:
       return {
@@ -39,6 +49,11 @@ export const shop = (state = { products: [], activeProduct:{}, cart: INITIAL_CAR
       return {
         ...state,
         activeProduct: action.activeProduct
+      }
+    case SET_EDITING_PRODUCT:
+      return {
+        ...state,
+        editingProduct: action.editingProduct
       }
     case ADD_TO_CART:
     case REMOVE_FROM_CART:

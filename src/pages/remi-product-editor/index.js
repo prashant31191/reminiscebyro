@@ -21,7 +21,7 @@ import textfield from '../../components/material/textfield.html';
 import '../../components/remi-media-uploader.js';
 
 import { shop } from "../../reducers/shop.js";
-import { publishProduct } from "../../actions/shop.js";
+import { publishProduct, setEditingProduct, getProductBySlug } from "../../actions/shop.js";
 import {slugify} from '../../core/utils.js';
 
 store.addReducers({
@@ -57,8 +57,15 @@ class RemiProductEdit extends connect(store)(PageViewElement) {
 
     static get observers() {
         return [
-            '_slugify(title)'
+            '_slugify(title)',
+            '_checkShouldFetchData(_page, _slug)'
         ]
+    }
+
+    _checkShouldFetchData(_page, _slug) {
+        if (this.data.name == null && _page === 'product-edit' && (_slug != null && _slug != 'create')) {
+            store.dispatch(getProductBySlug(_slug, product => store.dispatch(setEditingProduct(product))))
+        }
     }
 
     _slugify(title){
@@ -81,17 +88,10 @@ class RemiProductEdit extends connect(store)(PageViewElement) {
 
     submit(e) {
         e.preventDefault();
-        let node = e.target;
 
-        let data = {
-            email: this.email,
-            password: this.password
-        }
-        if (this._formIsValid()) {
-            this._submit(this.data)
-        } else {
-            console.error('form is invalid')
-        }
+        this._formIsValid()
+            ? this._submit(this.data)
+            : console.error('form is invalid')
     }
 
     _formIsValid() {
@@ -99,7 +99,7 @@ class RemiProductEdit extends connect(store)(PageViewElement) {
     }
 
     _submit(data) {
-        console.log(data);
+        console.log('submiting this form now');
         store.dispatch(publishProduct(data))
     }
 
@@ -112,7 +112,9 @@ class RemiProductEdit extends connect(store)(PageViewElement) {
     }
 
     _stateChanged(state){
-        this.data = state.shop.activeProduct
+        this.data = state.shop.editingProduct;
+        this._page = state.app.route.page;
+        this._slug = state.app.route.slug;
     }
 }
 

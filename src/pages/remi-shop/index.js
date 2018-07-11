@@ -18,7 +18,7 @@ import "../../components/remi-product-item";
 import buttonStyles from "../../components/material/button.html";
 import { PageViewElement } from '../../components/page-view-element.js';
 import { fadeIn, fadeOut } from '../../components/animation.js';
-import { getProductListing, setActiveProduct } from "../../actions/shop.js";
+import { getProductListing, setActiveProduct, setEditingProduct } from "../../actions/shop.js";
 
 import { shop } from "../../reducers/shop.js";
 
@@ -101,6 +101,11 @@ class RemiShop extends connect(store)(PageViewElement) {
         this.user = state.app.user;
         this.products = state.shop.products;
     }
+
+    _create(e){
+        store.dispatch(setEditingProduct({}))
+    }
+
     /**
      * Use for one-time configuration of your component after local DOM is initialized. 
      */

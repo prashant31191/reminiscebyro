@@ -40,6 +40,17 @@ export const Shop = new class {
         
     }
 
+    incrementProductView(product){
+
+        product.views = product.views || 0;
+
+        firebase().firestore().collection('products').doc(product.key)
+            .set({
+                ...product,
+                views: product.views +1
+            });
+    }
+
     _formatProducts(querySnapshot){
         const data = [];
         querySnapshot.forEach((doc) => {

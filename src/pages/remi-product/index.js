@@ -23,7 +23,7 @@ import '../../components/remi-color-swatch-input.js';
 import '../../components/quantity-input.js';
 
 import { shop } from "../../reducers/shop.js";
-import { getProductBySlug } from "../../actions/shop.js";
+import { getProductBySlug, setActiveProduct, productWasViewed, setEditingProduct } from "../../actions/shop.js";
 import { fadeIn, fadeOut } from '../../components/animation.js';
 
 store.addReducers({
@@ -64,14 +64,21 @@ class RemiProduct extends connect(store)(PageViewElement) {
     static get properties() {
         return {
             data:{
-                type: Object
+                type: Object,
+                observer: '_dataChanged'
             }
         }
     }
 
     _checkShouldFetchData(_page, _slug){
-        if(this.data.name == null && _page === 'product' && _slug != null){
-            store.dispatch(getProductBySlug(_slug))
+        if(this.data == null && _page === 'product' && _slug != null){
+            store.dispatch(getProductBySlug(_slug, product => store.dispatch(setActiveProduct(product))))
+        }
+    }
+
+    _dataChanged(data){
+        if(data){
+            store.dispatch(productWasViewed(data))
         }
     }
 
@@ -97,6 +104,11 @@ class RemiProduct extends connect(store)(PageViewElement) {
         
         selected ? this.show() : this.hide()  
         this.active = selected;
+    }
+
+    _edit(){
+        if (!this.data) return;
+        store.dispatch(setEditingProduct(this.data))
     }
 
     /**
@@ -128,6 +140,7 @@ class RemiProduct extends connect(store)(PageViewElement) {
         this.data = state.shop.activeProduct;
         this._page = state.app.route.page;
         this._slug = state.app.route.slug;
+        this.user = state.app.user;
     }
 }
 

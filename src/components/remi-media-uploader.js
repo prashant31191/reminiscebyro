@@ -68,12 +68,15 @@ class MediaUploader extends PolymerElement {
       .main:hover>div{
           opacity: .9;
       }
+      [hidden]{
+        display: none;
+      }
     </style>
     <div class="inner">
       <div class="main">
           <div>
               <input type="file" on-change="_fileChanged">
-              <div class="placeholder" hidden$="[[image]]">
+              <div class="placeholder" hidden="[[image]]">
                   <iron-icon src="/assets/icons/media.svg"></iron-icon>
               </div>
               <template is="dom-if" if="[[image]]">
