@@ -4,9 +4,21 @@
         margin: 16px 0;
         box-shadow: 5px 5px 25px 0 rgba(46,61,73,.2);
     }
+    header>div{
+        text-align: center;
+    }
+    p span{
+        font-weight: 600;
+    }
 </style>
 <section class="content">
-    <h1>Your Cart</h1>
+    <header class="pad">
+        <div>
+            <h1>Your Shopping Cart</h1>
+            <p>Review of <span>3</span> items <span>$144.90</span></p>
+            <div class="spacer"></div>
+        </div>
+    </header>
     <div>
         <remi-cart-item></remi-cart-item>
         <remi-cart-item></remi-cart-item>

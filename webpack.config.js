@@ -26,9 +26,14 @@ const processEnv = {
  */
 const copyStatics = {
   copyWebcomponents: [{
-    from: resolve('./node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js'),
+    from: resolve('./node_modules/@webcomponents'),
     to: join(OUTPUT_PATH, 'vendor'),
-    flatten: true
+    flatten: false
+  },
+  {
+    from: resolve('./node_modules/web-animations-js'),
+    to: join(OUTPUT_PATH, 'vendor/web-animations-js'),
+    flatten: false
   }, 
   // {
   //   from: resolve('./node_modules/@webcomponents/webcomponentsjs/webcomponents-lite.js'),
@@ -118,7 +123,7 @@ const shared = env => {
       },
       historyApiFallback: true,
       port: 3000,
-      host: '0.0.0.0',
+      host: '192.168.0.188',
       disableHostCheck: true
     },
     optimization: {

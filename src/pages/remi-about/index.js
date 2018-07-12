@@ -10,8 +10,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 import { html } from '@polymer/polymer/polymer-element.js';
 import { PageViewElement } from "../../components/page-view-element";
 import { connect } from 'pwa-helpers/connect-mixin.js';
+import '@polymer/iron-image';
+
+import SharedStyles from '../../components/shared-styles.html';
+import buttonStyles from "../../components/material/button.html";
 
 import { store } from '../../store.js';
+import template from './template.html';
 
 /**
  * `bn-project` Description
@@ -29,23 +34,12 @@ class RemiAbout extends connect(store)(PageViewElement) {
     }
 
     static get template() {
-        return html`
-            <style>
-            
-            </style>
-            <section>
-                
-            </section>
-        `;
+        return html([
+            template
+            + SharedStyles
+            + buttonStyles
+        ]);
     }
-
-    /**
-            * Object describing property-related metadata used by Polymer features
-            */
-    static get properties() {
-        return {}
-    }
-
 
     /**
      * Instance of the element is created/upgraded. Use: initializing state,

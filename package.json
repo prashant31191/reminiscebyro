@@ -99,6 +99,7 @@
     "redux": "3.7.2",
     "redux-thunk": "^2.2.0",
     "reselect": "^3.0.1",
-    "to-lit-html-loader": "0.0.2"
+    "to-lit-html-loader": "0.0.2",
+    "web-animations-js": "2.3.1"
   }
 }

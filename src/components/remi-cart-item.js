@@ -30,6 +30,7 @@ class CartItem extends PolymerElement {
 
       .inner{
         display: flex;
+        align-items: center;
       }
       .media{
         width: 275px;
@@ -61,6 +62,11 @@ class CartItem extends PolymerElement {
       }
       .price{
         font-weight: 600;
+      }
+      @media only screen and (max-device-width: 768px) and (min-device-width: 320px){
+        remi-color-swatch-input{
+            display: none;
+        }
       }
     </style>
     <div class="inner">
