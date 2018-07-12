@@ -82,6 +82,7 @@
     "@material/mwc-checkbox": "0.1.2",
     "@material/textfield": "0.37.0",
     "@polymer/app-layout": "^3.0.0-pre.19",
+    "@polymer/app-storage": "3.0.0-pre.21",
     "@polymer/iron-flex-layout": "3.0.0-pre.19",
     "@polymer/iron-iconset-svg": "3.0.0-pre.19",
     "@polymer/iron-image": "3.0.0-pre.19",

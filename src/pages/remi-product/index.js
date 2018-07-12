@@ -23,7 +23,7 @@ import '../../components/remi-color-swatch-input.js';
 import '../../components/quantity-input.js';
 
 import { shop } from "../../reducers/shop.js";
-import { getProductBySlug, setActiveProduct, productWasViewed, setEditingProduct } from "../../actions/shop.js";
+import { getProductBySlug, setActiveProduct, productWasViewed, setEditingProduct, addToCart } from "../../actions/shop.js";
 import { fadeIn, fadeOut } from '../../components/animation.js';
 
 store.addReducers({
@@ -104,6 +104,18 @@ class RemiProduct extends connect(store)(PageViewElement) {
         
         selected ? this.show() : this.hide()  
         this.active = selected;
+    }
+
+    _addToCart(e){
+        if(!this.data) return;
+        
+        store.dispatch(addToCart({
+            ...this.data,
+            quantity: 1,
+            selectedColor: 'pink'
+        }))
+
+        window.scrollTo(0, 0);
     }
 
     _edit(){

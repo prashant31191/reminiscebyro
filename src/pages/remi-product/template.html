@@ -30,11 +30,11 @@
     .color-names>span{
         font-weight: 500;
     }
-    /* @media only screen and (max-device-width: 480px) and (min-device-width: 320px){
-    .main-section{
-        flex-direction: column;
+    @media only screen and (max-device-width: 480px) and (min-device-width: 320px){
+        quantity-input{
+            max-width: 150px;
+        }
     }
-  } */
   @media only screen and (max-device-width: 768px) and (min-device-width: 320px){
     .main-section{
         flex-direction: column !important;
@@ -81,7 +81,7 @@
                 <div class="layout horizontal center">
                     <quantity-input min="1" max="7"></quantity-input>
                     <div class="flex">
-                        <button class="mdc-button mdc-button--unelevated btn-add-cart">
+                        <button class="mdc-button mdc-button--unelevated btn-add-cart" on-click="_addToCart">
                             Add to Cart
                         </button>
                     </div>

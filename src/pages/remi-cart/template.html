@@ -15,15 +15,14 @@
     <header class="pad">
         <div>
             <h1>Your Shopping Cart</h1>
-            <p>Review of <span>3</span> items <span>$144.90</span></p>
+            <p>Review of <span>[[numItems]]</span> items <span>$[[total]]</span></p>
             <div class="spacer"></div>
         </div>
     </header>
     <div>
-        <remi-cart-item></remi-cart-item>
-        <remi-cart-item></remi-cart-item>
-        <remi-cart-item></remi-cart-item>
-        <remi-cart-item></remi-cart-item>
+        <template is="dom-repeat" items="[[items]]">
+            <remi-cart-item data="[[item]]"></remi-cart-item>
+        </template>
     </div>
     <footer>
 

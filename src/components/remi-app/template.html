@@ -109,7 +109,20 @@ app-drawer{
 [page][active] {
   display: block;
 }
-
+[cart-btn]{
+  position: relative;
+}
+.cart-badge{
+  font-size: 12px;
+  height: 16px;
+  width: 16px;
+  background: #ff0057;
+  position: absolute;
+  top: 0px;
+  right: 4px;
+  color: white;
+  border-radius: 8px;
+}
 footer {
   padding: 24px;
   background: var(--app-primary-color);
@@ -156,7 +169,10 @@ changes to a wide layout. */
       <a href="/">ReminiscebyRo</a>
     </div>
     
-    <a href="/cart"><paper-icon-button icon="bn-icons:cart"></paper-icon-button></a>
+    <a href="/cart" cart-btn>
+      <paper-icon-button icon="bn-icons:cart"></paper-icon-button>
+      <span class="cart-badge">[[cartItemsCount]]</span>
+    </a>
     
   </app-toolbar>
   <!-- This gets hidden on a small screen-->
@@ -191,6 +207,14 @@ changes to a wide layout. */
   <remi-products page="products"></remi-products>
   <remi-product-editor page="product-edit"></remi-product-editor>
 </main>
+
+<!--
+    shop-cart-data maintains the state of the user's shopping cart (in localstorage) and
+    calculates the total amount.
+  -->
+
+<remi-cart-data></remi-cart-data>
+
 <footer>
 </footer>
 <snack-bar active$="[[toastVisible]]">

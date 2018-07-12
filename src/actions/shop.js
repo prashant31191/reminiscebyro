@@ -18,6 +18,7 @@ export const SET_FETCHING = 'SET_FETCHING';
 export const SET_UPDATING = 'SET_UPDATING';
 export const SET_ACTIVE_PRODUCT = 'SET_ACTIVE_PRODUCT';
 export const SET_EDITING_PRODUCT = 'SET_EDITING_PRODUCT';
+export const SET_CART = 'SET_CART';
 
 export const getProductListing = () => async (dispatch) => {
   // Here you would normally get the data from the server. We're simulating
@@ -75,9 +76,6 @@ export const getProductBySlug = (slug, callback) => async (dispatch) => {
   callback(product);
 }
 
-
-
-
 export const checkout = (productId) => (dispatch) => {
   // Here you could do things like credit card validation, etc.
   // If that fails, dispatch CHECKOUT_FAILURE. We're simulating that
@@ -94,28 +92,32 @@ export const checkout = (productId) => (dispatch) => {
   }
 };
 
-export const addToCart = (productId) => (dispatch, getState) =>{
-  const state = getState();
-  // Just because the UI thinks you can add this to the cart
-  // doesn't mean it's in the inventory (user could've fixed it);
-  if (state.shop.products[productId].inventory > 0) {
-    dispatch(addToCartUnsafe(productId));
-  }
+export const addToCart = (product) => (dispatch) =>{
+  
+  //check inventory before we add it?
+
+  dispatch({
+    type: ADD_TO_CART,
+    product
+  })
 };
 
-export const removeFromCart = (productId) => {
+export const removeFromCart = (product) => {
   return {
     type: REMOVE_FROM_CART,
-    productId
+    product
   };
 };
 
-export const addToCartUnsafe = (productId) => {
-  return {
-    type: ADD_TO_CART,
-    productId
-  };
-}
+export const setCart = (cart) => (dispatch) => {
+
+  //check inventory before we add it?
+
+  dispatch({
+    type: SET_CART,
+    cart
+  })
+};
 
 export const setUpdating = (value) => {
   return {

@@ -17,7 +17,8 @@ import { installRouter } from 'pwa-helpers/router.js';
 import { updateMetadata } from 'pwa-helpers/metadata.js';
 
 import { store } from '../../store.js';
-import { navigate, updateOffline, updateDrawerState, updateLayout, listenUserChange, updateLoading } from '../../actions/app.js';
+import '../../components/remi-cart-data.js';
+import { navigate, listenUserChange } from '../../actions/app.js';
 import template from './template.html';
 import sharedStyles from '../shared-styles.html';
 
@@ -53,6 +54,12 @@ static get properties() {
     }
   }
 }
+  
+  static get observers(){
+    return [
+      '_cartChanged(cart)'
+    ]
+  }
 
   constructor() {
     super();
@@ -67,6 +74,10 @@ static get properties() {
     store.dispatch(listenUserChange());
     await import('../lazy-components.js');
 
+  }
+
+  _cartChanged(cart){
+    console.log(cart);
   }
 
   connectedCallback() {
@@ -138,5 +149,6 @@ static get properties() {
     this._snackbarOpened = state.app.snackbarOpened;
     this._user = state.app.user;
     this.loading = state.app.loading;
+    this.cartItemsCount = state.shop && state.shop.cart.numItems;
   }
 });

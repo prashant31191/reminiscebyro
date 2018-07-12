@@ -8,24 +8,24 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 */
 
-import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
+import { html, LitElement } from '@polymer/lit-element';
 import '@polymer/iron-image';
 import './remi-color-swatch-input.js';
 import './quantity-input.js';
 
-class CartItem extends PolymerElement {
+class CartItem extends LitElement {
 
   static get properties() { return {
-    _items: Array,
-    _total: Number
+    data: Object
   }}
 
-  static get template(){
+  _render(props){
     return html`
     <style>
       :host{
         display: block;
         padding: 16px;
+        position: relative;
       }
 
       .inner{
@@ -37,8 +37,8 @@ class CartItem extends PolymerElement {
         height: 200px;
       }
       iron-image{
-          width: 100%;
-          height: 100%;
+        width: 100%;
+        height: 100%;
       }
       .info{
         padding: 024px;
@@ -55,17 +55,31 @@ class CartItem extends PolymerElement {
         justify-content: center;
       }
       .name{
-        font-weight: 500;
         font-size: .5rem;
-        color: #393433;
         text-decoration:none;
+        color: #424242;
+      }
+      .name h1{
+        font-weight: 500;
       }
       .price{
         font-weight: 600;
       }
+      .delete-btn{
+        position: absolute;
+        top: 16px;
+        right: 12px;
+        color: #757575;
+      }
       @media only screen and (max-device-width: 768px) and (min-device-width: 320px){
         remi-color-swatch-input{
             display: none;
+        }
+      }
+      @media only screen and (max-device-width: 480px) and (min-device-width: 320px){
+        .media{
+          width: 275px;
+          height: 100px;
         }
       }
     </style>
@@ -74,28 +88,36 @@ class CartItem extends PolymerElement {
         <iron-image 
               style="background-color: lightgray;" 
               sizing="cover" preload fade 
-              src="/assets/images/cosmetics-1543271_960_720.jpg">
+              src="${props.data.image}">
           </iron-image>
       </div>
       <div class="info flex">
         <div class="center">
           <a class="name" href="/product/matte-latte">
-            <h1>Matte Latte Lipstick</h1>
+            <h1>${props.data.name}</h1>
           </a>
           <span class="flex"></span>
-          <span class="price">$59.99</span>
+          <span class="price">$${props.data.price}</span>
         </div>
         <div>
             <!-- Color -->
             <remi-color-swatch-input readonly></remi-color-swatch-input>
             <!-- Quantity -->
-            <quantity-input min="1" max="7"></quantity-input>
+            <quantity-input min="1" max="7" value="${props.data.value}"></quantity-input>
           <span class="flex"></span>
-          <paper-icon-button icon="bn-icons:close"></paper-icon-button>
         </div>
       </div>
+      <paper-icon-button 
+        icon="bn-icons:close" 
+        class="delete-btn"
+        on-click="${(e) => this._delete(e)}"></paper-icon-button>
     </div>
     `;
+  }
+
+  _delete(e){
+    console.log('firing delete event')
+    this.dispatchEvent(new CustomEvent('delete', {detail: this.data}))
   }
 
   
