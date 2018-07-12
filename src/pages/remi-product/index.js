@@ -72,7 +72,9 @@ class RemiProduct extends connect(store)(PageViewElement) {
 
     _checkShouldFetchData(_page, _slug){
         if(this.data == null && _page === 'product' && _slug != null){
-            store.dispatch(getProductBySlug(_slug, product => store.dispatch(setActiveProduct(product))))
+            store.dispatch(getProductBySlug(_slug, 
+                product => store.dispatch(setActiveProduct(product)))
+            )
         }
     }
 

@@ -115,7 +115,7 @@ const getTotal = (state = INITIAL_CART.total, action) => {
     case ADD_TO_CART:
       return state + (action.product.price * action.product.quantity)
     case REMOVE_FROM_CART:
-      return state + (action.product.price - action.product.quantity)
+      return state - (action.product.price * action.product.quantity)
 
     default:
       return state;

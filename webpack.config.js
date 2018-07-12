@@ -34,26 +34,7 @@ const copyStatics = {
     from: resolve('./node_modules/web-animations-js'),
     to: join(OUTPUT_PATH, 'vendor/web-animations-js'),
     flatten: false
-  }, 
-  // {
-  //   from: resolve('./node_modules/@webcomponents/webcomponentsjs/webcomponents-lite.js'),
-  //   to: join(OUTPUT_PATH, 'vendor'),
-  //   flatten: true
-  // }, 
-//   {
-//     from: resolve('./node_modules/@webcomponents/webcomponentsjs/bundles/webcomponents-sd-ce.js'),
-//     to: join(OUTPUT_PATH, 'vendor'),
-//     flatten: true
-//   },
-//    {
-//     from: resolve('./node_modules/@webcomponents/webcomponentsjs/bundles/webcomponents-hi-sd-ce.js'),
-//     to: join(OUTPUT_PATH, 'vendor'),
-//     flatten: true
-//   }, {
-//     from: resolve('./node_modules/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js'),
-//     to: join(OUTPUT_PATH, 'vendor'),
-//     flatten: true
-//   }
+  }
  ],
   copyOthers: [{
     from: 'assets/**',

@@ -93,7 +93,7 @@ class CartItem extends LitElement {
       </div>
       <div class="info flex">
         <div class="center">
-          <a class="name" href="/product/matte-latte">
+          <a class="name" href$="/product/${props.data.slug}">
             <h1>${props.data.name}</h1>
           </a>
           <span class="flex"></span>
@@ -103,7 +103,7 @@ class CartItem extends LitElement {
             <!-- Color -->
             <remi-color-swatch-input readonly></remi-color-swatch-input>
             <!-- Quantity -->
-            <quantity-input min="1" max="7" value="${props.data.value}"></quantity-input>
+            <quantity-input min="1" max="7" value="${props.data.value}" on-value-change="${(e) => this._quantityChange(e)}"></quantity-input>
           <span class="flex"></span>
         </div>
       </div>
@@ -116,8 +116,11 @@ class CartItem extends LitElement {
   }
 
   _delete(e){
-    console.log('firing delete event')
     this.dispatchEvent(new CustomEvent('delete', {detail: this.data}))
+  }
+
+  _quantityChange(){
+
   }
 
   

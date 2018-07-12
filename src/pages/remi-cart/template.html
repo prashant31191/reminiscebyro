@@ -10,6 +10,22 @@
     p span{
         font-weight: 600;
     }
+    footer{
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        background-color: white;
+    }
+    .footer{
+        padding: 16px;
+        height: 50px;
+        color: white;
+        font-size: 18px;
+        text-align: center;
+    }
+    button{
+        border-radius: 23px !important;
+    }
 </style>
 <section class="content">
     <header class="pad">
@@ -21,10 +37,14 @@
     </header>
     <div>
         <template is="dom-repeat" items="[[items]]">
-            <remi-cart-item data="[[item]]"></remi-cart-item>
+            <remi-cart-item data="[[item]]" on-delete="_delete"></remi-cart-item>
         </template>
     </div>
     <footer>
-
+        <div class="footer">
+            <button class="mdc-button accent-btn" on-click="_checkout">
+                Checkout
+            </button>
+        </div>
     </footer>
 </section>

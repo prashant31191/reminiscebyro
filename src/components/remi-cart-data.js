@@ -11,7 +11,7 @@ store.addReducers({
 })
 
 customElements.define('remi-cart-data', class RemiCartData extends connect(store)(PolymerElement) {
-    _render() {
+    static get template() {
         return html`
             <app-localstorage-document key="remi-cart-data" data="{{_cart}}"></app-localstorage-document>
         `;
