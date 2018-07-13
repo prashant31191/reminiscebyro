@@ -9,7 +9,6 @@
 */
 import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 import template from './template.html'
-import SharedStyles  from '../../components/shared-styles.html';
 import '@polymer/iron-image';
 import { connect } from 'pwa-helpers/connect-mixin.js';
 
@@ -36,11 +35,9 @@ store.addReducers({
  */
 class RemiShop extends connect(store)(PageViewElement) {
     
-
     static get template() {
         return html([
             template
-            + SharedStyles 
             + buttonStyles
         ])
 

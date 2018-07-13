@@ -1,7 +1,7 @@
 
 
 import { PolymerElement, html } from '@polymer/polymer/polymer-element';
-
+import { dom} from '@polymer/polymer/lib/legacy/polymer.dom.js';
 import { RemiApp } from '../../core/app.js';
 
 import '@polymer/app-layout/app-drawer/app-drawer.js';
@@ -17,7 +17,6 @@ import { installRouter } from 'pwa-helpers/router.js';
 import { updateMetadata } from 'pwa-helpers/metadata.js';
 
 import { store } from '../../store.js';
-import '../../components/remi-cart-data.js';
 import { navigate, listenUserChange } from '../../actions/app.js';
 import template from './template.html';
 import sharedStyles from '../shared-styles.html';
@@ -70,8 +69,9 @@ static get properties() {
 
   async ready() {
     super.ready();
-
+    this.$pages = this.querySelector('#pages');
     store.dispatch(listenUserChange());
+
     await import('../lazy-components.js');
 
   }
@@ -88,9 +88,14 @@ static get properties() {
     //   (matches) => store.dispatch(updateLayout(matches)));
   }
 
+  _attachDom(node) {
+    dom(this).appendChild(node);
+  }
+
   _computeHideNav(){
     return ['product', 'cart'].indexOf(this.page) != -1;
   }
+  
   /**
     * @desc When the user navigates to a new page
     * @param {old, new} page - passes old and new page
@@ -99,8 +104,8 @@ static get properties() {
     this._drawerOpened = false;
 
     this._activatePage(
-      this.$.pages.querySelector(`[page=${page}]`),
-      this.$.pages.querySelector(`[page=${old}]`)
+      this.$pages.querySelector(`[page=${page}]`),
+      this.$pages.querySelector(`[page=${old}]`)
     );
 
   }
@@ -132,16 +137,16 @@ static get properties() {
   _openDrawer(){
     this._drawerOpened = true;
   }
-  _didRender(properties, changeList) {
-    if ('_page' in changeList) {
-      const pageTitle = properties.appTitle + ' - ' + changeList._page;
-      updateMetadata({
-        title: pageTitle,
-        description: pageTitle
-        // This object also takes an image property, that points to an img src.
-      });
-    }
-  }
+  // _didRender(properties, changeList) {
+  //   if ('_page' in changeList) {
+  //     const pageTitle = properties.appTitle + ' - ' + changeList._page;
+  //     updateMetadata({
+  //       title: pageTitle,
+  //       description: pageTitle
+  //       // This object also takes an image property, that points to an img src.
+  //     });
+  //   }
+  // }
 
   _stateChanged(state) {
     this.page = state.app.route.page;

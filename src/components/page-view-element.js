@@ -9,7 +9,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 */
 
 import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
-
+import { dom } from '@polymer/polymer/lib/legacy/polymer.dom.js';
 export class PageViewElement extends PolymerElement {
 
   static get properties() {
@@ -33,6 +33,10 @@ export class PageViewElement extends PolymerElement {
   hide() {
     this.active = false;
   }
+  _attachDom(node) {
+    dom(this).appendChild(node);
+  }
+
   ready() {
     super.ready();
 

@@ -43,9 +43,7 @@ class RemiHome extends connect(store)(PageViewElement) {
     static get template() {
         return html([
             template + 
-            buttonStyles + 
-            SharedStyles
-                
+            buttonStyles    
         ])
         
     }
@@ -110,7 +108,7 @@ class RemiHome extends connect(store)(PageViewElement) {
     async ready() {
         super.ready();
         store.dispatch(getProductListing())
-        const buttonRipple = new MDCRipple(this.shadowRoot.querySelector('.mdc-button'));
+        const buttonRipple = new MDCRipple(this.querySelector('.mdc-button'));
         
     }
 }

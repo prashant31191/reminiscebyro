@@ -104,7 +104,7 @@ const shared = env => {
       },
       historyApiFallback: true,
       port: 3000,
-      host: '192.168.0.188',
+      host: '0.0.0.0',
       disableHostCheck: true
     },
     optimization: {

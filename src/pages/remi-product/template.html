@@ -95,11 +95,11 @@
                         <br>
                     </div>
                     <div class="mdc-typography--headline5">Features:</div>
-                    <p>[[data.features]]</p>
                     <div>
                         <ul>
-                            <li>40% preshrunk ring-spun cotton, 60% polyester terry fleece.&nbsp;</li>
-                            <li>Available in dark heather charcoal with the white Google logo screen printed across center chest.</li>
+                            <template is="dom-repeat" items="[[_getFeatures(data.features)]]">
+                                <li>[[item]]</li>
+                            </template>
                         </ul>
                     </div>
                 </p>

@@ -103,7 +103,7 @@ class CartItem extends LitElement {
             <!-- Color -->
             <remi-color-swatch-input readonly></remi-color-swatch-input>
             <!-- Quantity -->
-            <quantity-input min="1" max="7" value="${props.data.value}" on-value-change="${(e) => this._quantityChange(e)}"></quantity-input>
+            <quantity-input min="1" max="7" value="${props.data.quantity}" on-value-change="${(e) => this._quantityChange(e)}"></quantity-input>
           <span class="flex"></span>
         </div>
       </div>
@@ -120,7 +120,7 @@ class CartItem extends LitElement {
   }
 
   _quantityChange(){
-
+    this.dispatchEvent(new CustomEvent('quantity-changed', { detail: this.data }))
   }
 
   

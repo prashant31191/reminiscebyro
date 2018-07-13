@@ -125,6 +125,10 @@ class RemiProduct extends connect(store)(PageViewElement) {
         store.dispatch(setEditingProduct(this.data))
     }
 
+    _getFeatures(features){
+        if(features)
+        return features.split('.');
+    }
     /**
      * Instance of the element is created/upgraded. Use: initializing state,
      * set up event listeners, create shadow dom.

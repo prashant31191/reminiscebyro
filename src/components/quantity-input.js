@@ -60,7 +60,7 @@ class QuantityInput extends LitElement {
         </style>
         <div class="quantity">
             <input type="button" value="—" on-click="${(e) => {this.minus(e)}}" class="qtyminus">
-            <input type="text" name="Quantity" value="${props.value}" class="qty" readonly>
+            <input type="text" name="Quantity" value="${props._value}" class="qty" readonly>
             <input type="button" value="+" class="qtyplus" on-click="${(e) => { this.plus(e) }}">
         </div>
         `;
@@ -73,20 +73,29 @@ class QuantityInput extends LitElement {
         return {
             value: Number,
             min: Number,
-            max: Number
+            max: Number,
+            _value: Number
         }
     }
 
     minus(e){
-        if ((this.value - 1) < this.min) return;
-        this.value--;
+        if ((this._value - 1) < this.min) return;
+        this._value--;
         this.valueChange();
     }
     
     plus(e){
-        if((this.value + 1) > this.max) return;
-        this.value++;
+        if((this._value + 1) > this.max) return;
+        this._value++;
         this.valueChange();
+    }
+
+    set value(value){
+        if(!value){
+            this._value = 1;
+            return;
+        }
+        this._value = value;
     }
 
     valueChange(){
