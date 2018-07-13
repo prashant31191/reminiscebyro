@@ -49,7 +49,6 @@ class RemiProductEdit extends connect(store)(PageViewElement) {
     static get template() {
         return html([
             template
-            + SharedStyles
             + buttonStyles
             + textfield
         ]);

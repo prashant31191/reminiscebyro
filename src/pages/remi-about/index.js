@@ -11,8 +11,6 @@ import { html } from '@polymer/polymer/polymer-element.js';
 import { PageViewElement } from "../../components/page-view-element";
 import { connect } from 'pwa-helpers/connect-mixin.js';
 import '@polymer/iron-image';
-
-import SharedStyles from '../../components/shared-styles.html';
 import buttonStyles from "../../components/material/button.html";
 
 import { store } from '../../store.js';
@@ -36,7 +34,6 @@ class RemiAbout extends connect(store)(PageViewElement) {
     static get template() {
         return html([
             template
-            + SharedStyles
             + buttonStyles
         ]);
     }

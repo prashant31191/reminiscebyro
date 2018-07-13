@@ -28,8 +28,7 @@ class RemiDashboard extends connect(store)(PageViewElement) {
 
     static get template() {
         return html([
-            template +
-            SharedStyles
+            template
         ]);
     }
 

@@ -37,8 +37,7 @@ class RemiCart extends connect(store)(PageViewElement) {
     static get template() {
         return html([
             template +
-            buttonStyles +
-            SharedStyles
+            buttonStyles
         ]);
     }
 
