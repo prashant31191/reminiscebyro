@@ -13,6 +13,7 @@ import { connect } from 'pwa-helpers/connect-mixin.js';
 import '@vaadin/vaadin-grid/vaadin-grid.js';
 import '@vaadin/vaadin-grid/vaadin-grid-selection-column.js';
 
+import '../../components/remi-order-details.js';
 import { store } from '../../store.js';
 import template from './template.html';
 
@@ -29,6 +30,13 @@ class RemiOrders extends connect(store)(PageViewElement) {
         return {
             orders:{
                 type: Array
+            },
+            /**
+             * The selected expense object.
+             * @type {Array}
+             */
+            activeItem: {
+                observer: '_activeItemChanged'
             }
         }
     }

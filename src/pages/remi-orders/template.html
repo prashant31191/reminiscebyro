@@ -2,6 +2,9 @@
     remi-orders header{
 
     }
+    remi-orders{
+        position: relative;
+    }
     remi-orders vaadin-grid{
         min-height: 100vh;
         background: white;
@@ -27,15 +30,15 @@
 </style>
 
 <section class="content">
+    <remi-order-details data="[[activeItem]]" opened="[[activeItem]]" dialog></remi-order-details>
     <div>
         <vaadin-grid 
             aria-label="Basic Binding Example" 
             items="[[orders]]" 
             column-reordering-allowed 
-            multi-sort t
-            heme="wrap-cell-content">
-
-            <vaadin-grid-selection-column auto-select> </vaadin-grid-selection-column>
+            multi-sort
+            active-item="{{activeItem}}"
+            theme="wrap-cell-content">
 
             <vaadin-grid-column width="100px" flex-grow="0">
                 <template class="header">Order #</template>
