@@ -75,10 +75,17 @@ class QuantityInput extends PolymerElement {
                 type: Number,
                 reflectToAttribute: true,
                 notify: true,
-                value: 1
+                value: 1,
+                observer: '_valueChanged'
             }    ,
             min: Number,
             max: Number
+        }
+    }
+
+    _valueChanged(val){
+        if(!val){
+            this.value = 1;
         }
     }
 

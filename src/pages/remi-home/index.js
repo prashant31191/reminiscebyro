@@ -61,7 +61,7 @@ class RemiHome extends connect(store)(PageViewElement) {
 
     hide() {
         return new Promise(async (resolve, reject) => {
-            const animation = await fadeOut(this).finished;
+            //const animation = await fadeOut(this);
             this.active = false;
             resolve();
         })
@@ -70,8 +70,8 @@ class RemiHome extends connect(store)(PageViewElement) {
 
     show() {
         return new Promise(async (resolve, reject) => {
-            const animation = await fadeIn(this).finished;
             this.active = true;
+            //const animation = await fadeIn(this);
             resolve();
         })
 

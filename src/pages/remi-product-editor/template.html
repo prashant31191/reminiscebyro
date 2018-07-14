@@ -1,46 +1,54 @@
 <style>
-    :host{
-        background: #eee;
+    remi-product-editor{
+        background: #fafafa;
     }
-    aside{
+    remi-product-editor aside{
         width: 400px;
     }
-    .content{
+    remi-product-editor aside header{
+        padding: 16px 0;
+    }
+    remi-product-editor .content{
         padding: 3em 0;
     }
-    form{
+    remi-product-editor form{
         padding: 1em 3em;
     }
-    form>*{
+    remi-product-editor form>*{
         margin: 2em 0;
     }
-    .mdc-text-field--box{
+    remi-product-editor .mdc-text-field--box{
         width: 100%;
     }
-    .row{
+    remi-product-editor .row{
         display: flex;
     }
-    .row>*{
+    remi-product-editor .row>*{
         margin-right: 16px;
     }
-    h1{
+    remi-product-editor h1{
         margin: 0;
         font-size: 1rem;
     }
-    remi-media-uploader{
-        margin-top: 4rem;
+    remi-product-editor remi-media-uploader{
+        margin-top: 16px;
         background: white;
     }
-    #mybtn{
-        
+    .mdc-text-field{
+        background-color: white !important;
+        border: 0!important;
+        box-shadow: 0 8px 16px 0 rgba(40,40,90,.09), 0 3px 6px 0 rgba(0,0,0,.065);
     }
-    .mdc-text-field--textarea .mdc-floating-label {
-        background-color: #eee !important;
+    .card-a{
+        margin-top: 5em;
     }
 </style>
 <div class="content">
-    <header>
-
+    <header class="layout horizontal">
+        <span class="flex"></span>
+        <button class="mdc-button accent-btn" on-click="submit">
+            <iron-icon icon="bn-icons:tick"></iron-icon>
+        </button>
     </header>
     <section class="layout horizontal">
         <div class="flex">
@@ -134,12 +142,12 @@
                     <input type="hidden" value="{{data.views::change}}" min="0">
                     <!-- Should user buy when no stock? -->
                     <div class="layout horizontal center">
-                        <mwc-checkbox></mwc-checkbox> Allow orders when there is no stock?
+                        <mwc-checkbox checked></mwc-checkbox> Allow orders when there is no stock?
                     </div>
                     
                     <!-- Should we notify when stock is low? -->
                     <div class="layout horizontal center">
-                        <mwc-checkbox></mwc-checkbox> notify me when stock is low?
+                        <mwc-checkbox checked></mwc-checkbox> notify me when stock is low?
                     </div>
                 </section>
                 <section class="row actions">
@@ -150,7 +158,16 @@
             </form>
         </div>
         <aside>
-            <remi-media-uploader image="{{data.image}}"></remi-media-uploader>
+            <div class="card-with--shadow pad card-a">
+                <header class="layout horizontal">
+                    <span class="flex"></span>
+                    <div class="layout horizontal center switch">
+                     Feature this product? <mwc-switch checked$="{{data.featured}}"></mwc-switch> 
+                    </div>
+                </header>
+                <remi-media-uploader image="{{data.image}}"></remi-media-uploader>
+            </div>
+            
         </aside>
     </section>
     

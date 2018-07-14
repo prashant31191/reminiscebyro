@@ -112,7 +112,7 @@ class RemiProduct extends connect(store)(PageViewElement) {
         
         store.dispatch(addToCart({
             ...this.data,
-            quantity: 1,
+            quantity: this.quantity,
             selectedColor: 'pink'
         }))
         this._onAddedToCart();
@@ -130,7 +130,7 @@ class RemiProduct extends connect(store)(PageViewElement) {
 
     _getFeatures(features){
         if(features)
-        return features.split('.');
+            return features.split('\n');
     }
     /**
      * Instance of the element is created/upgraded. Use: initializing state,

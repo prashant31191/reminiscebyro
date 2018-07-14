@@ -12,10 +12,10 @@ import { PageViewElement } from "../../components/page-view-element";
 import { connect } from 'pwa-helpers/connect-mixin.js';
 import { MDCTextField } from '@material/textfield';
 import {Checkbox} from "@material/mwc-checkbox";
+import { Switch } from "@material/mwc-switch";
 
 import { store } from '../../store.js';
 import template from './template.html';
-import SharedStyles from '../../components/shared-styles.html';
 import buttonStyles from "../../components/material/button.html";
 import textfield from '../../components/material/textfield.html';
 import '../../components/remi-media-uploader.js';
@@ -72,6 +72,7 @@ class RemiProductEdit extends connect(store)(PageViewElement) {
             this.slug = slugify(title);
         }
     }
+    
     /**
      * Instance of the element is created/upgraded. Use: initializing state,
      * set up event listeners, create shadow dom.

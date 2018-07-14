@@ -28,7 +28,6 @@ class MediaUploader extends PolymerElement {
     <style>
       :host{
         display: block;
-        padding: 16px;
       }
       .main{
         width: 100%;

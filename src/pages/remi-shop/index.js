@@ -16,7 +16,7 @@ import { store } from '../../store.js';
 import "../../components/remi-product-item";
 import buttonStyles from "../../components/material/button.html";
 import { PageViewElement } from '../../components/page-view-element.js';
-import { fadeIn, fadeOut } from '../../components/animation.js';
+import { slideUp, slideDown } from '../../components/animation.js';
 import { getProductListing, setActiveProduct, setEditingProduct } from "../../actions/shop.js";
 
 import { shop } from "../../reducers/shop.js";
@@ -59,18 +59,18 @@ class RemiShop extends connect(store)(PageViewElement) {
 
     hide() {
         return new Promise(async (resolve, reject) => {
-          const animation = await fadeOut(this).finished;
-          this.active = false;
-          resolve();
+            const animation = await slideDown(this);
+            this.active = false;
+            resolve();
         })
 
     }
 
     show() {
         return new Promise(async (resolve, reject) => {
-          const animation = await fadeIn(this).finished;
-          this.active = true;
-          resolve();
+            this.active = true;
+            const animation = await slideUp(this);
+            resolve();
         })
 
     }
