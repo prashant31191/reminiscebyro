@@ -1,29 +1,32 @@
 <style include="iron-flex iron-flex-factors iron-flex-alignment iron-positioning">
-    remi-cart-item{
+    remi-cart remi-cart-item{
         background-color: white;
         margin: 16px 0;
         box-shadow: 5px 5px 25px 0 rgba(46,61,73,.2);
     }
-    header>div{
+    remi-cart{
+        padding-bottom: 98px;
+    }
+    remi-cart header>div{
         text-align: center;
     }
-    p span{
+    remi-cart p span{
         font-weight: 600;
     }
-    footer{
+    remi-cart footer{
         position: fixed;
         bottom: 0;
         width: 100%;
         background-color: white;
     }
-    .footer{
+    remi-cart .footer{
         padding: 16px;
         height: 50px;
         color: white;
         font-size: 18px;
         text-align: center;
     }
-    button{
+    remi-cart button{
         border-radius: 23px !important;
     }
 </style>
@@ -37,7 +40,7 @@
     </header>
     <div>
         <template is="dom-repeat" items="[[items]]">
-            <remi-cart-item data="[[item]]" on-delete="_delete"></remi-cart-item>
+            <remi-cart-item data="[[item]]" on-delete="_delete" on-quantity-changed="_quantity-changed"></remi-cart-item>
         </template>
     </div>
     <footer hidden$="[[!numItems]]">

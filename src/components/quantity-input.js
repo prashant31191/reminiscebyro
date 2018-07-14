@@ -7,7 +7,7 @@ The complete set of contributors may be found at http://polymer.github.io/CONTRI
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 */
-import { LitElement, html } from '@polymer/lit-element';
+import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 
 /**
  * `bn-project` Description
@@ -17,14 +17,14 @@ import { LitElement, html } from '@polymer/lit-element';
  * @demo
  * 
  */
-class QuantityInput extends LitElement {
+class QuantityInput extends PolymerElement {
     static get properties() {
         return {
 
         }
     }
 
-    _render(props){
+    static get template(){
         return html `
         <style>
             :host { 
@@ -59,9 +59,9 @@ class QuantityInput extends LitElement {
             }
         </style>
         <div class="quantity">
-            <input type="button" value="—" on-click="${(e) => {this.minus(e)}}" class="qtyminus">
-            <input type="text" name="Quantity" value="${props._value}" class="qty" readonly>
-            <input type="button" value="+" class="qtyplus" on-click="${(e) => { this.plus(e) }}">
+            <input type="button" value="—" on-click="minus" class="qtyminus">
+            <input type="text" name="Quantity" value="[[value]]" class="qty" readonly>
+            <input type="button" value="+" class="qtyplus" on-click="plus">
         </div>
         `;
     }
@@ -71,35 +71,25 @@ class QuantityInput extends LitElement {
     */
     static get properties() {
         return {
-            value: Number,
+            value: {
+                type: Number,
+                reflectToAttribute: true,
+                notify: true,
+                value: 1
+            }    ,
             min: Number,
-            max: Number,
-            _value: Number
+            max: Number
         }
     }
 
     minus(e){
-        if ((this._value - 1) < this.min) return;
-        this._value--;
-        this.valueChange();
+        if ((this.value - 1) < this.min) return;
+        this.value--;
     }
     
     plus(e){
-        if((this._value + 1) > this.max) return;
-        this._value++;
-        this.valueChange();
-    }
-
-    set value(value){
-        if(!value){
-            this._value = 1;
-            return;
-        }
-        this._value = value;
-    }
-
-    valueChange(){
-        this.dispatchEvent(new CustomEvent('value-change', {detail: this.value}))
+        if((this.value + 1) > this.max) return;
+        this.value++;
     }
     
     /**
@@ -113,7 +103,6 @@ class QuantityInput extends LitElement {
 
     connectedCallback(){
         super.connectedCallback();
-        this.value = 1;
     }
 
     /**

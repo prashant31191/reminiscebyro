@@ -107,7 +107,7 @@ static get properties() {
       this.$pages.querySelector(`[page=${page}]`),
       this.$pages.querySelector(`[page=${old}]`)
     );
-
+    
   }
 
   is_selected(page, view){
@@ -131,6 +131,7 @@ static get properties() {
     }
 
     window.scrollTo(0, 0);
+
 
   }
 

@@ -105,12 +105,12 @@ class RemiHome extends connect(store)(PageViewElement) {
     /**
      * Use for one-time configuration of your component after local DOM is initialized. 
      */
-    async ready() {
+    ready() {
         super.ready();
-        store.dispatch(getProductListing())
+        store.dispatch(getProductListing());
         const buttonRipple = new MDCRipple(this.querySelector('.mdc-button'));
-        
     }
+
 }
 
 customElements.define('remi-home', RemiHome);

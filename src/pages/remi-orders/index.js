@@ -10,14 +10,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 import { html } from '@polymer/polymer/polymer-element.js';
 import { PageViewElement } from "../../components/page-view-element";
 import { connect } from 'pwa-helpers/connect-mixin.js';
-import { MDCRipple } from '@material/ripple';
-import buttonStyles from "../../components/material/button.html";
+import '@vaadin/vaadin-grid/vaadin-grid.js';
+import '@vaadin/vaadin-grid/vaadin-grid-selection-column.js';
 
 import { store } from '../../store.js';
 import template from './template.html';
-import SharedStyles from '../../components/shared-styles.html';
-import '../../components/remi-cart-item.js';
-import { removeFromCart } from '../../actions/shop.js';
 
 /**
  * `bn-project` Description
@@ -27,34 +24,21 @@ import { removeFromCart } from '../../actions/shop.js';
  * @demo
  * 
  */
-class RemiCart extends connect(store)(PageViewElement) {
+class RemiOrders extends connect(store)(PageViewElement) {
     static get properties() {
         return {
-
+            orders:{
+                type: Array
+            }
         }
     }
 
     static get template() {
         return html([
-            template +
-            buttonStyles
+            template
         ]);
     }
 
-    /**
-            * Object describing property-related metadata used by Polymer features
-            */
-    static get properties() {
-        return {}
-    }
-
-    _delete(e){
-        let product = e.target.data;
-        if (product){
-            store.dispatch(removeFromCart(product))
-        }
-        //handle it
-    }
     /**
      * Instance of the element is created/upgraded. Use: initializing state,
      * set up event listeners, create shadow dom.
@@ -73,14 +57,39 @@ class RemiCart extends connect(store)(PageViewElement) {
      */
     ready() {
         super.ready();
-        const buttonRipple = new MDCRipple(this.querySelector('.mdc-button'));
+        this.orders = [
+            {
+                number: '1077', date: '	Sep 8, 7:11pm', total: 206.00,
+                payment: {
+                    status: 'paid'
+                },
+                fulfilment: {
+                    status: 'Fulfilled'
+                },
+                customer: {
+                    firstName: 'Musa',
+                    lastName: 'Jallow'
+                }
+            },
+            {
+                number: '1077', date: '	Sep 8, 7:11pm', total: 206.00,
+                payment: {
+                    status: 'paid'
+                },
+                fulfilment: {
+                    status: 'Fulfilled'
+                },
+                customer: {
+                    firstName: 'Musa',
+                    lastName: 'Jallow'
+                }
+            }
+        ]
     }
 
     _stateChanged(state){
-        this.total = state.shop.cart.total;
-        this.numItems = state.shop.cart.numItems;
-        this.items = state.shop.cart.items;
+        
     }
 }
 
-customElements.define('remi-cart', RemiCart);
+customElements.define('remi-orders', RemiOrders);

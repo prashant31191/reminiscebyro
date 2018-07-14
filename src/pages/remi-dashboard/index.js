@@ -12,7 +12,6 @@ import { PageViewElement } from "../../components/page-view-element";
 import { connect } from 'pwa-helpers/connect-mixin.js';
 import { afterNextRender } from '@polymer/polymer/lib/utils/render-status.js';
 
-import SharedStyles from '../../components/shared-styles.html';
 import { store } from '../../store.js';
 import template from './template.html';
 import Chart from 'chart.js';

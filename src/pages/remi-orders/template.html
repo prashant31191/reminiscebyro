@@ -1,0 +1,80 @@
+<style>
+    remi-orders header{
+
+    }
+    remi-orders vaadin-grid{
+        min-height: 100vh;
+        background: white;
+        box-shadow: 0px 0px 9px #39343336;
+    }
+    remi-orders .badge{
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        -ms-border-radius: 10px;
+        -o-border-radius: 10px;
+        border-radius: 10px;
+        font-size: .8rem;
+        line-height: 20px;
+        min-height: 20px;
+        min-width: 20px;
+        vertical-align: middle;
+        text-align: center;
+        display: inline-block;
+        letter-spacing: .6px;
+        padding: 1px 10px;
+        background-color: #eee;
+    }
+</style>
+
+<section class="content">
+    <div>
+        <vaadin-grid 
+            aria-label="Basic Binding Example" 
+            items="[[orders]]" 
+            column-reordering-allowed 
+            multi-sort t
+            heme="wrap-cell-content">
+
+            <vaadin-grid-selection-column auto-select> </vaadin-grid-selection-column>
+
+            <vaadin-grid-column width="100px" flex-grow="0">
+                <template class="header">Order #</template>
+                <template>
+                    <span class="order-number">[[item.number]]</span>
+                </template>
+            </vaadin-grid-column>
+        
+            <vaadin-grid-column>
+                <template class="header">Date</template>
+                <template>[[item.date]]</template>
+            </vaadin-grid-column>
+        
+            <vaadin-grid-column>
+                <template class="header">Customer</template>
+                <template>[[item.customer.firstName]] [[item.customer.lastName]] </template>
+            </vaadin-grid-column>
+        
+            <vaadin-grid-column width="8em">
+                <template class="header">Payment Status</template>
+                <template>
+                    <div style="white-space: normal" class="badge">[[item.payment.status]]</div>
+                </template>
+            </vaadin-grid-column>
+            
+            <vaadin-grid-column width="8em">
+                <template class="header">Fulfilment Status</template>
+                <template>
+                    <div style="white-space: normal" class="badge">[[item.fulfilment.status]]</div>
+                </template>
+            </vaadin-grid-column>
+
+            <vaadin-grid-column width="8em">
+                <template class="header">Total</template>
+                <template>
+                    <div style="white-space: normal">$[[item.total]]</div>
+                </template>
+            </vaadin-grid-column>
+
+        </vaadin-grid>
+    </div>
+</section>

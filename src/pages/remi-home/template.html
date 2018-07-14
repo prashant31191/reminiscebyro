@@ -1,8 +1,5 @@
 
 <style>
-    :host{
-    }
-    
     remi-home .app-hero {
         height: 60vh;
         background-color: var(--app-primary-color);
@@ -14,8 +11,7 @@
     remi-home .hero-inner {
         height: 60vh;
     }
-
-    remi-home .some-component {
+    remi-home .hero-media>div {
         height: 331px;
         border-radius: 12px;
         max-width: 600px;
@@ -24,7 +20,6 @@
         background-image: url(https://cdn.shopify.com/s/files/1/1385/7027/t/7/assets/slide_2_1024x1024.jpg?14226104591786434212);
         background-size: cover;
     }
-
     remi-home button{
         --mdc-theme-primary: var(--app-secondary-color);
         padding: 0px 24px;
@@ -59,14 +54,6 @@
         margin-top: -60px;
         z-index: 0;
     }
-    remi-home .feature-grid{
-        display: grid;
-        grid-template-columns: repeat(6, 1fr);
-        grid-gap: 24px;
-    }
-    remi-home .feature-item{
-        grid-column-end: span 2;
-    }
     remi-home .heading-wrapper{
         margin-top: 5em;
     }
@@ -83,15 +70,33 @@
     remi-home .bottom-banner-info>*{
         margin: 8px 0;
     }
-  @media only screen and (max-device-width: 480px) and (min-device-width: 320px){
-    remi-home .feature-item{
-        grid-column-end: span 6;
+    remi-home .feature-grid{
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        grid-gap: 24px;
     }
-  }
-  @media only screen and (max-device-width: 768px) and (min-device-width: 480px){
     remi-home .feature-item{
-        grid-column-end: span 3;
+        grid-column-end: span 2;
     }
+  @media only screen and (max-device-width: 768px){
+    remi-home .feature-grid{
+        display: block;
+        margin-bottom: -17px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding-bottom: 17px;
+        padding-left: 40px;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+    }
+    remi-home .feature-item{
+        display: inline-block;
+        height: 100%;
+        max-width: 400px;
+        margin-right: 8px;
+        width: calc(100% + 24px);
+    }
+    
   }
 </style>
 <div class="page-wrapper">
@@ -137,10 +142,24 @@
             <p  class="mdc-typography--body2">Create colorful dimension from cheeks to eyes to temples.</p>
         </div>
     </section>
-    <section class="app-section feature pad" style="margin-bottom: 4em;">
+    <section class="app-section feature" style="margin-bottom: 1em;">
         <div class="content">
-            <div class="center heading-wrapper">
+            <div class="center heading-wrapper pad">
                 <h1 class="mdc-typography--headline5">Featured</h1>
+            </div>
+            <div class="feature-grid">
+                <template is="dom-repeat" items="[[bestSellers]]" as="product">
+                    <a href$="/product/[[product.slug]]" class="feature-item" on-click="_view">
+                        <remi-product-item featured forAdmin$="[[user]]" data="[[product]]"></remi-product-item>
+                    </a>
+                </template>
+            </div>
+        </div>
+    </section>
+    <section class="app-section feature" style="margin-bottom: 4em;">
+        <div class="content">
+            <div class="center heading-wrapper pad">
+                <h1 class="mdc-typography--headline5">Latest</h1>
             </div>
             <div class="feature-grid">
                 <template is="dom-repeat" items="[[bestSellers]]" as="product">

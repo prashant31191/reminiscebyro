@@ -76,6 +76,7 @@
     "xo": "0.21.0"
   },
   "dependencies": {
+    "@glidejs/glide": "3.1.0",
     "@material/button": "0.35.0",
     "@material/checkbox": "0.37.0",
     "@material/mwc-button": "0.1.1",
@@ -86,11 +87,14 @@
     "@polymer/iron-flex-layout": "3.0.0-pre.19",
     "@polymer/iron-iconset-svg": "3.0.0-pre.19",
     "@polymer/iron-image": "3.0.0-pre.19",
+    "@polymer/iron-overlay-behavior": "3.0.0-pre.21",
     "@polymer/lit-element": "^0.5.0",
     "@polymer/paper-icon-button": "3.0.0-pre.19",
     "@polymer/paper-progress": "3.0.0-pre.21",
     "@polymer/paper-tabs": "3.0.0-pre.21",
     "@polymer/polymer": "3.0.0",
+    "@vaadin/vaadin-grid": "5.1.0-alpha3",
+    "@vaadin/vaadin-lumo-styles": "1.1.0-alpha3",
     "@webcomponents/webcomponentsjs": "^2.0.0",
     "chart.js": "2.7.2",
     "es6-template-string-loader": "2.0.0",

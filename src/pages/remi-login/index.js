@@ -96,7 +96,7 @@ class RemiLogin extends connect(store)(PageViewElement) {
     }
 
     _formIsValid() {
-        return this.shadowRoot.querySelector('form').checkValidity();
+        return this.querySelector('form').checkValidity();
     }
 
     _login(data) {
@@ -122,7 +122,7 @@ class RemiLogin extends connect(store)(PageViewElement) {
      */
     ready() {
         super.ready();
-        this.shadowRoot.querySelectorAll('.mdc-text-field').forEach((node) => new MDCTextField(node));
+        this.querySelectorAll('.mdc-text-field').forEach((node) => new MDCTextField(node));
     }
 
     _stateChanged(state){

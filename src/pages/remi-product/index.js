@@ -115,8 +115,12 @@ class RemiProduct extends connect(store)(PageViewElement) {
             quantity: 1,
             selectedColor: 'pink'
         }))
+        this._onAddedToCart();
+    }
 
+    _onAddedToCart(){
         window.scrollTo(0, 0);
+        this.dialog.open();
     }
 
     _edit(){
@@ -146,7 +150,8 @@ class RemiProduct extends connect(store)(PageViewElement) {
      */
     async ready() {
         super.ready();
-        const buttonRipple = new MDCRipple(this.shadowRoot.querySelector('.mdc-button'));
+        const buttonRipple = new MDCRipple(this.querySelector('.mdc-button'));
+        this.dialog = document.getElementById('cart-modal');
 
         afterNextRender(this, () => {
         })
