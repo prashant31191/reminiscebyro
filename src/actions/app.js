@@ -129,10 +129,12 @@ export const login = (data) => async (dispatch, state) => {
   await Auth.login(data);
 }
 
-export const listenUserChange = () => (dispatch, state) => {
+export const listenUserChange = (callback) => (dispatch, state) => {
   Auth._onAuthChange((user) => {
+    callback(user);
     dispatch(updateUser(user))
   })
+  
 }
 
 export const updateUser = (user) => {

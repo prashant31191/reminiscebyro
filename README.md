@@ -14,7 +14,7 @@ Begin by cloning this repository to your machine, and installing all NPM depende
 
 ```bash
 git git@github.com:jobizzness/reminiscebyro.git
-cd remi-shop && npm install
+cd reminiscebyro && npm install
 yarn:build
 npm start
 ```

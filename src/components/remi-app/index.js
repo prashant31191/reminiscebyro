@@ -70,7 +70,8 @@ static get properties() {
   async ready() {
     super.ready();
     this.$pages = this.querySelector('#pages');
-    store.dispatch(listenUserChange());
+    store.dispatch(listenUserChange((user) => {
+    }));
 
     await import('../lazy-components.js');
 

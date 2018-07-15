@@ -103,13 +103,25 @@
     <section class="app-hero pad">
         <div class="content layout horizontal center-center app-hero-content">
             <div class="hero-content pad flex">
-                <h1 class="mdc-typography--headline2">Adu Matte Liquid Lipstick</h1>
-                <p class="mdc-typography--body2">Senses is the smart sleep tracker that improves your sleep, wakes you up feeling great, and shoes how the envirnment
-                    of your room affects your rest.</p>
+                <h1 class="mdc-typography--headline2">
+                    <biness-text 
+                        can-edit$="[[editMode]]"
+                        value="Adu Matte Liquid Lipstick"></biness-text>
+                </h1>
+                <p class="mdc-typography--body2">
+                    <biness-text 
+                        value="Senses is the smart sleep tracker that improves your sleep, wakes you up feeling great, and shoes how the envirnment of your
+                        room affects your rest."
+                        can-edit$="[[editMode]]"></biness-text>
+                </p>
                 <div class="call-action-wrapper center">
                     <a href="/shop">
                         <button class="mdc-button mdc-button--outlined">
-                            Shop Now
+                            <biness-text 
+                                can-edit$="[[editMode]]" 
+                                value="Shop Now">
+                            </biness-text>
+                            
                         </button>
                     </a>
                 </div>

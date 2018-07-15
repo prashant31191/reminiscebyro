@@ -16,6 +16,7 @@ import { PageViewElement } from '../../components/page-view-element.js';
 import template from './template.html'
 import SharedStyles  from '../../components/shared-styles.html';
 import buttonStyles from "../../components/material/button.html";
+import "../../components/biness-text.js";
 
 import { store } from '../../store.js';
 import { fadeIn, fadeOut } from '../../components/animation.js';
@@ -89,6 +90,7 @@ class RemiHome extends connect(store)(PageViewElement) {
     _stateChanged(state) {
         this.user = state.app.user;
         this.bestSellers = state.shop.products;
+        this.editMode = true;
     }
 
     _view(e) {
