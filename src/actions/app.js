@@ -143,3 +143,11 @@ export const updateUser = (user) => {
     user
   }
 }
+
+export const hideAppOverflow = (value) => {
+  if(value){
+    document.body.style.overflow = 'hidden';
+  }else{
+    document.body.style.overflow = 'auto';
+  }
+}

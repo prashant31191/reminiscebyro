@@ -82,6 +82,7 @@
     "@material/mwc-button": "0.1.1",
     "@material/mwc-checkbox": "0.1.2",
     "@material/mwc-switch": "0.1.2",
+    "@material/select": "0.37.0",
     "@material/textfield": "0.37.0",
     "@polymer/app-layout": "^3.0.0-pre.19",
     "@polymer/app-storage": "3.0.0-pre.21",
