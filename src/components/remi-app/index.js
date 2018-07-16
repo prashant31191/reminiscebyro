@@ -70,15 +70,14 @@ static get properties() {
   async ready() {
     super.ready();
     this.$pages = this.querySelector('#pages');
-    store.dispatch(listenUserChange((user) => {
-    }));
+    store.dispatch(listenUserChange());
 
     await import('../lazy-components.js');
 
   }
 
   _cartChanged(cart){
-    console.log(cart);
+    //console.log(cart);
   }
 
   connectedCallback() {

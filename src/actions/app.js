@@ -8,6 +8,7 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 */
 import { Auth } from '../core/auth.js';
+import { User } from '../core/user.js';
 
 export const UPDATE_USER = 'UPDATE_USER';
 export const UPDATE_ROUTE = 'UPDATE_ROUTE';
@@ -129,10 +130,9 @@ export const login = (data) => async (dispatch, state) => {
   await Auth.login(data);
 }
 
-export const listenUserChange = (callback) => (dispatch, state) => {
+export const listenUserChange = () => (dispatch, state) => {
   Auth._onAuthChange((user) => {
-    callback(user);
-    dispatch(updateUser(user))
+    User.onChanged(user, actualUser => dispatch(updateUser(actualUser)));
   })
   
 }

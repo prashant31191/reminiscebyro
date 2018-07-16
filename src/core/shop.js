@@ -21,7 +21,9 @@ export const Shop = new class {
         return new Promise(async (resolve, reject) => {
             try {
                 const querySnapshot = await firebase().firestore().collection("products").where("slug", "==", slug).get()
-                resolve(this._formatProducts(querySnapshot));
+                let result = this._formatProducts(querySnapshot);
+
+                resolve(result.length > 0 ? result[0] : null);
             } catch (error) {
                 reject(error);
             }
@@ -59,7 +61,7 @@ export const Shop = new class {
                 key: doc.id
             })
         });
-        return data.length > 2 ? data : data[0];
+        return data;
     }
 
     deleteProduct(key){

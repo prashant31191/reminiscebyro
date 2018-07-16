@@ -1,3 +1,12 @@
+import {
+    ADD_TO_CART,
+    SET_EDITING_PRODUCT,
+    REMOVE_FROM_CART,
+    CHECKOUT_SUCCESS,
+    CHECKOUT_FAILURE,
+    SET_CART
+} from '../actions/shop.js';
+
 export const INITIAL_CART = {
     items: [],
     total: 0,
