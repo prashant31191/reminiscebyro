@@ -14,7 +14,7 @@ class BinessText extends PolymerElement {
     static get template() {
         return html`
         <style>
-            :slotted([contenteditable]) {
+            ::slotted([contenteditable]) {
                 outline: none;
             }
         </style>

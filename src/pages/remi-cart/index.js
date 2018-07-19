@@ -11,13 +11,17 @@ import { html } from '@polymer/polymer/polymer-element.js';
 import { PageViewElement } from "../../components/page-view-element";
 import { connect } from 'pwa-helpers/connect-mixin.js';
 import { MDCRipple } from '@material/ripple';
-import buttonStyles from "../../components/material/button.html";
 
 import { store } from '../../store.js';
 import template from './template.html';
-import SharedStyles from '../../components/shared-styles.html';
+import '../../components/remi-checkout.js';
 import '../../components/remi-cart-item.js';
 import { removeFromCart } from '../../actions/shop.js';
+import { InjectGlobalStyle } from '../../core/utils.js';
+
+//Imports lazy global styles
+InjectGlobalStyle({ name: 'material-button' }, () => import('../../components/material/button.html'));
+InjectGlobalStyle({ name: 'material-textfield' }, () => import('../../components/material/textfield.html'));
 
 /**
  * `bn-project` Description
@@ -36,16 +40,8 @@ class RemiCart extends connect(store)(PageViewElement) {
 
     static get template() {
         return html([
-            template +
-            buttonStyles
+            template
         ]);
-    }
-
-    /**
-            * Object describing property-related metadata used by Polymer features
-            */
-    static get properties() {
-        return {}
     }
 
     _delete(e){
@@ -68,6 +64,10 @@ class RemiCart extends connect(store)(PageViewElement) {
         super.connectedCallback();
     }
 
+    _checkout(){
+        window.scrollTo(0, 0);
+        this.$.checkoutComponent.open();
+    }
     /**
      * Use for one-time configuration of your component after local DOM is initialized. 
      */

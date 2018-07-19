@@ -40,6 +40,28 @@ const makeInjection = (componentName) => {
     return service;
 }
 
+
+
+//injects global style
+export const InjectGlobalStyle = async (component, callback) =>{
+    if (!alreadyInjected(component.name)){
+
+        RemiApp.injected.push(component)
+        
+        let style = await callback()
+        const documentContainer = document.createElement('div');   
+        documentContainer.innerHTML = style.default;
+        documentContainer.setAttribute('style', 'display: none;');
+        document.head.appendChild(documentContainer);
+
+        
+    }
+}
+
+const alreadyInjected = (name) => {
+    return injected.filter((item) => item.name === name).length > 0;
+}
+
 export const Slugify = (text) => {
     return text.toString().toLowerCase()
         .replace(/\s+/g, '-')           // Replace spaces with -

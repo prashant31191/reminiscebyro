@@ -15,12 +15,12 @@ import { MDCTextField } from '@material/textfield';
 import { fadeIn, fadeOut } from '../../components/animation.js';
 import { store } from '../../store.js';
 import template from './template.html';
-import textfield from '../../components/material/textfield.html';
-import SharedStyles from '../../components/shared-styles.html';
-import buttonStyles from "../../components/material/button.html";
 
 import { login } from '../../actions/app.js';
+import { InjectGlobalStyle } from '../../core/utils.js';
 
+InjectGlobalStyle({ name: 'material-textfield' }, () => import('../../components/material/textfield.html'));
+InjectGlobalStyle({ name: 'material-button' }, () => import('../../components/material/button.html'));
 
 /**
  * `bn-project` Description
@@ -39,10 +39,7 @@ class RemiLogin extends connect(store)(PageViewElement) {
 
     static get template() {
         return html([
-            template +
-            buttonStyles +
-            SharedStyles +
-            textfield
+            template
         ]);
     }
 

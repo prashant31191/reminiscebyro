@@ -18,6 +18,10 @@ import buttonStyles from "../../components/material/button.html";
 import { PageViewElement } from '../../components/page-view-element.js';
 import { slideUp, slideDown } from '../../components/animation.js';
 import { getProductListing, setActiveProduct, setEditingProduct } from "../../actions/shop.js";
+import { InjectGlobalStyle } from '../../core/utils.js';
+
+//Import lazy global style
+InjectGlobalStyle({name: 'material-button'}, () => import('../../components/material/button.html'));
 
 import { shop } from "../../reducers/shop.js";
 
@@ -38,7 +42,6 @@ class RemiShop extends connect(store)(PageViewElement) {
     static get template() {
         return html([
             template
-            + buttonStyles
         ])
 
     }
@@ -109,6 +112,7 @@ class RemiShop extends connect(store)(PageViewElement) {
     async ready() {
         super.ready();
 
+        
         store.dispatch(getProductListing())
         
     }

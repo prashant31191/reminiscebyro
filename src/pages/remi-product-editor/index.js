@@ -16,17 +16,20 @@ import { Switch } from "@material/mwc-switch";
 
 import { store } from '../../store.js';
 import template from './template.html';
-import buttonStyles from "../../components/material/button.html";
-import textfield from '../../components/material/textfield.html';
 import '../../components/remi-media-uploader.js';
 
 import { shop } from "../../reducers/shop.js";
 import { publishProduct, setEditingProduct, getProductBySlug } from "../../actions/shop.js";
-import {slugify} from '../../core/utils.js';
+import { slugify, InjectGlobalStyle} from '../../core/utils.js';
 
 store.addReducers({
     shop
 });
+
+
+InjectGlobalStyle({name: 'material-textfield'}, () => import('../../components/material/textfield.html'));
+InjectGlobalStyle({name: 'material-button'}, () => import('../../components/material/button.html'));
+
 
 /**
  * `bn-project` Description
@@ -49,8 +52,6 @@ class RemiProductEdit extends connect(store)(PageViewElement) {
     static get template() {
         return html([
             template
-            + buttonStyles
-            + textfield
         ]);
     }
 

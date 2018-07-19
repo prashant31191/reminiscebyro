@@ -25,12 +25,13 @@ import '../../components/quantity-input.js';
 import { shop } from "../../reducers/shop.js";
 import { getProductBySlug, setActiveProduct, productWasViewed, setEditingProduct, addToCart } from "../../actions/shop.js";
 import { fadeIn, fadeOut } from '../../components/animation.js';
+import {InjectGlobalStyle } from '../../core/utils.js';
 
 store.addReducers({
     shop
 });
 
-
+InjectGlobalStyle({ name: 'material-button' }, () => import('../../components/material/button.html'));
 /**
  * `ts-home` Description
  *
@@ -44,8 +45,7 @@ class RemiProduct extends connect(store)(PageViewElement) {
 
     static get template() {
         return html([
-            template + 
-            buttonStyles
+            template
                 
         ])
 

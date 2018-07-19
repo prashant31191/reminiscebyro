@@ -22,6 +22,7 @@ import { store } from '../../store.js';
 import { fadeIn, fadeOut } from '../../components/animation.js';
 import "../../components/remi-product-item";
 import { getProductListing, setActiveProduct } from "../../actions/shop.js";
+import { InjectGlobalStyle} from '../../core/utils.js';
 
 import { shop } from "../../reducers/shop.js";
 
@@ -29,6 +30,8 @@ store.addReducers({
     shop
 });
 
+//Imports lazy global styles
+InjectGlobalStyle({name: 'material-button'}, () => import('../../components/material/button.html'));
 
 /**
  * `ts-home` Description
@@ -43,8 +46,7 @@ class RemiHome extends connect(store)(PageViewElement) {
 
     static get template() {
         return html([
-            template + 
-            buttonStyles    
+            template 
         ])
         
     }
@@ -111,6 +113,8 @@ class RemiHome extends connect(store)(PageViewElement) {
         super.ready();
         store.dispatch(getProductListing());
         const buttonRipple = new MDCRipple(this.querySelector('.mdc-button'));
+        
+        
     }
 
 }
