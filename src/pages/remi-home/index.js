@@ -31,6 +31,7 @@ store.addReducers({
 });
 
 //Imports lazy global styles
+InjectGlobalStyle({ name: 'remi-home' }, () => import('./style.html'));
 InjectGlobalStyle({name: 'material-button'}, () => import('../../components/material/button.html'));
 
 /**
@@ -113,8 +114,6 @@ class RemiHome extends connect(store)(PageViewElement) {
         super.ready();
         store.dispatch(getProductListing());
         const buttonRipple = new MDCRipple(this.querySelector('.mdc-button'));
-        
-        
     }
 
 }

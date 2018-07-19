@@ -22,6 +22,7 @@ import { InjectGlobalStyle } from '../../core/utils.js';
 
 //Import lazy global style
 InjectGlobalStyle({name: 'material-button'}, () => import('../../components/material/button.html'));
+InjectGlobalStyle({ name: 'remi-shop' }, () => import('./style.html'));
 
 import { shop } from "../../reducers/shop.js";
 

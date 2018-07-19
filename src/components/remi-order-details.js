@@ -163,7 +163,7 @@ customElements.define('remi-order-details', class extends mixinBehaviors(
                 <header class="toolbar">
                     <h1 class="title">Order Details</h1>
                     <span class="flex"></span>
-                    <button class="mdc-button" dialog-dismiss>
+                    <button class="mdc-button" on-click="close">
                         <iron-icon icon="bn-icons:close"></iron-icon>
                     </button>
                 </header>

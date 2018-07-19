@@ -1,6 +1,6 @@
 
 
-import { PolymerElement, html } from '@polymer/polymer/polymer-element';
+import { html } from '@polymer/polymer/polymer-element';
 import { dom} from '@polymer/polymer/lib/legacy/polymer.dom.js';
 import { RemiApp } from '../../core/app.js';
 
@@ -9,7 +9,6 @@ import '@polymer/app-layout/app-header/app-header.js';
 import '@polymer/app-layout/app-scroll-effects/effects/waterfall.js';
 import '@polymer/app-layout/app-toolbar/app-toolbar.js';
 import { setPassiveTouchGestures } from '@polymer/polymer/lib/utils/settings.js';
-import '@polymer/iron-flex-layout/iron-flex-layout-classes.js';
 import '@polymer/paper-progress/paper-progress.js';
 
 import { connect } from 'pwa-helpers/connect-mixin.js';
@@ -19,17 +18,20 @@ import { updateMetadata } from 'pwa-helpers/metadata.js';
 import { store } from '../../store.js';
 import { navigate, listenUserChange } from '../../actions/app.js';
 import template from './template.html';
-import sharedStyles from '../shared-styles.html';
+import { lightComponent } from '../lightComponent.js';
 
+import { InjectGlobalStyle } from '../../core/utils.js';
+//Imports lazy global styles
+InjectGlobalStyle({ name: 'remi-app' }, () => import('./style.html'));
+InjectGlobalStyle({ name: 'shared-styles' }, () => import('../shared-styles.html'));
 
-window.customElements.define('remi-app', class extends connect(store)(PolymerElement) {
+window.customElements.define('remi-app', class extends connect(store)(lightComponent) {
 
   static get template() {
 
     return html`
         ${html([
           template
-          +sharedStyles
         ])}
       `;
   }
@@ -69,12 +71,14 @@ static get properties() {
 
   async ready() {
     super.ready();
+
     this.$pages = this.querySelector('#pages');
     store.dispatch(listenUserChange());
 
     await import('../lazy-components.js');
 
   }
+
 
   _cartChanged(cart){
     //console.log(cart);
@@ -88,9 +92,6 @@ static get properties() {
     //   (matches) => store.dispatch(updateLayout(matches)));
   }
 
-  _attachDom(node) {
-    dom(this).appendChild(node);
-  }
 
   _computeHideNav(){
     return ['product', 'cart'].indexOf(this.page) != -1;

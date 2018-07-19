@@ -109,6 +109,7 @@
 	</style>
 
   <script>
+     window.ShadyDOM = { force: true};
     (function() {
       if (!('serviceWorker' in navigator)) {
         console.log('Service worker is not supported');
@@ -167,7 +168,7 @@
   </remi-app>
 
   <script src="./vendor/webcomponentsjs/custom-elements-es5-adapter.js" nomodule></script>
-  <script src="./vendor/webcomponentsjs/webcomponents-loader.js"></script>
+  <script src="./vendor/webcomponentsjs/webcomponents-loader.js" shadydom></script>
   <script src="./vendor/web-animations-js/web-animations.min.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
 </body>

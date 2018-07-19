@@ -90,7 +90,7 @@ customElements.define('remi-checkout', class extends mixinBehaviors(
                 -webkit-flex-shrink: 0;
                 flex-shrink: 0;
             }
-            .title{
+            remi-checkout .title{
                 font-size: 1.5rem;
                 color: var(--app-primary-color);
             }
@@ -110,7 +110,7 @@ customElements.define('remi-checkout', class extends mixinBehaviors(
             remi-checkout h2{
                 font-size: 14px;
             }
-            .actions{
+            remi-checkout .actions{
                 margin-top: 3em;
             }
             @media (max-width: 767px) {
@@ -132,7 +132,7 @@ customElements.define('remi-checkout', class extends mixinBehaviors(
                 <header class="toolbar">
                     <h1 class="title">Checkout</h1>
                     <span class="flex"></span>
-                    <button class="mdc-button" dialog-dismiss>
+                    <button class="mdc-button" on-click="close">
                         <iron-icon icon="bn-icons:close"></iron-icon>
                     </button>
                 </header>
@@ -299,8 +299,8 @@ customElements.define('remi-checkout', class extends mixinBehaviors(
     }
 
     _renderClosed() {
-        hideAppOverflow();
         this.classList.remove('opened');
+        hideAppOverflow();
     }
 
     _onCancel(e) {
