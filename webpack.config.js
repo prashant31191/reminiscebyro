@@ -34,7 +34,12 @@ const copyStatics = {
     from: resolve('./node_modules/web-animations-js'),
     to: join(OUTPUT_PATH, 'vendor/web-animations-js'),
     flatten: false
-  }
+  },
+  {
+      from: resolve('./src/components/remi-app/remi-app.css'),
+      to: join(OUTPUT_PATH, 'assets/style/app.css'),
+      flatten: true
+    }
  ],
   copyOthers: [{
     from: 'assets/**',

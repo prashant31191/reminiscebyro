@@ -31,6 +31,7 @@ store.addReducers({
     shop
 });
 
+InjectGlobalStyle({ name: 'remi-product' }, () => import('./style.html'));
 InjectGlobalStyle({ name: 'material-button' }, () => import('../../components/material/button.html'));
 /**
  * `ts-home` Description

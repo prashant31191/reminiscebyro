@@ -26,7 +26,7 @@ store.addReducers({
     shop
 });
 
-
+InjectGlobalStyle({ name: 'remi-product-editor' }, () => import('./style.html'));
 InjectGlobalStyle({name: 'material-textfield'}, () => import('../../components/material/textfield.html'));
 InjectGlobalStyle({name: 'material-button'}, () => import('../../components/material/button.html'));
 

@@ -1,5 +1,5 @@
-<style>
-    :host {
+
+    remi-app {
         --app-drawer-width: 256px;
         display: block;
     }
@@ -19,15 +19,15 @@
         z-index: 4;
     }
 
-    :host([hide-nav]) .toolbar-list {
+    remi-app[hide-nav] .toolbar-list {
         display: none;
     }
 
-    :host([hide-nav]) #menu-btn {
+    remi-app[hide-nav] #menu-btn {
         display: none !important;
     }
 
-    :host([hide-nav]) #back-btn {
+    remi-app[hide-nav] #back-btn {
         display: block;
     }
 
@@ -160,4 +160,3 @@ changes to a wide layout. */
             padding-right: 0px;
         }
     }
-</style>

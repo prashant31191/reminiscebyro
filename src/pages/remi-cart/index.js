@@ -20,6 +20,7 @@ import { removeFromCart } from '../../actions/shop.js';
 import { InjectGlobalStyle } from '../../core/utils.js';
 
 //Imports lazy global styles
+InjectGlobalStyle({ name: 'remi-cart' }, () => import('./style.html'));
 InjectGlobalStyle({ name: 'material-button' }, () => import('../../components/material/button.html'));
 InjectGlobalStyle({ name: 'material-textfield' }, () => import('../../components/material/textfield.html'));
 

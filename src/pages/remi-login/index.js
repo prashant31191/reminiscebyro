@@ -19,6 +19,7 @@ import template from './template.html';
 import { login } from '../../actions/app.js';
 import { InjectGlobalStyle } from '../../core/utils.js';
 
+InjectGlobalStyle({ name: 'remi-login' }, () => import('./style.html'));
 InjectGlobalStyle({ name: 'material-textfield' }, () => import('../../components/material/textfield.html'));
 InjectGlobalStyle({ name: 'material-button' }, () => import('../../components/material/button.html'));
 
