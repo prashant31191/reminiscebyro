@@ -1,7 +1,6 @@
 
 
 import { html } from '@polymer/polymer/polymer-element';
-import { dom} from '@polymer/polymer/lib/legacy/polymer.dom.js';
 import { RemiApp } from '../../core/app.js';
 
 import '@polymer/app-layout/app-drawer/app-drawer.js';

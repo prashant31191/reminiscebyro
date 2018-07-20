@@ -10,7 +10,6 @@
 import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 import { MDCRipple } from '@material/ripple';
 import '@polymer/iron-image';
-import '@polymer/iron-flex-layout/iron-flex-layout-classes.js';
 import { connect } from 'pwa-helpers/connect-mixin.js';
 import { afterNextRender } from "@polymer/polymer/lib/utils/render-status.js";
 
@@ -120,6 +119,7 @@ class RemiProduct extends connect(store)(PageViewElement) {
         }
 
         store.dispatch(addToCart(data, this.user != null ))
+        this.onAddedToCart();
     }
 
     onAddedToCart(){

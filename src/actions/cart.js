@@ -37,6 +37,7 @@ const _addToCartRemote = async (product, dispatch) => {
 }
 
 const _addToCart = (product) => {
+    
     return {
         type: ADD_TO_CART,
         product
