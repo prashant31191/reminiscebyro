@@ -93,7 +93,7 @@ class RemiHome extends connect(store)(PageViewElement) {
     _stateChanged(state) {
         this.user = state.app.user;
         this.bestSellers = state.shop.products;
-        this.editMode = true;
+        this.editMode = false;
     }
 
     _view(e) {

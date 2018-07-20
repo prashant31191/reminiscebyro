@@ -80,17 +80,18 @@ class RemiLogin extends connect(store)(PageViewElement) {
 
     submit(e) {
         e.preventDefault();
-        let node = e.target;
-
-        let data = {
-            email: this.email,
-            password: this.password
-        }
+        
         if(this._formIsValid()){
-            this._login(data)
-        }else{
-            console.log('form is invalid')
+
+            let data = {
+                email: this.email,
+                password: this.password
+            }
+            return this._login(data)
         }
+
+        console.log('form is invalid')
+        
     }
 
     _formIsValid() {

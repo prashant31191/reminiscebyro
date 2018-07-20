@@ -7,7 +7,7 @@
     <paper-icon-button 
       id="menu-btn"
       icon="bn-icons:menu" 
-      hidden$="[[!_user]]"
+      hidden$="[[!_userIsAdmin(_user)]]"
       on-click="_openDrawer"></paper-icon-button>
     <a href="/">
       <paper-icon-button icon="bn-icons:arrow-back" id="back-btn"></paper-icon-button>
@@ -35,14 +35,17 @@
 </app-header>
 <!-- Drawer content -->
 
-<app-drawer opened="{{_drawerOpened}}">
-  <nav class="drawer-list">
-    <a selected$="[[is_selected(_page, 'view2')]]" href="/dashboard">Dashboard</a>
-    <a selected$="[[is_selected(_page, 'view3')]]" href="/shop">Shop</a>
-    <a selected$="[[is_selected(_page, 'view3')]]" href="/orders">Orders</a>
-    <a selected$="[[is_selected(_page, 'view3')]]" href="/blogging">Blog</a>
-  </nav>
-</app-drawer>
+<template is="dom-if" if="[[_userIsAdmin(_user)]]">
+  <app-drawer opened="{{_drawerOpened}}">
+    <nav class="drawer-list">
+      <a selected$="[[is_selected(_page, 'view2')]]" href="/dashboard">Dashboard</a>
+      <a selected$="[[is_selected(_page, 'view3')]]" href="/shop">Shop</a>
+      <a selected$="[[is_selected(_page, 'view3')]]" href="/orders">Orders</a>
+      <a selected$="[[is_selected(_page, 'view3')]]" href="/blogging">Blog</a>
+    </nav>
+  </app-drawer>
+</template>
+
 <!-- Main content -->
 <main class="main-content" id="pages">
   <remi-home page="home"></remi-home>

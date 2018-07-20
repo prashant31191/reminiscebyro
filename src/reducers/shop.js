@@ -11,13 +11,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 import {
   SET_ACTIVE_PRODUCT,
   GET_PRODUCTS,
-  ADD_TO_CART,
   SET_EDITING_PRODUCT,
   REMOVE_FROM_CART,
   CHECKOUT_SUCCESS,
-  CHECKOUT_FAILURE,
-  SET_CART
+  CHECKOUT_FAILURE
 } from '../actions/shop.js';
+
+import { ADD_TO_CART, SET_CART } from "../actions/cart.js";
 
 import { cart, INITIAL_CART} from './cart.js';
 

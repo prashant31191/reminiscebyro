@@ -1,6 +1,6 @@
 
 <section class="page-wrapper">
-    <template is="dom-if" if="[[user]]">
+    <template is="dom-if" if="[[_userIsAdmin(user)]]">
         <header class="layout content horizontal center toolbar">
             <span class="flex"></span>
             <a href="/product-edit/[[data.slug]]" on-click="_edit">

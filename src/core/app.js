@@ -15,6 +15,7 @@ window.__REMI_APP__ = window.__REMI_APP__ || new class {
 
     constructor() {
         this.firebase = this._initializeFirebase(this.firebaseConfig);
+        this.element = document.querySelector('remi-app');
     }
 
     _initializeFirebase(config) {

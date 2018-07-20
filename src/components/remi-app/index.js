@@ -158,4 +158,9 @@ static get properties() {
     this.loading = state.app.loading;
     this.cartItemsCount = state.shop && state.shop.cart.numItems;
   }
+
+  _userIsAdmin(user) {
+      return user && user.roles && user.roles.admin
+  }
+
 });

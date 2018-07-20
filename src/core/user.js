@@ -8,13 +8,15 @@ export const User = new class {
         firebase().firestore().settings(settings);
     }
 
+    /**
+    * @desc when user changes we check if they already exists
+    * if not we create them
+    * @param {auth, whenDone} - auth is the data whenDone is the callback()
+    * @return a promise - success or failure
+    */
     async onChanged(auth, whenDone){
 
         whenDone(await this._getRealUser(auth));
-        
-        //check if the user exits in our system
-        //if not then we create it
-        //then we return the new user object
     }
 
     _getRealUser(auth) {
@@ -42,8 +44,20 @@ export const User = new class {
                 customer: true,
                 
             },
+            email: auth.email,
+            avatar: auth.photoURL,
             fullname: '',
-            address: ''
+            verified: auth.emailVerified,
+            phone: auth.phoneNumber,
+            addresses: {},
+            address: {},
+            cart: {
+                items: [],
+                total: 0,
+                numItems: 0
+            },
+            purchases: []
+
         }
     }
 

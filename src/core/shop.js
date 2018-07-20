@@ -73,10 +73,30 @@ export const Shop = new class {
                 .set(data);
     }
 
-    _makeUpdate(data){
-        
-        
+    //Cart ====================
+
+    addToCart(product){
+        return new Promise(async (resolve, reject) => {
+            try {
+                //const querySnapshot = await firebase().firestore().collection("products").get();
+                resolve();
+            } catch (error) {
+                reject(error);
+            }
+        })
     }
+
+    removeFromCart(product){
+        return new Promise(async (resolve, reject) => {
+            try {
+                //const querySnapshot = await firebase().firestore().collection("products").get();
+                resolve();
+            } catch (error) {
+                reject(error);
+            }
+        })
+    }
+
    
 
 }();

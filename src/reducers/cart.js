@@ -1,11 +1,10 @@
 import {
-    ADD_TO_CART,
     SET_EDITING_PRODUCT,
     REMOVE_FROM_CART,
     CHECKOUT_SUCCESS,
-    CHECKOUT_FAILURE,
-    SET_CART
+    CHECKOUT_FAILURE
 } from '../actions/shop.js';
+import { ADD_TO_CART, SET_CART} from "../actions/cart.js";
 
 export const INITIAL_CART = {
     items: [],

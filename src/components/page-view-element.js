@@ -45,5 +45,9 @@ export class PageViewElement extends lightComponent {
     }
 
   }
+  
+  _userIsAdmin(user){
+    return user && user.roles && user.roles.admin
+  }
 
 }

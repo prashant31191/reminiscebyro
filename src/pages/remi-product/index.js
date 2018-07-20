@@ -23,7 +23,9 @@ import '../../components/remi-color-swatch-input.js';
 import '../../components/quantity-input.js';
 
 import { shop } from "../../reducers/shop.js";
-import { getProductBySlug, setActiveProduct, productWasViewed, setEditingProduct, addToCart } from "../../actions/shop.js";
+import { getProductBySlug, setActiveProduct, productWasViewed, setEditingProduct } from "../../actions/shop.js";
+import { addToCart} from '../../actions/cart.js';
+
 import { fadeIn, fadeOut } from '../../components/animation.js';
 import {InjectGlobalStyle } from '../../core/utils.js';
 
@@ -110,16 +112,17 @@ class RemiProduct extends connect(store)(PageViewElement) {
 
     _addToCart(e){
         if(!this.data) return;
-        
-        store.dispatch(addToCart({
+
+        const data = {
             ...this.data,
             quantity: this.quantity,
             selectedColor: 'pink'
-        }))
-        this._onAddedToCart();
+        }
+
+        store.dispatch(addToCart(data, this.user != null ))
     }
 
-    _onAddedToCart(){
+    onAddedToCart(){
         window.scrollTo(0, 0);
         this.dialog.open();
     }
@@ -133,6 +136,7 @@ class RemiProduct extends connect(store)(PageViewElement) {
         if(features)
             return features.split('\n');
     }
+    
     /**
      * Instance of the element is created/upgraded. Use: initializing state,
      * set up event listeners, create shadow dom.

@@ -3,7 +3,7 @@ import '@polymer/app-storage/app-localstorage/app-localstorage-document.js';
 import { connect } from 'pwa-helpers/connect-mixin.js';
 
 import { store } from '../store.js';
-import { setCart } from '../actions/shop.js';
+import { setCart } from '../actions/cart.js';
 import { shop} from '../reducers/shop.js';
 
 store.addReducers({
@@ -13,7 +13,7 @@ store.addReducers({
 customElements.define('remi-cart-data', class RemiCartData extends connect(store)(PolymerElement) {
     static get template() {
         return html`
-            <app-localstorage-document key="remi-cart-data" data="{{_cart}}"></app-localstorage-document>
+            <app-localstorage-document key="remi-cart-data" id="storage"></app-localstorage-document>
         `;
     }
 
@@ -33,23 +33,25 @@ customElements.define('remi-cart-data', class RemiCartData extends connect(store
 
     static get observers(){
         return [
-            '_localCartChanged(_cart)'
+            '_updateCart(user)'
         ]
     }
 
-    _localCartChanged(cart){
-        if(cart.numItems != this.cart.numItems){
+    _updateCart(user){
+        let cart = user && user.cart || this.$.storage.data;
+        if(cart != this._cart){
             store.dispatch(setCart(cart));
         }
         
     }
 
     _cartChanged(cart){
-        this._cart = cart;
+        this.$.storage.set('data', cart);
     }
 
     _stateChanged(state){
         this.cart = state.shop.cart;
+        this.user = state.app.user;
     }
 
     ready(){

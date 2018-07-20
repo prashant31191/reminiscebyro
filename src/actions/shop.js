@@ -10,15 +10,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 import { Shop } from "../core/shop.js";
 
 export const GET_PRODUCTS = 'GET_PRODUCTS';
-export const ADD_TO_CART = 'ADD_TO_CART';
-export const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
 export const CHECKOUT_SUCCESS = 'CHECKOUT_SUCCESS';
 export const CHECKOUT_FAILURE = 'CHECKOUT_FAILURE';
 export const SET_FETCHING = 'SET_FETCHING';
 export const SET_UPDATING = 'SET_UPDATING';
 export const SET_ACTIVE_PRODUCT = 'SET_ACTIVE_PRODUCT';
 export const SET_EDITING_PRODUCT = 'SET_EDITING_PRODUCT';
-export const SET_CART = 'SET_CART';
+
 
 export const getProductListing = () => async (dispatch) => {
   // Here you would normally get the data from the server. We're simulating
@@ -92,32 +90,6 @@ export const checkout = (productId) => (dispatch) => {
   }
 };
 
-export const addToCart = (product) => (dispatch) =>{
-  
-  //check inventory before we add it?
-
-  dispatch({
-    type: ADD_TO_CART,
-    product
-  })
-};
-
-export const removeFromCart = (product) => {
-  return {
-    type: REMOVE_FROM_CART,
-    product
-  };
-};
-
-export const setCart = (cart) => (dispatch) => {
-
-  //check inventory before we add it?
-
-  dispatch({
-    type: SET_CART,
-    cart
-  })
-};
 
 export const setUpdating = (value) => {
   return {
