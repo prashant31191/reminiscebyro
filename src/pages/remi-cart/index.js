@@ -16,7 +16,7 @@ import { store } from '../../store.js';
 import template from './template.html';
 import '../../components/remi-checkout.js';
 import '../../components/remi-cart-item.js';
-import { removeFromCart } from '../../actions/shop.js';
+import { removeFromCart } from '../../actions/cart.js';
 import { InjectGlobalStyle } from '../../core/utils.js';
 
 //Imports lazy global styles
@@ -33,11 +33,7 @@ InjectGlobalStyle({ name: 'material-textfield' }, () => import('../../components
  * 
  */
 class RemiCart extends connect(store)(PageViewElement) {
-    static get properties() {
-        return {
 
-        }
-    }
 
     static get template() {
         return html([
@@ -48,7 +44,7 @@ class RemiCart extends connect(store)(PageViewElement) {
     _delete(e){
         let product = e.target.data;
         if (product){
-            store.dispatch(removeFromCart(product))
+            store.dispatch(removeFromCart(product, this.user != null))
         }
         //handle it
     }
@@ -81,6 +77,7 @@ class RemiCart extends connect(store)(PageViewElement) {
         this.total = state.shop.cart.total;
         this.numItems = state.shop.cart.numItems;
         this.items = state.shop.cart.items;
+        this.user = state.app.user;
     }
 }
 

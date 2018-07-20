@@ -50,18 +50,22 @@ export const removeFromCart = (product, useRemote) => (dispatch) => {
         return _removeFromCartRemote(product, dispatch);
     }
 
-    dispatch({
-        type: REMOVE_FROM_CART,
-        product
-    });
+    dispatch(_removeFromCart(product));
 };
 
 const _removeFromCartRemote = async (product, dispatch) => {
     try {
-        const done = await Shop.removeToCart(product);
-        dispatch(_addToCart(product));
+        const done = await Shop.removeFromCart(product);
+        dispatch(_removeFromCart(product));
     } catch (error) {
         console.error(error);
+    }
+}
+
+const _removeFromCart = (product) =>{
+    return {
+        type: REMOVE_FROM_CART,
+        product
     }
 }
 

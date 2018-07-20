@@ -230,9 +230,9 @@ changes to a wide layout. */
     height: 43px;
     border-radius: 4px;
   }
-  .bn-green{
+  button.btn-responsive{
     --mdc-theme-primary: white;
-    background: var(--app-primary-color) !important;
+    background: #ff0057 !important;
     min-width: 125px;
     padding: 0 35px;
     height: 43px;
@@ -254,7 +254,7 @@ changes to a wide layout. */
     .hidden-on-small{
       display: none;
     }
-    .bn-green{
+    button.btn-responsive{
       width: 100%;
       height: 63px;
       border-radius: 0px !important;
