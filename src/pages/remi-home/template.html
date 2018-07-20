@@ -41,43 +41,47 @@
             </g>
         </svg>
     </div>
-    <section class="app-section content layout horizontal center pad">
-        <div class="pad">
+    <section class="app-section content layout horizontal center highlight-product pad">
+        <div class="media">
             <iron-image 
-                style="width:400px; height:400px; background-color: lightgray;"
                 sizing="cover"
                 preload 
-                src="https://www.fentybeauty.com/dw/image/v2/AAXW_PRD/on/demandware.static/-/Sites-itemmaster_FNT/default/dw92d0bfc2/hi-res/Summer%20II%20Concrete%20-%20Final/27785V1_alt1_final.jpg?sw=550%20550w"></iron-image>
+                src="/assets/images/banner.jpeg"></iron-image>
         </div>
+        <span class="flex"></span>
         <div class="pad">
             <h1 class="mdc-typography--headline3">
                 <biness-text 
                         can-edit$="[[editMode]]"
-                        value="Speaking of the web"></biness-text>
+                        value="Beauty in real Life"></biness-text>
                 </h1>
             <p class="mdc-typography--body2">
                 <biness-text 
                         can-edit$="[[editMode]]"
                         value="Create colorful dimension from cheeks to eyes to temples."></biness-text>
-            
             </p>
+            <button class="mdc-button mdc-button--outlined">
+                <biness-text can-edit$="[[editMode]]" value="Shop Now"></biness-text>
+            </button>
         </div>
     </section>
-    <section class="app-section feature" style="margin-bottom: 1em;">
+     <section class="app-section feature" style="padding-bottom: 4em;">
         <div class="content">
             <div class="center heading-wrapper pad">
                 <h1 class="mdc-typography--headline5">Featured</h1>
             </div>
             <div class="feature-grid">
                 <template is="dom-repeat" items="[[bestSellers]]" as="product">
-                    <a href$="/product/[[product.slug]]" class="feature-item" on-click="_view">
+                    <a href$="/product/[[product.slug]]" 
+                        class="feature-item" 
+                        on-click="_view">
                         <remi-product-item featured forAdmin$="[[_userIsAdmin(user)]]" data="[[product]]"></remi-product-item>
                     </a>
                 </template>
             </div>
         </div>
     </section>
-    <section class="app-section feature" style="margin-bottom: 4em;">
+    <section class="app-section feature" style="padding-bottom: 4em;">
         <div class="content">
             <div class="center heading-wrapper pad">
                 <h1 class="mdc-typography--headline5">Latest</h1>
@@ -91,6 +95,7 @@
             </div>
         </div>
     </section>
+
     <section class="app-section" style="height: 70vh; position: relative;">
         <iron-image 
             style="width:100%; height:100%; background-color: lightgray;"

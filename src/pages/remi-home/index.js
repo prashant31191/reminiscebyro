@@ -7,24 +7,22 @@
     Code distributed by Google as part of the polymer project is also
     subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 */
-import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
+import { html } from '@polymer/polymer/polymer-element.js';
+import { PageViewElement } from '../../components/page-view-element.js';
 import '@polymer/iron-image';
 import { MDCRipple } from '@material/ripple';
 import { connect } from 'pwa-helpers/connect-mixin.js';
 
-import { PageViewElement } from '../../components/page-view-element.js';
 import template from './template.html'
-import SharedStyles  from '../../components/shared-styles.html';
-import buttonStyles from "../../components/material/button.html";
 import "../../components/biness-text.js";
 
 import { store } from '../../store.js';
-import { fadeIn, fadeOut } from '../../components/animation.js';
 import "../../components/remi-product-item";
 import { getProductListing, setActiveProduct } from "../../actions/shop.js";
 import { InjectGlobalStyle} from '../../core/utils.js';
 
 import { shop } from "../../reducers/shop.js";
+import './style.html';
 
 store.addReducers({
     shop

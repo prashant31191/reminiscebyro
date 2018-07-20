@@ -55,61 +55,7 @@
   <meta property="og:image" content="/assets/images/manifest/icon-144x144.png" />
   
   <link rel="stylesheet" href="/assets/style/app.css">
-
-  <!-- Font -->
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,600" rel="stylesheet">
   
-  
-	<style>
-    * {
-      box-sizing: border-box;
-    }
-
-    :root{
-      --app-primary-color: #393433;
-      --app-secondary-color: #f51681;
-      --app-dark-text-color: black;
-      --app-light-text-color: #F6F6F6;
-      --app-section-even-color: #f7f7f7;
-      --app-section-odd-color: white;
-
-      --app-header-background-color: var(--app-primary-color);
-      --app-header-text-color: var(--app-light-text-color);
-      --app-header-selected-color: var(--app-secondary-color);
-
-      --app-drawer-background-color: var(--app-primary-color);
-      --app-drawer-text-color: var(--app-light-text-color);
-      --app-drawer-selected-color: #78909C;
-
-      --mdc-theme-primary: var(--app-primary-color);
-      --mdc-theme-secondary: var(--app-secondary-color);
-    }
-
-    body {
-      font-family: 'Montserrat', 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
-      line-height: 1.5;
-      text-rendering: geometricPrecision;
-      -webkit-font-smoothing: antialiased;
-      margin: 0;
-      height: 100%;
-      background-color: var(--app-light-text-color);
-    }
-
-    .fake-header {
-      background-color: var(--app-primary-color);
-      height: 114px;
-      width: 100%;
-    }
-    .fake-main{
-      min-height: 100vh;
-    }
-    @media only screen and (max-device-width: 480px) and (min-device-width: 320px){
-    .fake-header{
-      height: 64px;
-    }
-  }
-	</style>
-
   <script>
     (function() {
       if (!('serviceWorker' in navigator)) {
@@ -161,16 +107,13 @@
 </head>
 
 <body>
-	<remi-app>
-    <!-- <div class="Loader">
-      <header class="fake-header"></header>
-      <main class="fake-main"></main>
-    </div> -->
-  </remi-app>
+	<remi-app></remi-app>
 
   <script src="./vendor/webcomponentsjs/custom-elements-es5-adapter.js" nomodule></script>
   <script src="./vendor/webcomponentsjs/webcomponents-loader.js"></script>
   <script src="./vendor/web-animations-js/web-animations.min.js"></script>
+
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,600" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
 </body>
 

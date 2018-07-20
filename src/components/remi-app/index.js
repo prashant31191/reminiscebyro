@@ -20,11 +20,6 @@ import { navigate, listenUserChange } from '../../actions/app.js';
 import template from './template.html';
 import { lightComponent } from '../lightComponent.js';
 
-import { InjectGlobalStyle } from '../../core/utils.js';
-//Imports lazy global styles
-
-InjectGlobalStyle({ name: 'shared-styles' }, () => import('../shared-styles.html'));
-
 window.customElements.define('remi-app', class extends connect(store)(lightComponent) {
 
   static get template() {
