@@ -51,3 +51,23 @@ export class PageViewElement extends lightComponent {
   }
 
 }
+
+export const ShopBehavior = (element) => class extends element {
+
+  _formatProduct(data) {
+    return {
+      name: data.title,
+      key: data.id,
+      image: data.images[0] && data.images[0].src,
+      price: data.variants[0] && data.variants[0].price,
+      description: data.description,
+      created_at: data.createdAt,
+      published_at: data.publishedAt,
+      variants: data.variants,
+      tags: data.tags,
+      link: data.onlineStoreUrl,
+      slug: data.handle
+    }
+  }
+
+}

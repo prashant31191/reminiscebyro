@@ -13,28 +13,15 @@ export const SET_CART = 'SET_CART';
 export const ADD_TO_CART = 'ADD_TO_CART';
 export const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
 
-export const addToCart = (product, useRemote) => (dispatch) => {
+export const addToCart = (product) => (dispatch) => {
 
     //check inventory before we add it?
-    if (product.stock < product.quantity) {
-        throw new Error('Not enough inventory for this product', this);
-    }
-
-    if (useRemote) {
-        return _addToCartRemote(product, dispatch);
-    }
+    // if (product.stock < product.quantity) {
+    //     throw new Error('Not enough inventory for this product', this);
+    // }
 
     dispatch(_addToCart(product));
 };
-
-const _addToCartRemote = async (product, dispatch) => {
-    try {
-        const done = await Shop.addToCart(product);
-        dispatch(_addToCart(product));
-    } catch (error) {
-        console.error(error);
-    }
-}
 
 const _addToCart = (product) => {
     
@@ -44,23 +31,10 @@ const _addToCart = (product) => {
     }
 }
 
-export const removeFromCart = (product, useRemote) => (dispatch) => {
-
-    if (useRemote) {
-        return _removeFromCartRemote(product, dispatch);
-    }
+export const removeFromCart = (product) => (dispatch) => {
 
     dispatch(_removeFromCart(product));
 };
-
-const _removeFromCartRemote = async (product, dispatch) => {
-    try {
-        const done = await Shop.removeFromCart(product);
-        dispatch(_removeFromCart(product));
-    } catch (error) {
-        console.error(error);
-    }
-}
 
 const _removeFromCart = (product) =>{
     return {
@@ -70,6 +44,7 @@ const _removeFromCart = (product) =>{
 }
 
 export const setCart = (cart) => async (dispatch) => {
+
     dispatch({
         type: SET_CART,
         cart

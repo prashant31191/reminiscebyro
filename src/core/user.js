@@ -1,11 +1,8 @@
-import "firebase/firestore";
-import { firebase } from '../core/app.js';
+
 
 export const User = new class {
 
     constructor() {
-        const settings = { timestampsInSnapshots: true };
-        firebase().firestore().settings(settings);
     }
 
     /**
@@ -16,7 +13,7 @@ export const User = new class {
     */
     async onChanged(auth, whenDone){
 
-        whenDone(await this._getRealUser(auth));
+        //whenDone(await this._getRealUser(auth));
     }
 
     _getRealUser(auth) {

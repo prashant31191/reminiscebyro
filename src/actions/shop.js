@@ -16,21 +16,34 @@ export const SET_FETCHING = 'SET_FETCHING';
 export const SET_UPDATING = 'SET_UPDATING';
 export const SET_ACTIVE_PRODUCT = 'SET_ACTIVE_PRODUCT';
 export const SET_EDITING_PRODUCT = 'SET_EDITING_PRODUCT';
-
+export const GET_LATEST_PRODUCTS = 'GET_LATEST_PRODUCTS';
 
 export const getProductListing = () => async (dispatch) => {
   // Here you would normally get the data from the server. We're simulating
   // that by dispatching an async action (that you would dispatch when you
   // succesfully got the data back)
-  dispatch(setFetching(true))
-  const data = await Shop.getAllProduct();
-  dispatch(setFetching(false))
+  const data = await Shop.products;
 
   // You could reformat the data in the right format as well:
   const products = data;
 
   dispatch({
     type: GET_PRODUCTS,
+    products: products
+  });
+};
+
+export const getLatestProducts = () => async (dispatch) => {
+  // Here you would normally get the data from the server. We're simulating
+  // that by dispatching an async action (that you would dispatch when you
+  // succesfully got the data back)
+  const data = await Shop.products;
+
+  // You could reformat the data in the right format as well:
+  const products = data.slice(0, 6);
+
+  dispatch({
+    type: GET_LATEST_PRODUCTS,
     products: products
   });
 };

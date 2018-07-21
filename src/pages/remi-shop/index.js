@@ -14,8 +14,8 @@ import { connect } from 'pwa-helpers/connect-mixin.js';
 
 import { store } from '../../store.js';
 import "../../components/remi-product-item";
-import buttonStyles from "../../components/material/button.html";
-import { PageViewElement } from '../../components/page-view-element.js';
+
+import { PageViewElement, ShopBehavior } from '../../components/page-view-element.js';
 import { slideUp, slideDown } from '../../components/animation.js';
 import { getProductListing, setActiveProduct, setEditingProduct } from "../../actions/shop.js";
 import { InjectGlobalStyle } from '../../core/utils.js';
@@ -38,7 +38,7 @@ store.addReducers({
  * @demo 
  * 
  */
-class RemiShop extends connect(store)(PageViewElement) {
+class RemiShop extends connect(store)(ShopBehavior(PageViewElement)) {
     
     static get template() {
         return html([
@@ -85,6 +85,7 @@ class RemiShop extends connect(store)(PageViewElement) {
 
         store.dispatch(setActiveProduct(data));
     }
+
     /**
      * Instance of the element is created/upgraded. Use: initializing state,
      * set up event listeners, create shadow dom.
@@ -112,10 +113,7 @@ class RemiShop extends connect(store)(PageViewElement) {
      */
     async ready() {
         super.ready();
-
-        
         store.dispatch(getProductListing())
-        
     }
 }
 

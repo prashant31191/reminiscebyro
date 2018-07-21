@@ -20,8 +20,8 @@
         </template>
         <div class="feature-grid">
             <template is="dom-repeat" items="[[products]]" as="product">
-                <a href$="/product/[[product.slug]]" class="feature-item" on-click="_view" data="[[product]]">
-                    <remi-product-item featured forAdmin$="[[_userIsAdmin(user)]]" data="[[product]]"></remi-product-item>
+                <a href$="/product/[[product.handle]]" class="feature-item" on-click="_view" data="[[product]]">
+                    <remi-product-item featured forAdmin$="[[_userIsAdmin(user)]]" data="[[_formatProduct(product)]]"></remi-product-item>
                 </a>
             </template>
         </div>

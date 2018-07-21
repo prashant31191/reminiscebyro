@@ -101,7 +101,7 @@ class RemiProductItem extends LitElement {
                         ?
                         html`
                             <div class="flexed">
-                                <span class="price-tag">$60.00</span>
+                                <span class="price-tag">$${props.data.price}</span>
                                 <span style="flex:1"></span>
                                 <button class="mdc-button mdc-button--dense mdc-button--raised"> 
                                     Add to Cart</button>

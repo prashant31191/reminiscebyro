@@ -11,6 +11,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 import {
   SET_ACTIVE_PRODUCT,
   GET_PRODUCTS,
+  GET_LATEST_PRODUCTS,
   SET_EDITING_PRODUCT,
   REMOVE_FROM_CART,
   CHECKOUT_SUCCESS,
@@ -38,6 +39,11 @@ export const shop = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         products: action.products
+      };
+    case GET_LATEST_PRODUCTS:
+      return {
+        ...state,
+        latest: action.products
       };
     case SET_ACTIVE_PRODUCT:
       return {

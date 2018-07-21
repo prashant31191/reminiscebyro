@@ -8,17 +8,17 @@
     subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 */
 import { html } from '@polymer/polymer/polymer-element.js';
-import { PageViewElement } from '../../components/page-view-element.js';
-import '@polymer/iron-image';
 import { MDCRipple } from '@material/ripple';
 import { connect } from 'pwa-helpers/connect-mixin.js';
 
-import template from './template.html'
+import '@polymer/iron-image';
 import "../../components/biness-text.js";
-
-import { store } from '../../store.js';
 import "../../components/remi-product-item";
-import { getProductListing, setActiveProduct } from "../../actions/shop.js";
+
+import template from './template.html'
+import { store } from '../../store.js';
+import { PageViewElement, ShopBehavior } from '../../components/page-view-element.js';
+import { getLatestProducts, setActiveProduct } from "../../actions/shop.js";
 import { InjectGlobalStyle} from '../../core/utils.js';
 
 import { shop } from "../../reducers/shop.js";
@@ -40,7 +40,7 @@ InjectGlobalStyle({name: 'material-button'}, () => import('../../components/mate
  * @demo 
  * 
  */
-class RemiHome extends connect(store)(PageViewElement) {
+class RemiHome extends connect(store)(ShopBehavior(PageViewElement)) {
     
 
     static get template() {
@@ -90,7 +90,7 @@ class RemiHome extends connect(store)(PageViewElement) {
 
     _stateChanged(state) {
         this.user = state.app.user;
-        this.bestSellers = state.shop.products;
+        this.latest = state.shop.latest;
         this.editMode = false;
     }
 
@@ -110,7 +110,7 @@ class RemiHome extends connect(store)(PageViewElement) {
      */
     ready() {
         super.ready();
-        store.dispatch(getProductListing());
+        store.dispatch(getLatestProducts());
         const buttonRipple = new MDCRipple(this.querySelector('.mdc-button'));
     }
 

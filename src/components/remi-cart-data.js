@@ -13,7 +13,7 @@ store.addReducers({
 customElements.define('remi-cart-data', class RemiCartData extends connect(store)(PolymerElement) {
     static get template() {
         return html`
-            <app-localstorage-document key="remi-cart-data" id="storage"></app-localstorage-document>
+            <app-localstorage-document key="remi-cart-data" id="storage" data="{{_cart}}"></app-localstorage-document>
         `;
     }
 
@@ -22,36 +22,31 @@ customElements.define('remi-cart-data', class RemiCartData extends connect(store
     static get properties() {
         return {
 
-            cart: {
-                type: Array,
-                value: {},
+            _cart: {
+                type: Object,
                 observer: '_cartChanged'
+            },
+            cart: {
+                type: Object,
+                observer: 'cartChanged'
             }
 
         }
     }
 
-    static get observers(){
-        return [
-            '_updateCart(user)'
-        ]
-    }
-
-    _updateCart(user){
-        let cart = user && user.cart || this.$.storage.data;
-        if(cart != this._cart){
+    _cartChanged(cart){
+        if(cart != this.cart){
             store.dispatch(setCart(cart));
         }
         
     }
 
-    _cartChanged(cart){
-        this.$.storage.set('data', cart);
+    cartChanged(){
+        this.$.storage.set('data', this.cart);
     }
 
     _stateChanged(state){
         this.cart = state.shop.cart;
-        this.user = state.app.user;
     }
 
     ready(){

@@ -1,5 +1,4 @@
-import auth from "firebase/auth";
-import { firebase } from '../core/app.js';
+
 
 export const Auth = new class {
     constructor() {
@@ -16,7 +15,7 @@ export const Auth = new class {
     }
 
     _onAuthChange(callback){
-        return firebase().auth().onAuthStateChanged(callback);
+        //return firebase().auth().onAuthStateChanged(callback);
     }
 
     _loginWithEmail(email, password){

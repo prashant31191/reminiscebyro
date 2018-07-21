@@ -118,7 +118,7 @@ class RemiProduct extends connect(store)(PageViewElement) {
             selectedColor: 'pink'
         }
 
-        store.dispatch(addToCart(data, this.user != null ))
+        store.dispatch(addToCart(data))
         this.onAddedToCart();
     }
 
@@ -167,7 +167,6 @@ class RemiProduct extends connect(store)(PageViewElement) {
         this.data = state.shop.activeProduct;
         this._page = state.app.route.page;
         this._slug = state.app.route.slug;
-        this.user = state.app.user;
     }
 }
 
