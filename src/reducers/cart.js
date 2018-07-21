@@ -85,7 +85,7 @@ const _indexOf = (product, cart) => {
     if (cart) {
         for (let i = 0; i < cart.length; ++i) {
             let entry = cart[i];
-            if (entry.key === product.key && entry.selectedColor === product.selectedColor) {
+            if (entry.id === product.id) {
                 return i;
             }
         }

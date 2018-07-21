@@ -8,8 +8,24 @@ export const Shop = RemiApp.Shop = RemiApp.Shop || new class {
         this.collections = shopify().collection.fetchAllWithProducts();
     }
 
-    createCheckout(){
-        return shopify().checkout.create();
+    checkout(cart){
+        return new Promise(async (resolve, reject) => {
+            try {
+                const checkout = await shopify().checkout.create();
+                await shopify().checkout.addLineItems(checkout.id, cart.map(
+                    item => {
+                        return {
+                            variantId: item.id, 
+                            quantity: item.quantity
+                        }
+                    })
+                )
+                resolve(await shopify().checkout.fetch(checkout.id));
+            } catch (error) {
+                reject(error);
+            }
+        })
+        
     }
 
     incrementProductView(product){

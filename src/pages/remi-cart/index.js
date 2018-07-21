@@ -17,6 +17,7 @@ import template from './template.html';
 import '../../components/remi-checkout.js';
 import '../../components/remi-cart-item.js';
 import { removeFromCart } from '../../actions/cart.js';
+import {checkout} from '../../actions/shop.js';
 import { InjectGlobalStyle } from '../../core/utils.js';
 
 //Imports lazy global styles
@@ -62,8 +63,9 @@ class RemiCart extends connect(store)(PageViewElement) {
     }
 
     _checkout(){
-        window.scrollTo(0, 0);
-        this.$.checkoutComponent.open();
+        store.dispatch(checkout(this.items))
+        //tell store to checkout
+        //window.scrollTo(0, 0);
     }
     /**
      * Use for one-time configuration of your component after local DOM is initialized. 
@@ -78,6 +80,7 @@ class RemiCart extends connect(store)(PageViewElement) {
         this.numItems = state.shop.cart.numItems;
         this.items = state.shop.cart.items;
         this.user = state.app.user;
+
     }
 }
 

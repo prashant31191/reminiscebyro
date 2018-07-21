@@ -115,7 +115,7 @@ class RemiProduct extends connect(store)(PageViewElement) {
         const data = {
             ...this.data,
             quantity: this.quantity,
-            selectedColor: 'pink'
+            id: this.data.variants[0].id,
         }
 
         store.dispatch(addToCart(data))

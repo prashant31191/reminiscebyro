@@ -87,20 +87,19 @@ export const getProductBySlug = (slug, callback) => async (dispatch) => {
   callback(product);
 }
 
-export const checkout = (productId) => (dispatch) => {
-  // Here you could do things like credit card validation, etc.
-  // If that fails, dispatch CHECKOUT_FAILURE. We're simulating that
-  // by flipping a coin :)
-  const flip = Math.floor(Math.random() * 2);
-  if (flip === 0) {
-    dispatch({
-      type: CHECKOUT_FAILURE
-    });
-  } else {
-    dispatch({
-      type: CHECKOUT_SUCCESS
-    });
-  }
+export const checkout = (cart, whenDone) => async (dispatch) => {
+
+  whenDone(await Shop.checkout(cart));
+  
+  // if (flip === 0) {
+  //   dispatch({
+  //     type: CHECKOUT_FAILURE
+  //   });
+  // } else {
+  //   dispatch({
+  //     type: CHECKOUT_SUCCESS
+  //   });
+  // }
 };
 
 
