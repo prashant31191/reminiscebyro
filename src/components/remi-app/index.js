@@ -68,7 +68,6 @@ static get properties() {
     super.ready();
 
     this.$pages = this.querySelector('#pages');
-
     await import('../lazy-components.js');
 
   }
@@ -84,6 +83,7 @@ static get properties() {
     // installOfflineWatcher((offline) => store.dispatch(updateOffline(offline)));
     // installMediaQueryWatcher(`(min-width: 460px)`,
     //   (matches) => store.dispatch(updateLayout(matches)));
+    this.addEventListener('added-to-cart', (e) => this._onAddedToCart(e))
   }
 
 
@@ -144,6 +144,9 @@ static get properties() {
   //   }
   // }
 
+  _onAddedToCart(e){
+    this.$.cartModal.open();
+  }
   _stateChanged(state) {
     this.page = state.app.route.page;
     this._offline = state.app.offline;

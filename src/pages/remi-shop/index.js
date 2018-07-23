@@ -57,7 +57,9 @@ class RemiShop extends connect(store)(ShopBehavior(PageViewElement)) {
     */
     static get properties() {
         return {
-            
+            products: {
+                type: Array
+            }
         }
     }
 

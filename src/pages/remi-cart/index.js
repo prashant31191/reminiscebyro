@@ -17,6 +17,7 @@ import template from './template.html';
 import '../../components/remi-checkout.js';
 import '../../components/remi-cart-item.js';
 import { removeFromCart, checkout, setCheckout } from '../../actions/cart.js';
+import { updateLoading} from '../../actions/app.js';
 import { InjectGlobalStyle } from '../../core/utils.js';
 
 //Imports lazy global styles
@@ -41,6 +42,16 @@ class RemiCart extends connect(store)(PageViewElement) {
         ]);
     }
 
+    static get properties(){
+        return {
+            loading: {
+                type: Boolean,
+                value: false,
+                reflectToAttribute: true
+            }
+        }
+    }
+
     _delete(e){
         let product = e.target.data;
         if (product){
@@ -62,6 +73,10 @@ class RemiCart extends connect(store)(PageViewElement) {
     }
 
     _checkout(){
+
+        this.loading = true;
+        store.dispatch(updateLoading(true));
+
         if(!this.checkout){
             store.dispatch(checkout(this.items, (data) => this._onCheckoutCreated(data)))
         }else{

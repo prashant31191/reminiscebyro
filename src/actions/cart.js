@@ -8,6 +8,7 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 */
 import { Shop } from "../core/shop.js";
+import {RemiApp} from '../core/app.js';
 
 export const SET_CART = 'SET_CART';
 export const ADD_TO_CART = 'ADD_TO_CART';
@@ -17,6 +18,8 @@ export const SET_CHECKOUT = 'SET_CHECKOUT';
 export const addToCart = (product) => async (dispatch, getState) => {
 
     await Shop.addToCart(product, getState().shop.checkout)
+
+    RemiApp.element.dispatchEvent(new CustomEvent('added-to-cart', { detail: product }))
     dispatch(_addToCart(product));
 };
 

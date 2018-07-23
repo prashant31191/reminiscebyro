@@ -26,7 +26,7 @@ const INITIAL_PRODUCT = {
 }
 
 const INITIAL_STATE = {
-  products: [], 
+  products: null, 
   activeProduct: null,
   editingProduct: INITIAL_PRODUCT, 
   cart: INITIAL_CART,

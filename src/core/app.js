@@ -14,6 +14,7 @@ window.__REMI_APP__ = window.__REMI_APP__ || new class {
             storefrontAccessToken: this.config.SHOPIFY.STORE_FRONT_TOKEN
         });
         this.element = document.querySelector('remi-app');
+        this.dispatch = this.element.dispatchEvent
     }
 
 }();
