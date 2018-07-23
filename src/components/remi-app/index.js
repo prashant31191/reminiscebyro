@@ -14,6 +14,7 @@ import { connect } from 'pwa-helpers/connect-mixin.js';
 import { installRouter } from 'pwa-helpers/router.js';
 import { updateMetadata } from 'pwa-helpers/metadata.js';
 
+import '../remi-cart-data.js';
 import { store } from '../../store.js';
 import { navigate, listenUserChange } from '../../actions/app.js';
 import template from './template.html';
@@ -67,7 +68,6 @@ static get properties() {
     super.ready();
 
     this.$pages = this.querySelector('#pages');
-    store.dispatch(listenUserChange());
 
     await import('../lazy-components.js');
 

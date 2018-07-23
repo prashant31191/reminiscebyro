@@ -16,8 +16,7 @@ import { afterNextRender } from "@polymer/polymer/lib/utils/render-status.js";
 import { store } from '../../store.js';
 import template from './template.html'
 import { PageViewElement } from '../../components/page-view-element.js';
-import SharedStyles  from '../../components/shared-styles.html';
-import buttonStyles from "../../components/material/button.html";
+
 import '../../components/remi-color-swatch-input.js';
 import '../../components/quantity-input.js';
 
@@ -119,12 +118,6 @@ class RemiProduct extends connect(store)(PageViewElement) {
         }
 
         store.dispatch(addToCart(data))
-        this.onAddedToCart();
-    }
-
-    onAddedToCart(){
-        window.scrollTo(0, 0);
-        this.dialog.open();
     }
 
     _edit(){
@@ -156,7 +149,6 @@ class RemiProduct extends connect(store)(PageViewElement) {
     async ready() {
         super.ready();
         const buttonRipple = new MDCRipple(this.querySelector('.mdc-button'));
-        this.dialog = document.getElementById('cart-modal');
 
         afterNextRender(this, () => {
         })

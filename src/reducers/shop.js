@@ -17,7 +17,7 @@ import {
   CHECKOUT_FAILURE
 } from '../actions/shop.js';
 
-import { ADD_TO_CART, SET_CART, REMOVE_FROM_CART } from "../actions/cart.js";
+import { ADD_TO_CART, SET_CART, SET_CHECKOUT, REMOVE_FROM_CART } from "../actions/cart.js";
 
 import { cart, INITIAL_CART} from './cart.js';
 
@@ -29,7 +29,8 @@ const INITIAL_STATE = {
   products: [], 
   activeProduct: null,
   editingProduct: INITIAL_PRODUCT, 
-  cart: INITIAL_CART
+  cart: INITIAL_CART,
+  checkout: null
 }
 
 export const shop = (state = INITIAL_STATE, action) => {
@@ -69,6 +70,11 @@ export const shop = (state = INITIAL_STATE, action) => {
         ...state,
         error: 'Checkout failed. Please try again'
       };
+    case SET_CHECKOUT:
+      return {
+        ...state,
+        checkout: action.checkout
+      }
     default:
       return state;
   }

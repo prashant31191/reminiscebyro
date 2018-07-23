@@ -12,14 +12,11 @@ import { Shop } from "../core/shop.js";
 export const SET_CART = 'SET_CART';
 export const ADD_TO_CART = 'ADD_TO_CART';
 export const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
+export const SET_CHECKOUT = 'SET_CHECKOUT';
 
-export const addToCart = (product) => (dispatch) => {
+export const addToCart = (product) => async (dispatch, getState) => {
 
-    //check inventory before we add it?
-    // if (product.stock < product.quantity) {
-    //     throw new Error('Not enough inventory for this product', this);
-    // }
-
+    await Shop.addToCart(product, getState().shop.checkout)
     dispatch(_addToCart(product));
 };
 
@@ -31,8 +28,9 @@ const _addToCart = (product) => {
     }
 }
 
-export const removeFromCart = (product) => (dispatch) => {
+export const removeFromCart = (product) => async (dispatch, getState) => {
 
+    setCheckout(null)(dispatch);
     dispatch(_removeFromCart(product));
 };
 
@@ -50,3 +48,37 @@ export const setCart = (cart) => async (dispatch) => {
         cart
     })
 };
+
+export const setCheckout = (checkout) => async (dispatch) => {
+
+    dispatch({
+        type: SET_CHECKOUT,
+        checkout
+    })
+};
+
+export const checkout = (cart, whenDone) => async (dispatch, getState) => {
+
+    let checkout =  getState().shop.checkout;
+    const updatedCheckout = await Shop.checkout(cart, checkout);
+    whenDone(updatedCheckout);
+
+
+    // if (flip === 0) {
+    //   dispatch({
+    //     type: CHECKOUT_FAILURE
+    //   });
+    // } else {
+    //   dispatch({
+    //     type: CHECKOUT_SUCCESS
+    //   });
+    // }
+};
+
+const addToCartFailed = () => {
+
+}
+
+const addToCartSuccess = () => {
+
+}

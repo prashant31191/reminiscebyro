@@ -84,24 +84,8 @@ export const setEditingProduct = (editingProduct) => {
 export const getProductBySlug = (slug, callback) => async (dispatch) => {
 
   const product = await Shop.getProductBySlug(slug);
-  callback(product);
+  callback(Shop.transform(product));
 }
-
-export const checkout = (cart, whenDone) => async (dispatch) => {
-
-  whenDone(await Shop.checkout(cart));
-  
-  // if (flip === 0) {
-  //   dispatch({
-  //     type: CHECKOUT_FAILURE
-  //   });
-  // } else {
-  //   dispatch({
-  //     type: CHECKOUT_SUCCESS
-  //   });
-  // }
-};
-
 
 export const setUpdating = (value) => {
   return {
