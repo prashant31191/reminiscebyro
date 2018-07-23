@@ -70,6 +70,10 @@ class RemiShop extends connect(store)(ShopBehavior(PageViewElement)) {
 
     }
 
+    _loaders(latest) {
+        return (!latest) ? [{}, {}, {}, {},{},{}] : [];
+    }
+
     show() {
         return new Promise(async (resolve, reject) => {
             this.active = true;

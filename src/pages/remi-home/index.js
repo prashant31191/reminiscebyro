@@ -55,8 +55,9 @@ class RemiHome extends connect(store)(ShopBehavior(PageViewElement)) {
     */
     static get properties() {
         return {
-            bestSellers:{
-                type: Array
+            latest:{
+                type: Array,
+                value: []
             }
         }
     }
@@ -77,6 +78,10 @@ class RemiHome extends connect(store)(ShopBehavior(PageViewElement)) {
             resolve();
         })
 
+    }
+
+    _loaders(latest){
+        return (!latest) ? [ {}, {}, {} ] : [];
     }
 
     /**
