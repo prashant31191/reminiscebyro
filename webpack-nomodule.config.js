@@ -1,6 +1,11 @@
 'use strict';
 
-const BROWSERS = ['> 1%', 'last 2 versions', 'Firefox ESR', 'not ie <= 11'];
+const BROWSERS = [
+  // Best practice: https://github.com/babel/babel/issues/7789
+  '>=1%',
+  'not ie 11',
+  'not op_mini all'
+];
 
 module.exports = () => {
   return {
@@ -17,10 +22,12 @@ module.exports = () => {
                 'env',
                 {
                   targets: {browsers: BROWSERS},
-                  debug: true
-                }
+                  debug: true,
+                },
               ]],
-              plugins: ["syntax-dynamic-import", ['transform-object-rest-spread', {useBuiltIns: true}]]
+              plugins: [
+                "syntax-dynamic-import",
+              ['transform-object-rest-spread', {useBuiltIns: true}]]
             }
           }
         }

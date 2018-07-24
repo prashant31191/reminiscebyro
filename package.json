@@ -102,6 +102,7 @@
     "@webcomponents/webcomponentsjs": "^2.0.0",
     "babel-plugin-add-shopify-header": "1.0.6",
     "babel-plugin-graphql-js-client-transform": "1.1.1",
+    "babel-plugin-transform-runtime": "6.23.0",
     "babel-preset-shopify": "16.5.0",
     "braintree-web": "3.34.1",
     "braintree-web-drop-in": "1.11.0",
