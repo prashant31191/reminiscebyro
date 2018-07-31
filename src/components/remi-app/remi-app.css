@@ -162,13 +162,16 @@
         color: white;
         border-radius: 8px;
     }
-
-    /* footer {
-  padding: 24px;
-  background: var(--app-primary-color);
-  color: var(--app-drawer-text-color);
-  text-align: center;
-} */
+    .app-footer{
+      
+      padding:16px;
+      background-color: var(--app-primary-color);
+      color:white;
+    }
+    .app-footer>div{
+      height: 100%;
+      min-height: 400px;
+    }
 
     paper-progress {
         width: 100%;
@@ -258,6 +261,9 @@ changes to a wide layout. */
       width: 100%;
       height: 63px;
       border-radius: 0px !important;
+    }
+    .app-footer>div{
+      display: block !important;
     }
   }
   
@@ -463,6 +469,11 @@ remi-home, remi-product{
     visibility: hidden;
 }
 
+iron-image{
+  width: 100%;
+  height: 100%;
+}
+
 @-webkit-keyframes placeHolderShimmer {
     0% {
         background-position: -468px 0;
@@ -522,3 +533,21 @@ remi-home, remi-product{
       height: 14px;
       width: 90px;
   }
+
+ul{
+  list-style: none;
+}
+.contact-info>*{
+    margin-bottom: 8px;
+    font-size: .9rem;
+    color: #ffffffb8;
+}
+
+.contact-info>* iron-icon{
+  margin-right: 8px;
+}
+
+footer p{
+    font-size: .9rem;
+    color: #ffffffc7;
+}
