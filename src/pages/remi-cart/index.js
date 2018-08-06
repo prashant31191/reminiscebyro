@@ -11,13 +11,19 @@ import { html } from '@polymer/polymer/polymer-element.js';
 import { PageViewElement } from "../../components/page-view-element";
 import { connect } from 'pwa-helpers/connect-mixin.js';
 import { MDCRipple } from '@material/ripple';
-import buttonStyles from "../../components/material/button.html";
 
 import { store } from '../../store.js';
 import template from './template.html';
-import SharedStyles from '../../components/shared-styles.html';
+import '../../components/remi-checkout.js';
 import '../../components/remi-cart-item.js';
-import { removeFromCart } from '../../actions/shop.js';
+import { removeFromCart, checkout, setCheckout } from '../../actions/cart.js';
+import { updateLoading} from '../../actions/app.js';
+import { InjectGlobalStyle } from '../../core/utils.js';
+
+//Imports lazy global styles
+InjectGlobalStyle({ name: 'remi-cart' }, () => import('./style.html'));
+InjectGlobalStyle({ name: 'material-button' }, () => import('../../components/material/button.html'));
+InjectGlobalStyle({ name: 'material-textfield' }, () => import('../../components/material/textfield.html'));
 
 /**
  * `bn-project` Description
@@ -28,30 +34,28 @@ import { removeFromCart } from '../../actions/shop.js';
  * 
  */
 class RemiCart extends connect(store)(PageViewElement) {
-    static get properties() {
-        return {
 
-        }
-    }
 
     static get template() {
         return html([
-            template +
-            buttonStyles
+            template
         ]);
     }
 
-    /**
-            * Object describing property-related metadata used by Polymer features
-            */
-    static get properties() {
-        return {}
+    static get properties(){
+        return {
+            loading: {
+                type: Boolean,
+                value: false,
+                reflectToAttribute: true
+            }
+        }
     }
 
     _delete(e){
         let product = e.target.data;
         if (product){
-            store.dispatch(removeFromCart(product))
+            store.dispatch(removeFromCart(product, this.user != null))
         }
         //handle it
     }
@@ -68,6 +72,23 @@ class RemiCart extends connect(store)(PageViewElement) {
         super.connectedCallback();
     }
 
+    _checkout(){
+
+        this.loading = true;
+        store.dispatch(updateLoading(true));
+
+        if(!this.checkout){
+            store.dispatch(checkout(this.items, (data) => this._onCheckoutCreated(data)))
+        }else{
+            this._onCheckoutCreated(this.checkout)
+        }
+    }
+
+    _onCheckoutCreated(checkout){
+        store.dispatch(setCheckout(checkout));
+        window.location.replace(checkout.webUrl);
+    }
+
     /**
      * Use for one-time configuration of your component after local DOM is initialized. 
      */
@@ -80,6 +101,9 @@ class RemiCart extends connect(store)(PageViewElement) {
         this.total = state.shop.cart.total;
         this.numItems = state.shop.cart.numItems;
         this.items = state.shop.cart.items;
+        this.user = state.app.user;
+        this.checkout = state.shop.checkout;
+
     }
 }
 

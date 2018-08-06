@@ -1,7 +1,6 @@
 
 
-import { PolymerElement, html } from '@polymer/polymer/polymer-element';
-import { dom} from '@polymer/polymer/lib/legacy/polymer.dom.js';
+import { html } from '@polymer/polymer/polymer-element';
 import { RemiApp } from '../../core/app.js';
 
 import '@polymer/app-layout/app-drawer/app-drawer.js';
@@ -9,27 +8,25 @@ import '@polymer/app-layout/app-header/app-header.js';
 import '@polymer/app-layout/app-scroll-effects/effects/waterfall.js';
 import '@polymer/app-layout/app-toolbar/app-toolbar.js';
 import { setPassiveTouchGestures } from '@polymer/polymer/lib/utils/settings.js';
-import '@polymer/iron-flex-layout/iron-flex-layout-classes.js';
 import '@polymer/paper-progress/paper-progress.js';
 
 import { connect } from 'pwa-helpers/connect-mixin.js';
 import { installRouter } from 'pwa-helpers/router.js';
 import { updateMetadata } from 'pwa-helpers/metadata.js';
 
+import '../remi-cart-data.js';
 import { store } from '../../store.js';
 import { navigate, listenUserChange } from '../../actions/app.js';
 import template from './template.html';
-import sharedStyles from '../shared-styles.html';
+import { lightComponent } from '../lightComponent.js';
 
-
-window.customElements.define('remi-app', class extends connect(store)(PolymerElement) {
+window.customElements.define('remi-app', class extends connect(store)(lightComponent) {
 
   static get template() {
 
     return html`
         ${html([
           template
-          +sharedStyles
         ])}
       `;
   }
@@ -69,16 +66,15 @@ static get properties() {
 
   async ready() {
     super.ready();
-    this.$pages = this.querySelector('#pages');
-    store.dispatch(listenUserChange((user) => {
-    }));
 
+    this.$pages = this.querySelector('#pages');
     await import('../lazy-components.js');
 
   }
 
+
   _cartChanged(cart){
-    console.log(cart);
+    //console.log(cart);
   }
 
   connectedCallback() {
@@ -87,11 +83,9 @@ static get properties() {
     // installOfflineWatcher((offline) => store.dispatch(updateOffline(offline)));
     // installMediaQueryWatcher(`(min-width: 460px)`,
     //   (matches) => store.dispatch(updateLayout(matches)));
+    this.addEventListener('added-to-cart', (e) => this._onAddedToCart(e))
   }
 
-  _attachDom(node) {
-    dom(this).appendChild(node);
-  }
 
   _computeHideNav(){
     return ['product', 'cart'].indexOf(this.page) != -1;
@@ -150,6 +144,9 @@ static get properties() {
   //   }
   // }
 
+  _onAddedToCart(e){
+    this.$.cartModal.open();
+  }
   _stateChanged(state) {
     this.page = state.app.route.page;
     this._offline = state.app.offline;
@@ -158,4 +155,9 @@ static get properties() {
     this.loading = state.app.loading;
     this.cartItemsCount = state.shop && state.shop.cart.numItems;
   }
+
+  _userIsAdmin(user) {
+      return user && user.roles && user.roles.admin
+  }
+
 });

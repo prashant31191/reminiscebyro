@@ -44,12 +44,12 @@ class RemiProductItem extends LitElement {
                 position: absolute;
                 bottom: 0px;
                 width:100%;
-                height: 87px;
+                height: 105px;
                 background: white;
             }
             .title{
-                font-size: 18px;
-                font-weight: 500;
+                font-size: 1rem;
+                font-weight: 600;
                 color: #000000db;
                 padding-bottom: 8px;
                 margin: 0;
@@ -66,9 +66,8 @@ class RemiProductItem extends LitElement {
             }
             button{
                 color: white;
-                background: #d80b6d;
-                border-radius: 25px;
-                --mdc-theme-primary: var(--app-primary-color);
+                border-radius: 25px !important;
+                --mdc-theme-primary: var(--app-secondary-color);
             }
             .stats-item{
                 margin-right: 12px;
@@ -102,7 +101,7 @@ class RemiProductItem extends LitElement {
                         ?
                         html`
                             <div class="flexed">
-                                <span class="price-tag">$60.00</span>
+                                <span class="price-tag">$${props.data.price}</span>
                                 <span style="flex:1"></span>
                                 <button class="mdc-button mdc-button--dense mdc-button--raised"> 
                                     Add to Cart</button>

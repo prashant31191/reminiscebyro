@@ -1,35 +1,4 @@
-<style include="iron-flex iron-flex-factors iron-flex-alignment iron-positioning">
-    remi-cart remi-cart-item{
-        background-color: white;
-        margin: 16px 0;
-        box-shadow: 5px 5px 25px 0 rgba(46,61,73,.2);
-    }
-    remi-cart{
-        padding-bottom: 98px;
-    }
-    remi-cart header>div{
-        text-align: center;
-    }
-    remi-cart p span{
-        font-weight: 600;
-    }
-    remi-cart footer{
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-        background-color: white;
-    }
-    remi-cart .footer{
-        padding: 16px;
-        height: 50px;
-        color: white;
-        font-size: 18px;
-        text-align: center;
-    }
-    remi-cart button{
-        border-radius: 23px !important;
-    }
-</style>
+
 <section class="content">
     <header class="pad">
         <div>
@@ -44,9 +13,9 @@
         </template>
     </div>
     <footer hidden$="[[!numItems]]">
-        <div class="footer">
-            <button class="mdc-button accent-btn" on-click="_checkout">
-                Checkout
+        <div class="footer-inner">
+            <button class="mdc-button btn-responsive" on-click="_checkout">
+                Proceed to Checkout
             </button>
         </div>
     </footer>

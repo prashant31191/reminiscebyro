@@ -8,9 +8,10 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 */
 
-import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
-import { dom } from '@polymer/polymer/lib/legacy/polymer.dom.js';
-export class PageViewElement extends PolymerElement {
+import { html } from '@polymer/polymer/polymer-element.js';
+
+import { lightComponent } from './lightComponent';
+export class PageViewElement extends lightComponent {
 
   static get properties() {
     return {
@@ -30,11 +31,9 @@ export class PageViewElement extends PolymerElement {
   show() {
     this.active = true;
   }
+
   hide() {
     this.active = false;
-  }
-  _attachDom(node) {
-    dom(this).appendChild(node);
   }
 
   ready() {
@@ -45,6 +44,30 @@ export class PageViewElement extends PolymerElement {
       this.show();
     }
 
+  }
+  
+  _userIsAdmin(user){
+    return user && user.roles && user.roles.admin
+  }
+
+}
+
+export const ShopBehavior = (element) => class extends element {
+
+  _formatProduct(data) {
+    return {
+      name: data.title,
+      key: data.id,
+      image: data.images[0] && data.images[0].src,
+      price: data.variants[0] && data.variants[0].price,
+      description: data.description,
+      created_at: data.createdAt,
+      published_at: data.publishedAt,
+      variants: data.variants,
+      tags: data.tags,
+      link: data.onlineStoreUrl,
+      slug: data.handle
+    }
   }
 
 }

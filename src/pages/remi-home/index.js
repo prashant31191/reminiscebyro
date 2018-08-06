@@ -7,28 +7,30 @@
     Code distributed by Google as part of the polymer project is also
     subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 */
-import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
-import '@polymer/iron-image';
+import { html } from '@polymer/polymer/polymer-element.js';
 import { MDCRipple } from '@material/ripple';
 import { connect } from 'pwa-helpers/connect-mixin.js';
 
-import { PageViewElement } from '../../components/page-view-element.js';
-import template from './template.html'
-import SharedStyles  from '../../components/shared-styles.html';
-import buttonStyles from "../../components/material/button.html";
+import '@polymer/iron-image';
 import "../../components/biness-text.js";
-
-import { store } from '../../store.js';
-import { fadeIn, fadeOut } from '../../components/animation.js';
 import "../../components/remi-product-item";
-import { getProductListing, setActiveProduct } from "../../actions/shop.js";
+
+import template from './template.html'
+import { store } from '../../store.js';
+import { PageViewElement, ShopBehavior } from '../../components/page-view-element.js';
+import { getLatestProducts, setActiveProduct } from "../../actions/shop.js";
+import { InjectGlobalStyle} from '../../core/utils.js';
 
 import { shop } from "../../reducers/shop.js";
+import './style.html';
 
 store.addReducers({
     shop
 });
 
+//Imports lazy global styles
+InjectGlobalStyle({ name: 'remi-home' }, () => import('./style.html'));
+InjectGlobalStyle({name: 'material-button'}, () => import('../../components/material/button.html'));
 
 /**
  * `ts-home` Description
@@ -38,13 +40,12 @@ store.addReducers({
  * @demo 
  * 
  */
-class RemiHome extends connect(store)(PageViewElement) {
+class RemiHome extends connect(store)(ShopBehavior(PageViewElement)) {
     
 
     static get template() {
         return html([
-            template + 
-            buttonStyles    
+            template 
         ])
         
     }
@@ -54,8 +55,9 @@ class RemiHome extends connect(store)(PageViewElement) {
     */
     static get properties() {
         return {
-            bestSellers:{
-                type: Array
+            latest:{
+                type: Array,
+                value: []
             }
         }
     }
@@ -78,6 +80,10 @@ class RemiHome extends connect(store)(PageViewElement) {
 
     }
 
+    _loaders(latest){
+        return (!latest) ? [ {}, {}, {} ] : [];
+    }
+
     /**
      * Instance of the element is created/upgraded. Use: initializing state,
      * set up event listeners, create shadow dom.
@@ -89,8 +95,8 @@ class RemiHome extends connect(store)(PageViewElement) {
 
     _stateChanged(state) {
         this.user = state.app.user;
-        this.bestSellers = state.shop.products;
-        this.editMode = true;
+        this.latest = state.shop.latest;
+        this.editMode = false;
     }
 
     _view(e) {
@@ -109,7 +115,7 @@ class RemiHome extends connect(store)(PageViewElement) {
      */
     ready() {
         super.ready();
-        store.dispatch(getProductListing());
+        store.dispatch(getLatestProducts());
         const buttonRipple = new MDCRipple(this.querySelector('.mdc-button'));
     }
 

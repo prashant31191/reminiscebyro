@@ -1,104 +1,4 @@
 
-<style>
-    remi-home .app-hero {
-        height: 60vh;
-        background-color: var(--app-primary-color);
-        background-size: cover;
-    }
-    remi-home .app-hero-content{
-        height: 100%;
-    }
-    remi-home .hero-inner {
-        height: 60vh;
-    }
-    remi-home .hero-media>div {
-        height: 331px;
-        border-radius: 12px;
-        max-width: 600px;
-        background: #b1b1b4;
-        box-shadow: 0px 17px 27px -26px rgba(0, 0, 0, 0.7);
-        background-image: url(https://cdn.shopify.com/s/files/1/1385/7027/t/7/assets/slide_2_1024x1024.jpg?14226104591786434212);
-        background-size: cover;
-    }
-    remi-home button{
-        --mdc-theme-primary: var(--app-secondary-color);
-        padding: 0px 24px;
-    }
-
-    remi-home .hero-inner button {
-        margin: 16px;
-        padding: 0 52px;
-    }
-    remi-home .app-hero{
-        height: 80vh;
-    }
-    remi-home .hero-content{
-        color: var(--app-light-text-color);
-    }
-    remi-home .hero-content p{
-        max-width: 500px;
-    }
-    remi-home .hero-content h1{
-        max-width: 300px;
-    }
-    remi-home .call-action-wrapper{
-        margin: 2em 0;
-    }
-    remi-home .white-wave{
-        width: 100%;
-        height: 100%;
-    }
-    remi-home .hero-bottom-wave{
-        position: relative;
-        height: 20vh;
-        margin-top: -60px;
-        z-index: 0;
-    }
-    remi-home .heading-wrapper{
-        margin-top: 5em;
-    }
-    remi-home .white-btn{
-        --mdc-theme-primary: white;
-        padding: 0px 28px !important;
-    }
-    remi-home .subtitle{
-        padding: 1em;
-    }
-    remi-home .bottom-banner-info{
-        background: #a25d707a;
-    }
-    remi-home .bottom-banner-info>*{
-        margin: 8px 0;
-    }
-    remi-home .feature-grid{
-        display: grid;
-        grid-template-columns: repeat(6, 1fr);
-        grid-gap: 24px;
-    }
-    remi-home .feature-item{
-        grid-column-end: span 2;
-    }
-  @media only screen and (max-device-width: 768px){
-    remi-home .feature-grid{
-        display: block;
-        margin-bottom: -17px;
-        overflow-x: auto;
-        overflow-y: hidden;
-        padding-bottom: 17px;
-        padding-left: 40px;
-        white-space: nowrap;
-        -webkit-overflow-scrolling: touch;
-    }
-    remi-home .feature-item{
-        display: inline-block;
-        height: 100%;
-        max-width: 400px;
-        margin-right: 8px;
-        width: calc(100% + 24px);
-    }
-    
-  }
-</style>
 <div class="page-wrapper">
     <section class="app-hero pad">
         <div class="content layout horizontal center-center app-hero-content">
@@ -141,47 +41,72 @@
             </g>
         </svg>
     </div>
-    <section class="app-section content layout horizontal center pad">
-        <div class="pad">
+    <section class="app-section content layout horizontal center highlight-product pad">
+        <div class="media">
             <iron-image 
-                style="width:400px; height:400px; background-color: lightgray;"
                 sizing="cover"
                 preload 
-                src="https://www.fentybeauty.com/dw/image/v2/AAXW_PRD/on/demandware.static/-/Sites-itemmaster_FNT/default/dw92d0bfc2/hi-res/Summer%20II%20Concrete%20-%20Final/27785V1_alt1_final.jpg?sw=550%20550w"></iron-image>
+                src="/assets/images/banner.jpeg"></iron-image>
         </div>
+        <span class="flex"></span>
         <div class="pad">
-            <h1 class="mdc-typography--headline3">Speaking of the web</h1>
-            <p  class="mdc-typography--body2">Create colorful dimension from cheeks to eyes to temples.</p>
+            <h1 class="mdc-typography--headline3">
+                <biness-text 
+                        can-edit$="[[editMode]]"
+                        value="Beauty in real Life"></biness-text>
+                </h1>
+            <p class="mdc-typography--body2">
+                <biness-text 
+                        can-edit$="[[editMode]]"
+                        value="Create colorful dimension from cheeks to eyes to temples."></biness-text>
+            </p>
+            <a href="/shop">
+                <button class="mdc-button mdc-button--outlined" style="margin: 2em 0">
+                    <biness-text can-edit$="[[editMode]]" value="Shop Now"></biness-text>
+                </button>
+            </a>
         </div>
     </section>
-    <section class="app-section feature" style="margin-bottom: 1em;">
+     <!-- <section class="app-section feature" style="padding-bottom: 4em;">
         <div class="content">
             <div class="center heading-wrapper pad">
                 <h1 class="mdc-typography--headline5">Featured</h1>
             </div>
             <div class="feature-grid">
                 <template is="dom-repeat" items="[[bestSellers]]" as="product">
-                    <a href$="/product/[[product.slug]]" class="feature-item" on-click="_view">
-                        <remi-product-item featured forAdmin$="[[user]]" data="[[product]]"></remi-product-item>
+                    <a href$="/product/[[product.slug]]" 
+                        class="feature-item" 
+                        on-click="_view">
+                        <remi-product-item featured forAdmin$="[[_userIsAdmin(user)]]" data="[[product]]"></remi-product-item>
                     </a>
                 </template>
             </div>
         </div>
-    </section>
-    <section class="app-section feature" style="margin-bottom: 4em;">
+    </section> -->
+    <section class="app-section feature" style="padding-bottom: 4em;">
         <div class="content">
             <div class="center heading-wrapper pad">
                 <h1 class="mdc-typography--headline5">Latest</h1>
             </div>
             <div class="feature-grid">
-                <template is="dom-repeat" items="[[bestSellers]]" as="product">
-                    <a href$="/product/[[product.slug]]" class="feature-item" on-click="_view">
-                        <remi-product-item featured forAdmin$="[[user]]" data="[[product]]"></remi-product-item>
+                <template is="dom-repeat" items="[[latest]]" as="product">
+                    <a href$="/product/[[product.handle]]" class="feature-item" on-click="_view">
+                        <remi-product-item featured forAdmin$="[[_userIsAdmin(user)]]" data="[[_formatProduct(product)]]"></remi-product-item>
                     </a>
+                </template>
+                <template is="dom-repeat" items="[[_loaders(latest)]]">
+                    <div class="remi-product-item-placeholder">
+                        <div class="remi-product-item-placeholder--image"></div>
+                        <div class="remi-product-item-footer pad">
+                            <div class="remi-product-item-placeholder--title placeholder-shimmer"></div>
+                            <div class="remi-product-item-placeholder--price placeholder-shimmer"></div>
+                        </div>
+                    </div>
                 </template>
             </div>
         </div>
     </section>
+
     <section class="app-section" style="height: 70vh; position: relative;">
         <iron-image 
             style="width:100%; height:100%; background-color: lightgray;"
@@ -189,12 +114,12 @@
             preload 
             fade 
             src="/assets/images/pexels-photo-457704.jpeg"></iron-image>
-        <div class="layout vertical center-center bottom-banner-info fit white-color">
+        <div class="layout vertical center-center bottom-banner-info fit">
             <div class="title mdc-typography--headline5">
                 <small style="font-size:18px">NEW!</small>
                 <br>Matte Liquid Lipstick
             </div>
-            <div class="mdc-typography--body" style="    padding: 0 24px;text-align: center;">Stunning Metalic Look that Touch Glow Skin Tone you love.</div>
+            <div class="mdc-typography--body" style="padding: 0 24px;text-align: center;">Stunning Metalic Look that Touch Glow Skin Tone you love.</div>
             <a href="/shop">
                 <button class="mdc-button mdc-button--outlined white-btn">
                     Shop Now

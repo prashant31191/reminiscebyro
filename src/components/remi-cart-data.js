@@ -3,7 +3,7 @@ import '@polymer/app-storage/app-localstorage/app-localstorage-document.js';
 import { connect } from 'pwa-helpers/connect-mixin.js';
 
 import { store } from '../store.js';
-import { setCart } from '../actions/shop.js';
+import { setCart, setCheckout } from '../actions/cart.js';
 import { shop} from '../reducers/shop.js';
 
 store.addReducers({
@@ -13,7 +13,8 @@ store.addReducers({
 customElements.define('remi-cart-data', class RemiCartData extends connect(store)(PolymerElement) {
     static get template() {
         return html`
-            <app-localstorage-document key="remi-cart-data" data="{{_cart}}"></app-localstorage-document>
+            <app-localstorage-document key="remi-cart-data" id="storage" data="{{_cart}}"></app-localstorage-document>
+            <app-localstorage-document key="remi-checkout" id="checkoutStorage" data="{{_checkout}}"></app-localstorage-document>
         `;
     }
 
@@ -22,10 +23,13 @@ customElements.define('remi-cart-data', class RemiCartData extends connect(store
     static get properties() {
         return {
 
-            cart: {
-                type: Array,
-                value: {},
+            _cart: {
+                type: Object,
                 observer: '_cartChanged'
+            },
+            cart: {
+                type: Object,
+                observer: 'cartChanged'
             }
 
         }
@@ -33,26 +37,43 @@ customElements.define('remi-cart-data', class RemiCartData extends connect(store
 
     static get observers(){
         return [
-            '_localCartChanged(_cart)'
+            '_cartChanged(_cart)',
+            'cartChanged(cart)',
+            '_checkoutChanged(_checkout)',
+            'checkoutChanged(checkout)'
         ]
     }
 
-    _localCartChanged(cart){
-        if(cart.numItems != this.cart.numItems){
+    _cartChanged(cart){
+        if(cart != this.cart){
             store.dispatch(setCart(cart));
         }
-        
+    }
+    _checkoutChanged(checkout) {
+        if (checkout != this.checkout) {
+            store.dispatch(setCheckout(checkout));
+        }
     }
 
-    _cartChanged(cart){
-        this._cart = cart;
+    cartChanged(cart){
+        this.$.storage.set('data', this.cart);
+    }
+    checkoutChanged(checkout){
+        this.$.checkoutStorage.set('data', this.checkout)
     }
 
     _stateChanged(state){
         this.cart = state.shop.cart;
+        this.checkout = state.shop.checkout;
+        this.app = state.app.meta;
     }
 
     ready(){
         super.ready();
+        
+        //TODO
+        //check if there is pending checkout
+        //if complete dispatch empty cart
+        //
     }
 });

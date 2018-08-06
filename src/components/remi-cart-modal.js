@@ -75,12 +75,12 @@ customElements.define('remi-cart-modal', class extends mixinBehaviors(
                 </div>
                 <div class="actions">
                     <a href="/cart">
-                        <button class="mdc-button checkout">
+                        <button class="mdc-button checkout" on-click="close">
                             Checkout
                         </button>
                     </a>
                     <span>
-                        <button class="mdc-button close">
+                        <button class="mdc-button close" on-click="close">
                             Continue
                         </button>
                     </span>

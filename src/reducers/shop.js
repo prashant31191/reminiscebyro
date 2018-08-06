@@ -11,13 +11,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 import {
   SET_ACTIVE_PRODUCT,
   GET_PRODUCTS,
-  ADD_TO_CART,
+  GET_LATEST_PRODUCTS,
   SET_EDITING_PRODUCT,
-  REMOVE_FROM_CART,
   CHECKOUT_SUCCESS,
-  CHECKOUT_FAILURE,
-  SET_CART
+  CHECKOUT_FAILURE
 } from '../actions/shop.js';
+
+import { ADD_TO_CART, SET_CART, SET_CHECKOUT, REMOVE_FROM_CART } from "../actions/cart.js";
 
 import { cart, INITIAL_CART} from './cart.js';
 
@@ -26,10 +26,11 @@ const INITIAL_PRODUCT = {
 }
 
 const INITIAL_STATE = {
-  products: [], 
+  products: null, 
   activeProduct: null,
   editingProduct: INITIAL_PRODUCT, 
-  cart: INITIAL_CART
+  cart: INITIAL_CART,
+  checkout: null
 }
 
 export const shop = (state = INITIAL_STATE, action) => {
@@ -38,6 +39,11 @@ export const shop = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         products: action.products
+      };
+    case GET_LATEST_PRODUCTS:
+      return {
+        ...state,
+        latest: action.products
       };
     case SET_ACTIVE_PRODUCT:
       return {
@@ -64,6 +70,11 @@ export const shop = (state = INITIAL_STATE, action) => {
         ...state,
         error: 'Checkout failed. Please try again'
       };
+    case SET_CHECKOUT:
+      return {
+        ...state,
+        checkout: action.checkout
+      }
     default:
       return state;
   }

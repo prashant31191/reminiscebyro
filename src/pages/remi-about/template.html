@@ -1,67 +1,56 @@
 <style>
-    .app-hero {
-        height: 60vh;
-        background-color: white;
-        background-size: cover;
-        
+    remi-about .about-wrapper{
+        max-width: 400px;
+        padding: 16px;
     }
-    .hero-inner{
-        height: 100%;
-        margin-top: 3em;
+    remi-about .media{
+        height: 500px;
     }
-    .v-center{
-        justify-content: center;
+    remi-about{
+        padding-top: 3em;
     }
-    .hero-media{
-        overflow: hidden;
-        cursor: pointer;
-        box-shadow: 8px 10px 20px 0 rgba(46,61,73,.15);
-        border-radius: 12px;
+    remi-about .title{
+        font-weight: 600;
+        font-size: 3rem;
+        color: #393433;
+        margin: 16px 0px 16px;
     }
-    .hero-media iron-image:hover {
-        transform: scale(1.1);
-        will-change: transform;
-    }
-    .hero-media iron-image{
-        -webkit-transition: -webkit-transform .45s;
-        transition: -webkit-transform .45s;
-        -o-transition: transform .45s;
-        -webkit-transition: -webkit-transform .45s;
-        transition: -webkit-transform .45s;
-        transition: transform .45s;
-        transition: transform .45s,-webkit-transform .45s;
-        transition: transform .45s,-webkit-transform .45s;
-    }   
-    .hero-title{
-        margin: 0;
-        font-size: 2rem;
+    remi-about .sub-title{
+        margin-top: 0;
+        font-size: 1.2rem;
         color: #f51681;
     }
+    remi-about p{
+        font-weight: 500;
+        font-size: 1rem;
+        color: #393433;
+    }
+    remi-about iron-image{
+        box-shadow: 0px 13px 49px #75757585;
+    }
+     @media only screen and (max-device-width: 425px) {
+        remi-about .horizontal{
+             display: block !important;
+        }
+     }
 </style>
-<section class="app-hero content app-section">
-    <div class="hero-inner layout horizontal">
-        <div class="layout vertical v-center flex pad">
-            <h1 class="hero-title">Belive in your dreams</h1>
-            <p>Lorem vero eis el impsum this is how we started qui bladitis praesentium.</p>
+<section class="content app-section">
+    <div class="layout horizontal center">
+        <div class="about-wrapper">
+            <h1 class="title">About Us</h1>
+            <h4 class="sub-title">Reminisce is all about love care and passion</h4>
+            <p>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Cum sociis natoque penatibus et magnis dis parturient
+            montes, nascetur ridiculus mus. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Nulla vitae elit libero, a
+            pharetra augue. Donec sed odio dui. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem
+            nec elit. Etiam porta sem malesuada magna mollis euismod.</p>
         </div>
-        <div class="flex hero-media">
-            <iron-image 
-                style="width:100%; height:100%; background-color: lightgray;"
-                sizing="cover"
-                preload 
-                src="/assets/images/bag-business-cafe-949670.jpg"></iron-image>
-             
+        <div class="media-wrapper pad flex">
+            <div class="media pad">
+                <iron-image 
+                    sizing="cover"
+                    preload 
+                    src="/assets/images/pexels-photo-932397.jpeg"></iron-image>
+            </div>
         </div>
     </div>
-</section>
-<section class="app-section" style="    background-color: #393433;
-    margin: 8em 0 1rem;
-    min-height: 79vh;">
-    <div class="pad">
-        <!-- Avatar -->
-        <!-- Heading -->
-        <!-- Media floating -->
-        <!-- Text -->
-    </div>
-
 </section>

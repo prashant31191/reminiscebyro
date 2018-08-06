@@ -1,3 +1,11 @@
+import {
+    SET_EDITING_PRODUCT,
+    CHECKOUT_SUCCESS,
+    CHECKOUT_FAILURE
+} from '../actions/shop.js';
+
+import { ADD_TO_CART, SET_CART, REMOVE_FROM_CART} from "../actions/cart.js";
+
 export const INITIAL_CART = {
     items: [],
     total: 0,
@@ -77,7 +85,7 @@ const _indexOf = (product, cart) => {
     if (cart) {
         for (let i = 0; i < cart.length; ++i) {
             let entry = cart[i];
-            if (entry.key === product.key && entry.selectedColor === product.selectedColor) {
+            if (entry.id === product.id) {
                 return i;
             }
         }

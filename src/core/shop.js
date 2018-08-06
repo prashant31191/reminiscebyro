@@ -1,80 +1,97 @@
-import "firebase/firestore";
-import { firebase } from '../core/app.js';
 
-export const Shop = new class {
+import {shopify, RemiApp} from './app.js';
+
+export const Shop = RemiApp.Shop = RemiApp.Shop || new class {
     
     constructor() {
-        const settings = {timestampsInSnapshots: true };
-        firebase().firestore().settings(settings);
+        this.products = shopify().product.fetchAll();
+        this.collections = shopify().collection.fetchAllWithProducts();
     }
 
-    publishProduct(data){
-        return !data.key ? firebase().firestore().collection('products').add(data)
-        : this.updateProduct(data);
-    }
-
-    getProduct(key){
-        return firebase().firestore().collection("products").doc(key).get()
-    }
-
-    getProductBySlug(slug){
+    checkout(cart, checkout = null){
         return new Promise(async (resolve, reject) => {
             try {
-                const querySnapshot = await firebase().firestore().collection("products").where("slug", "==", slug).get()
-                resolve(this._formatProducts(querySnapshot));
+                (checkout != null) 
+                ? resolve(await shopify().checkout.fetch(checkout.id))
+                : resolve(await this._createCheckout(cart))
             } catch (error) {
                 reject(error);
             }
         })
     }
 
-    getAllProduct(){
-        return new Promise(async (resolve, reject) => {
-            try {
-                const querySnapshot = await firebase().firestore().collection("products").get();
-                resolve(this._formatProducts(querySnapshot));
-            } catch (error) {
-                reject(error);
-            }
-        })
-        
+    async _createCheckout(cart){
+        const checkout = await shopify().checkout.create();
+        await shopify().checkout.addLineItems(checkout.id, cart.map(
+            item => {
+                return {
+                    variantId: item.id,
+                    quantity: item.quantity
+                }
+            })
+        )
+        return await shopify().checkout.fetch(checkout.id);
     }
 
     incrementProductView(product){
 
-        product.views = product.views || 0;
-
-        firebase().firestore().collection('products').doc(product.key)
-            .set({
-                ...product,
-                views: product.views +1
-            });
     }
 
-    _formatProducts(querySnapshot){
-        const data = [];
-        querySnapshot.forEach((doc) => {
-            data.push({
-                ...doc.data(),
-                key: doc.id
-            })
-        });
-        return data.length > 2 ? data : data[0];
+
+    //Cart ====================
+
+    /**
+    * @desc Adds a product to shopify cart
+    * @param string msg - the message to be displayed
+    * @return bool - success or failure
+    */
+    async addToCart(product, checkout=null){
+        if(checkout == null){
+            return;
+        }
+
+        return await shopify().checkout.addLineItems(checkout.id, [
+            {
+                variantId: product.id,
+                quantity: product.quantity
+            }
+        ])
     }
 
-    deleteProduct(key){
+    async removeFromCart(product, checkout=null){
+        if (checkout == null) {
+            return;
+        }
 
+        return await shopify().checkout.removeLineItems(checkout.id, [
+            /**
+             * TODO remove line item
+             */
+            //we need the id
+            //hmm
+        ])
     }
 
-    updateProduct(data){
-        return firebase().firestore().collection('products').doc(data.key)
-                .set(data);
+    async getProductBySlug(slug){
+        return await shopify().product.fetchByHandle(slug);
     }
 
-    _makeUpdate(data){
-        
-        
+    transform(data){
+        return {
+            name: data.title,
+            key: data.id,
+            image: data.images[0] && data.images[0].src,
+            price: data.variants[0] && data.variants[0].price,
+            description: data.description,
+            created_at: data.createdAt,
+            published_at: data.publishedAt,
+            variants: data.variants,
+            tags: data.tags,
+            link: data.onlineStoreUrl,
+            slug: data.handle
+        }
     }
+
    
 
 }();

@@ -10,27 +10,29 @@
 import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 import { MDCRipple } from '@material/ripple';
 import '@polymer/iron-image';
-import '@polymer/iron-flex-layout/iron-flex-layout-classes.js';
 import { connect } from 'pwa-helpers/connect-mixin.js';
 import { afterNextRender } from "@polymer/polymer/lib/utils/render-status.js";
 
 import { store } from '../../store.js';
 import template from './template.html'
 import { PageViewElement } from '../../components/page-view-element.js';
-import SharedStyles  from '../../components/shared-styles.html';
-import buttonStyles from "../../components/material/button.html";
+
 import '../../components/remi-color-swatch-input.js';
 import '../../components/quantity-input.js';
 
 import { shop } from "../../reducers/shop.js";
-import { getProductBySlug, setActiveProduct, productWasViewed, setEditingProduct, addToCart } from "../../actions/shop.js";
+import { getProductBySlug, setActiveProduct, productWasViewed, setEditingProduct } from "../../actions/shop.js";
+import { addToCart} from '../../actions/cart.js';
+
 import { fadeIn, fadeOut } from '../../components/animation.js';
+import {InjectGlobalStyle } from '../../core/utils.js';
 
 store.addReducers({
     shop
 });
 
-
+InjectGlobalStyle({ name: 'remi-product' }, () => import('./style.html'));
+InjectGlobalStyle({ name: 'material-button' }, () => import('../../components/material/button.html'));
 /**
  * `ts-home` Description
  *
@@ -44,8 +46,7 @@ class RemiProduct extends connect(store)(PageViewElement) {
 
     static get template() {
         return html([
-            template + 
-            buttonStyles
+            template
                 
         ])
 
@@ -109,18 +110,14 @@ class RemiProduct extends connect(store)(PageViewElement) {
 
     _addToCart(e){
         if(!this.data) return;
-        
-        store.dispatch(addToCart({
+
+        const data = {
             ...this.data,
             quantity: this.quantity,
-            selectedColor: 'pink'
-        }))
-        this._onAddedToCart();
-    }
+            id: this.data.variants[0].id,
+        }
 
-    _onAddedToCart(){
-        window.scrollTo(0, 0);
-        this.dialog.open();
+        store.dispatch(addToCart(data))
     }
 
     _edit(){
@@ -132,6 +129,7 @@ class RemiProduct extends connect(store)(PageViewElement) {
         if(features)
             return features.split('\n');
     }
+    
     /**
      * Instance of the element is created/upgraded. Use: initializing state,
      * set up event listeners, create shadow dom.
@@ -151,7 +149,6 @@ class RemiProduct extends connect(store)(PageViewElement) {
     async ready() {
         super.ready();
         const buttonRipple = new MDCRipple(this.querySelector('.mdc-button'));
-        this.dialog = document.getElementById('cart-modal');
 
         afterNextRender(this, () => {
         })
@@ -162,7 +159,6 @@ class RemiProduct extends connect(store)(PageViewElement) {
         this.data = state.shop.activeProduct;
         this._page = state.app.route.page;
         this._slug = state.app.route.slug;
-        this.user = state.app.user;
     }
 }
 

@@ -1,35 +1,13 @@
-<style>
-    .feature-grid{
-        display: grid;
-        grid-template-columns: repeat(6, 1fr);
-        grid-gap: 24px;
-    }
-    .feature-item{
-        grid-column-end: span 2;
-    }
-    .toolbar{
-        padding: 16px 0;
-    }
-      @media only screen and (max-device-width: 480px) and (min-device-width: 320px){
-    .feature-item{
-        grid-column-end: span 6;
-    }
-  }
-  @media only screen and (max-device-width: 768px) and (min-device-width: 480px){
-    .feature-item{
-        grid-column-end: span 3;
-    }
-  }
-</style>
+
 <section>
 
 </section>
-<section class="app-section feature pad" style="margin-bottom: 4em;">
+<section class="app-section feature pad">
     <div class="content">
         <div class="center heading-wrapper">
             <h1 class="mdc-typography--headline5">Shop</h1>
         </div>
-        <template is="dom-if" if="[[user]]">
+        <template is="dom-if" if="[[_userIsAdmin(user)]]">
             <header class="layout horizontal center toolbar">
                 <span class="flex"></span>
                 <a href="/product-edit/create" on-click="_create">
@@ -42,9 +20,18 @@
         </template>
         <div class="feature-grid">
             <template is="dom-repeat" items="[[products]]" as="product">
-                <a href$="/product/[[product.slug]]" class="feature-item" on-click="_view" data="[[product]]">
-                    <remi-product-item featured forAdmin$="[[user]]" data="[[product]]"></remi-product-item>
+                <a href$="/product/[[product.handle]]" class="feature-item" on-click="_view" data="[[product]]">
+                    <remi-product-item featured forAdmin$="[[_userIsAdmin(user)]]" data="[[_formatProduct(product)]]"></remi-product-item>
                 </a>
+            </template>
+            <template is="dom-repeat" items="[[_loaders(products)]]">
+                <div class="remi-product-item-placeholder">
+                    <div class="remi-product-item-placeholder--image"></div>
+                    <div class="remi-product-item-footer pad">
+                        <div class="remi-product-item-placeholder--title placeholder-shimmer"></div>
+                        <div class="remi-product-item-placeholder--price placeholder-shimmer"></div>
+                    </div>
+                </div>
             </template>
         </div>
     </div>
